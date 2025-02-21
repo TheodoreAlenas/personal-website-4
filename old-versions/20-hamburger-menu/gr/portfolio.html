@@ -1,0 +1,443 @@
+<!DOCTYPE HTML>
+<html scheme="dark">
+    <head>
+        <title>Χαρτοφυλάκιο</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+html { color-scheme: light; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+button { cursor: pointer; }
+pre { border-radius: 5px; padding-left: 1em; overflow: scroll; }
+a { text-underline-offset: 0.2em; }
+main a:hover { position: relative; z-index: 1; }
+main a:hover::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: 0; right: 0; top: -0.2em; bottom: 0;
+}
+
+/* Improvised bright color scheme and TokyoNight color scheme */
+[scheme=light] pre b,
+[scheme=light] a { color: #000066; }
+[scheme=light] a:visited { color: #660044; }
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after,
+[scheme=light] .bg1 { background-color: #ffffff; }
+[scheme=light] pre,
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after { border-color: #111111; }
+[scheme=light] .fg1 { color: #111111; }
+
+[scheme=dark] pre { color: #7dcfff; }
+[scheme=dark] pre b,
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after,
+[scheme=dark] .bg1 { background-color: #24283b; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after { border-color: #c0caf5; }
+[scheme=dark] .fg1 { color: #c0caf5; }
+
+[scheme=light] .hov-bg3:hover,
+[scheme=light] a:hover,
+[scheme=light] main a:hover::before,
+[scheme=light] *::selection,
+[scheme=light] a.bg3,
+[scheme=light] .bg3 { background-color: #111122; color: #c0caf5 }
+[scheme=light] #menu button,
+[scheme=light] main { border-color: #cccccc; }
+[scheme=light] pre { background-color: #eeeeee; }
+[scheme=light] .shadow { box-shadow: #cccccc 0 0 1rem 0; }
+
+[scheme=dark] .hov-bg3:hover,
+[scheme=dark] a:hover,
+[scheme=dark] main a:hover::before,
+[scheme=dark] *::selection,
+[scheme=dark] a.bg3,
+[scheme=dark] .bg3 { background-color: #e0af68; color: #1d202f }
+[scheme=dark] #menu button,
+[scheme=dark] main { border-color: #1d202f; }
+[scheme=dark] pre { background-color: #1d202f; }
+[scheme=dark] .shadow { box-shadow: #1d202f 0 0 1rem 0; }
+
+main {border-left: 1px solid; border-right: 1px solid}
+#menu button {border-style: solid; border-width: 2px}
+#menu button {border-radius: 3px}
+#menu button {font-family: inherit; font-size: inherit}
+
+body {line-height: 1.5em}
+#menu input {width: 1.7em; height: 1.7em}
+main {max-width: 30cm}
+#menu ul {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto;
+    grid-auto-columns: max-content;
+}
+#menu li {grid-row: 1}
+#menu ul {padding: 0}
+main, #menu a {padding: 1.5em 1.5em}
+#menu label {padding: 0.5em 1em}
+#menu button {padding: 1em 1em; margin: 0.5em}
+.pl3, #menu .pl3 {padding-left: 3em}
+.pr3, #menu .pr3 {padding-right: 3em}
+header {position: sticky; top: 0}
+#menu input {position: absolute; top: 0.5em; right: 1em}
+body, #menu input {margin: 0}
+main, #menu ul {margin: 0 auto}
+#menu ul {list-style: none; max-width: 60cm}
+#menu li, #menu a, #menu button {display: inline-block}
+#menu a, #menu button {transition: all 0.2s}
+
+#hamburger-checkbox::before,
+#hamburger-checkbox::after {
+    content: ""; position: absolute;
+    width: 100%; height: 50%;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    box-sizing: border-box;
+}
+#hamburger-checkbox::before {
+    top: 0; border-top-width: 2px; border-bottom-width: 1px; }
+#hamburger-checkbox::after {
+    top: 50%; border-top-width: 1px; border-bottom-width: 2px; }
+
+body {font-family: system-ui; font-size: 0.5cm}
+#menu input, #menu label {display: none}
+
+@media screen and (max-width: 25cm) {
+    body { font-size: 0.4cm; }
+    #menu input {display: unset}
+    #menu label {display: block}
+
+    #hamburger-checkbox:not(:checked) + label + ul {
+        display: none;
+    }
+    #hamburger-checkbox:checked + label::before {
+        content: ""; position: absolute;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+    }
+    #menu ul {
+        position: absolute;
+        top: 1em; right: 1em;
+        border-radius: 5px; overflow: hidden;
+        display: grid; grid-auto-rows: auto; align-items: center;
+    }
+    #menu li {
+        display: grid; grid-column: 1; grid-row: unset;
+    }
+    #menu li a {
+        padding: 1.5em 2em;
+    }
+}
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function switchColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "light";
+    if (definer.getAttribute("scheme") === "light")
+        setTo = "dark";
+    definer.setAttribute("scheme", setTo);
+    localStorage.setItem("lastTheme", setTo);
+}
+
+function setUpColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "dark";
+    if (localStorage.getItem("lastTheme") === "light")
+        setTo = "light";
+    definer.setAttribute("scheme", setTo);
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="bg1 fg1">
+        <header id="menu">
+            <nav>
+
+                <!-- header.php -->
+<input
+    id="hamburger-checkbox"
+    type="checkbox"
+    />
+<label
+    for="hamburger-checkbox"
+    class="shadow bg1"
+>Χαρτοφυλάκιο</label>
+<ul
+    class="shadow bg1"
+>
+    <li>
+        <a href="index.html" class="ilbl hov-bg3 pl3 pr3 ">
+            Αρχική        </a>
+    </li>
+    <li>
+        <button
+            onclick="switchColorScheme()"
+            class="ilbl bg1 fg1 hov-bg3"
+        >
+            Χρώμα        </button>
+    </li>
+    <script> setUpColorScheme(); </script>
+    <li>
+        <a href="../en/portfolio.html" class="ilbl hov-bg3  ">
+            English        </a>
+    </li>
+    <li>
+        <a href="../cv.pdf" class="ilbl hov-bg3  ">
+            cv.pdf
+        </a>
+    </li>
+    <li>
+        <a href="portfolio.html" class="ilbl hov-bg3  bg3 ">
+            Χαρτοφυλάκιο        </a>
+    </li>
+    <li>
+        <a href="biography.html" class="ilbl hov-bg3 pr3 ">
+            Βιογραφικό        </a>
+    </li>
+</ul>
+
+
+            </nav>
+        </header>
+        <main class="bg1 fg1">
+            
+
+<h2>Αυτός ο ιστοχώρος</h2>
+<p>
+Pre-rendered ιστοχώρος. Επανασχεδιάστηκε με στόχο
+να γίνει εύκολα τροποποιήσιμος,
+από εμένα συγκεκριμένα, και να διατηρήσει απλή δομή.
+Πέρασε από πολλούς επανασχεδιασμούς.
+Η πρώτη κύρια έκδοση βασιζόταν σε αφαίρεση,
+ενώ η δεύτερη σε συντομογραφίες.
+</p>
+<pre>&lt;?php
+/* License at the bottom */
+
+include_once(&quot;common/wraps/<b>typical-layouts</b>.php&quot;);
+include_once(&quot;common/wraps/external-links.php&quot;);
+include_once(&quot;common/wraps/xml.php&quot;);
+
+[...]
+
+function <b>get_biography_html</b>(string $language) {
+
+  return <b>get_typical_layout</b>(
+    $language,</pre>
+<i>V1</i>
+<pre>&lt;?php
+    function biography_array_to_en_gr($array) {
+        global <b>$EN</b>, <b>$GR</b>; <b>$EN</b>($array-&gt;en); <b>$GR</b>($array-&gt;gr);
+    }
+    $b = &quot;biography_array_to_en_gr&quot;;
+?&gt;
+[...]
+&lt;?php $h = simplexml_load_file(&quot;bio-high-school.xml&quot;) ?&gt;
+&lt;h2&gt;&lt;?php $b($h-&gt;<b>title</b>) ?&gt;&lt;/h2&gt;
+&lt;p&gt;
+    &lt;?php $b($h-&gt;<b>graduated</b>) ?&gt;
+    &lt;a href=&quot;http://2lyk-amaliad.ilei.sch.gr/wordpress17/&quot;
+    &gt;&lt;?php $b($h-&gt;<b>high_school</b>) ?&gt;&lt;/a&gt;</pre>
+<i>V2</i>
+<p>
+    Μπορείτε να βρείτε και την    <a href="https://github.com/TheodoreAlenas/personal-home-page/"
+    >πρώτη</a>
+    και τη    <a href="https://github.com/TheodoreAlenas/personal-website-2/"
+    >δεύτερη</a>
+    έκδοση στο GitHub.
+</p>
+
+<h2>Συνδυασμοί πλήκτρων του ΛΣ</h2>
+<p>
+    
+Σύστημα που απεικονίζει επόμενους επιτρεπτούς συνδυασμούς πλήκτρων
+και πεδία συμπλήρωης για ορισμένους συνδυασμούς, χτισμένο πάνω από το
+<code>sxhkd</code>,
+    με 4 κύριες εκδόσεις:
+</p>
+<h3>Έκδοση 1: alchain</h3>
+<p>
+    3 προγράμματα,
+    <code>alchain</code>,
+    <code>alpopup</code> και    <code>hk-tui.bash</code>,
+    
+που συνεργάζονται ώστε πατώντας το πλήκτρο Windows
+εμφανίζεται ένα τερματικό που καταλαμβάνει το κατώτερο τρίτο της οθόνης,
+προβάλλει επιτρεπτά πλήκτρα και αναμένει είσοδο.
+Αφότου πατηθεί το Windows και εμφανιστεί το τερματικό,
+και μέσα στο τερματικό πατηθεί ακόμη ένα πλήκτρο όπως για παράδειγμα
+<code>W</code>,
+    
+σε πολλές περιπτώσεις δε συνέβαινε τίποτα και το τερματικό
+πρόβαλλε τα επιτρεπτά πλήκτρα που ακολουθούν μετά από το πρώτο.
+</p>
+<pre><b>read</b> -n 1 -s -r
+<b>next</b>=$( awk &quot;/^<b>$REPLY</b>/ { print \$2 }&quot; hk-states/<b>$state</b> )
+
+if [ -z $<b>next</b> ]
+then
+    <b>next</b>=ROOT
+    bspc node last --focus
+fi</pre>
+<i>
+    απόσπασμα του    <code><a href="../hk-tui.bash">hk-tui.bash</a></code>
+    (Πηγαίος κώδηκας)</i>
+<p>
+Το πρόβλημα ήταν ότι τα παράθυρα δε σχεδιάστηκαν για τέτοια χρήση.
+Δεν υπήρχαν μόνο προβλήματα που θα αποκαλούσε κανείς bugs,
+αποδείχτηκε ότι τα παράθυρα είναι πιο διακοσμητικά απ' ότι υπέθεσα.
+Ο περισσότερος απ' τον κώδικα του συστήματος έχει χαθεί σήμερα.
+</p>
+<h3>Έκδοση 2: alk</h3>
+<p>
+    
+Shell scripts που δέχονται ορίσματα
+ανάλογα των αντίστοιχων συνδυασμών πλήκτρων,
+και ενεργούν.
+    Το εκτελέσιμο <code>al</code> προβάλλει τα    <code>stdout</code> και    <code>stderr</code> 
+σε ένα τερματικό, αν κλήθηκε από περιβάλλον που
+δε δίνει τιμή στη μεταβλητή
+    <code>INTERACTIVE</code> Οι ορισμοί των shell functions των εκτελέσιμων    <code>alk-*</code> 
+μεταγλωττίζονται σε εγχειρίδιο χρήσης,
+το οποίο αναλαμβάνει και το ρόλο της λίστας συνδυασμού πλήκτρων.
+Αν και ο κώδικας είναι παράξενος, είναι πού πιο κοντά στο
+χαρακτήρα του σημερινού μου κώδικα shell scripts.
+Παρατηρήστε ότι είναι POSIX compliant αντί για Bash.
+</p>
+<pre>if [ &quot;$INTERACTIVE&quot; = &#039;&#039; ]
+then <b>set_interactive</b>
+fi
+
+execute_al() {
+    <b>alk-router</b> &quot;$@&quot;
+}
+execute_al_interactive() {
+    <b>execute_al </b>&quot;$@&quot;
+}</pre>
+<i>
+    απόσπασμα του    <code><a href="https://github.com/TheodoreAlenas/alk/blob/main/al"
+    >al</a></code>
+</i>
+<p>
+Σε σχέση με την πρώτη έκδοση, αυτή απαιτεί
+πολύ μεγαλύτερα αρχεία ρυθμίσεων.
+Επίσης δε χρησιμοποιήθηκε σχεδόν ποτέ εντός τερματικού.
+</p>
+<h3>Έκδοση 3: alsnip</h3>
+<p>
+Σύστημα παραγωγής φράσεων κώδικα,
+το οποίο μπορεί να δεχτεί είσοδο από το χρήστη
+για τη συμπλήρωση μιας φράσης,
+και στο μεταξύ προβάλλει προτάσεις σχετικά με την είσοδο.
+Οι φράσεις μπορούσαν να είναι shell scripts που θα εκτελούνταν,
+και η συμπλήρωση μπορούσε να ξεκινήσει με συνδυασμό πλήκτρων.
+Τα αρχεία ρυθμίσεων ξεκαθάριζαν ποιες φράσεις είναι shell scripts
+(προς εκτέλεση), και μεταξύ αυτών,
+ποιες αντιστοιχούνταν σε συνδυασμούς πλήκτρων,
+και ποιες απαιτούσαν την παρουσία τερματικού για παράδειγμα
+για εισαγωγή κωδικών.
+Ήταν έτοιμο για έκδοση, αλλά είχε πολλές εξαρτήσεις από το σύστημά μου,
+και επίσης το παράτησα πριν αποφασίσω να το εκδόσω.
+</p>
+<pre>fn=<b>powff</b>+key+is-e-q+key-term:&quot;$fn&quot;
+fn_<b>powff</b>() {
+  case &quot;$act&quot; in
+    <b>script</b>) printf &#039;sudo shutdown %s\n&#039; &quot;$1&quot; ;;
+    <b>descr</b>) cat &lt;&lt;EOM
+systemd command,  poweroff  is an alias to  shutdown now
+EOM
+    ;;
+    <b>arg1</b>) printf &quot;recommend\nnow\n+1\n+5\n+30\n23:59\n02:00\n&quot; ;;
+  esac
+}</pre>
+<i>
+    απόσπασμα του    <code><a href="https://github.com/TheodoreAlenas/alsnip/blob/main/example-config/reset.sh"
+    >example-config/reset.sh</a></code>
+</i>
+<p>
+    
+Ποτέ μου δεν είχα χρησιμοποιήσει έτοιμες φράσεις κώδικα,
+και ούτε κινητοποιήθηκα χάρη σε αυτό το σύστημα να τις χρησιμοποιήσω.
+Οπότε το σύστημα ανέλαβε μόνο το ρόλο του συνδυασμού πλήκτρων.
+Επίσης η κατάχρηση της έμπνευσης από τον κύριο Robert C. Martin
+έκανε το σύστημα περίπλοκο σε κάθε κλίμακα για τον έως τότε κώδικά μου.
+Φτιάχνοντας αυτό τον ιστοχώρο, το δημοσίευσα στο
+    <a href="https://github.com/TheodoreAlenas/alsnip">GitHub</a>.
+</p>
+
+<h3>Έκδοση 4: scmd</h3>
+<p>Ένα αρχείο.</p>
+<pre>volume_set_8<b>()</b> <b>{</b> pacmd set-sink-volume 0 48000; <b>}</b> <b>#m8</b>
+volume_set_9<b>()</b> <b>{</b> pacmd set-sink-volume 0 54000; <b>}</b> <b>#m9</b>
+volume_set_custom<b>()</b> <b>{</b> pacmd set-sink-volume 0 &quot;$(:|dmenu)&quot;; <b>}</b>
+
+wallpaper_set_scale<b>()</b> <b>{</b> bspc_float; feh --bg-scale &quot;$(find ~/l/gwp/ -type f -print0 | xargs -0 sxiv -ot)&quot;; <b>}</b>
+wallpaper_set_fill<b>()</b>  <b>{</b> bspc_float; feh --bg-fill  &quot;$(find ~/l/gwp/ -type f -print0 | xargs -0 sxiv -ot)&quot;; <b>}</b></pre>
+<p>
+Κάθε γραμμή είναι είτε κενή, είναι σχόλιο,
+είτε ορισμός συνάρτησης shell.
+</p>
+<pre><b>scmd_run</b>() { c=&quot;$(dmenu &lt; &quot;$(<b>this_file</b>)&quot; | cut -d&#039;(&#039; -f1)&quot;; test &quot;$c&quot; &amp;&amp; <b>scmd_with_bar_status</b> &quot;$c&quot;; } <b>#x</b>
+  [...]
+<b>this_file</b>() { echo ~/.config/scmd.sh; }</pre>
+<p>
+Αυτό είναι ένα από τα έργα μου που καμαρώνω περισσότερο, τώρα το
+Νοέμβριο του 2023.
+Κανείς δε με καταλαβαίνει και ο πρώην εαυτός μου
+θα προσπαθούσε να το βελτιώσει καταστρέφοντάς το.
+Δε με επηρεάζει τίποτα,
+το καμαρώνω όσο μας αξίζει εμένα και του υπολογιστή μου,
+επειδή αυτό δεν είναι έργο ενός ανθρώπου
+και ούτε και θα μπορούσε να είναι για μένα,
+είναι έργο συνεργασίας ανθρώπου και υπολογιστή που εκφέρει άποψη
+σχετικά με το τι λογισμικό τού είναι υγιεινό και τι τον βαραίνει.
+</p>
+<pre><b>scmd_ls_keys</b>() { sed -n &#039;s/^\([a-z0-9_]\+\)(.*#\([^}]*\)$/\2 \1/p&#039; &quot;$(<b>this_file</b>)&quot;; }
+<b><b>scmd_sxhkdrc</b>_vim</b>() { in_vim <b>scmd_sxhkdrc</b>; }
+<b>scmd_sxhkdrc</b>() { <b>scmd_ls_keys</b> | awk &quot;{ $(<b>scmd_awk1</b>) $(<b>scmd_awk2</b>) }&quot;; }
+<b>scmd_awk1</b>() { printf %s &#039;s = $1; gsub(/./, &quot;; super + &amp;&quot;, s); sub(&quot;; &quot;, &quot;&quot;, s); &#039;; }
+<b>scmd_awk2</b>() { printf %s &#039;print(s); printf(&quot;\t. %s &amp;&amp; scmd_with_bar_status %s\n\n&quot;, &quot;&#039;&quot;$(<b>this_file</b>)&quot;&#039;&quot;, $2);&#039;; }</pre>
+<a href="https://github.com/TheodoreAlenas/dotfiles/blob/main/c/scmd.sh"
+>scmd.sh</a>.
+        </main>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->

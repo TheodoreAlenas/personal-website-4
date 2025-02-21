@@ -1,0 +1,451 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Biography</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+body {
+    line-height: 1.5em;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-weight: normal;
+    font-size: 0.5cm;
+}
+body > div > * { padding: 1em 1em; }
+.img-and-p { display: flex; flex-direction: row; align-items: center; }
+@media (max-width: 20cm) { .img-and-p { flex-direction: column; } }
+.img-container { margin: 1cm 2cm; }
+.img-container, img { border-radius: 100vw; }
+body > div > header { position: relative; }
+.skip-link { position: absolute; top: -100%; text-align: center; }
+.skip-link:focus { top: 0; left: 0; right: 0; }
+h1 { text-align: center; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+pre {
+    border-radius: 5px; padding-left: 1em; overflow: scroll;
+    font-family: 'Source Code Pro Light', monospace;
+    font-size: 0.4cm; line-height: 1.2em;
+}
+a {
+    text-underline-offset: 0.2em;
+    display: inline-block; position: relative; z-index: 1;
+}
+a::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: -0.5em; right: -0.5em; top: -0.5em; bottom: -0.5em;
+}
+a::before, button {
+    border-radius: 5px;
+}
+button {
+    border-style: solid; border-width: 1px;
+    font-family: inherit; font-size: inherit;
+    cursor: pointer;
+    padding: 0.5em 0.5em;
+}
+
+body > div { max-width: 30cm; margin: 0 auto; }
+@media (min-width: 30cm) {
+    [scheme=dark] body,
+    [scheme=light] body {
+        background-color: #cde;
+        background-image: url(../blue-mountains.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+[scheme=light] a { color: #036; }
+[scheme=light] a:visited { color: #604; }
+[scheme=light] button,
+[scheme=light] pre { box-sizing: border-box; border: #888c 1px solid; }
+[scheme=light] body > div,
+[scheme=light] button { background-color: #fffd; color: #111; }
+[scheme=light] pre,
+[scheme=light] body > div > header { background-color: #0088ff0e; }
+[scheme=light] body > div > header::after {
+    content: ""; position: absolute;
+    bottom: 0; left: 1em; right: 1em; height: 1px;
+    background-color: #888c;
+}
+
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] body > div > header,
+[scheme=dark] pre {
+    background-color: #134; box-shadow: inset 0 3px 5px 0 #0003;
+}
+[scheme=dark] pre b { color: #ccd; }
+[scheme=dark] body > div,
+[scheme=dark] button {
+    color: #bde; border-color: #bde; background-color: #245;
+}
+
+[scheme=accessible-dark] button,
+[scheme=accessible-dark] body { background-color: #000; color: #fff; }
+[scheme=accessible-dark] a { color: #8af; }
+[scheme=accessible-dark] a:visited { color: #fa8; }
+
+[scheme=accessible-light] button,
+[scheme=accessible-light] body { background-color: #fff; color: #000; }
+[scheme=accessible-light] a { color: #043; }
+[scheme=accessible-light] a:visited { color: #804; }
+
+
+[scheme=light] body { --bg-hov: #112; --fg-hov: #cdf; }
+[scheme=dark] body { --bg-hov: #cf6; --fg-hov: #000; }
+[scheme=accessible-light] body { --bg-hov: #000; --fg-hov: #fff; }
+[scheme=accessible-dark] body { --bg-hov: #fff; --fg-hov: #000; }
+
+[scheme] a.skip-link, a.skip-link::before,
+button:hover, [scheme] a:hover, a:hover::before,
+*::selection { background-color: var(--bg-hov); color: var(--fg-hov); }
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function setUpColorScheme() {
+    const stored = localStorage.getItem("lastTheme");
+    const html = document.querySelector("html");
+    setSchemeByChangingElement(html, getThisOrPreferedScheme(stored));
+}
+
+function switchColorScheme() {
+    const html = document.querySelector("html");
+    const next = getNextSchemeLookingAtElement(html);
+    setSchemeByChangingElement(html, next);
+    localStorage.setItem("lastTheme", next);
+}
+
+function setSchemeByChangingElement(html, newScheme) {
+    html.setAttribute("scheme", newScheme);
+    if (newScheme === "light" || newScheme === "accessible-light")
+        html.style.colorScheme = "light";
+    if (newScheme === "dark" || newScheme === "accessible-dark")
+        html.style.colorScheme = "dark";
+}
+
+function getThisOrPreferedScheme(stored) {
+    if (stored)
+        return stored;
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        return "dark";
+    return "light";
+}
+
+function getNextSchemeLookingAtElement(html) {
+    const now = html.getAttribute("scheme");
+    if (now === "light")
+        return "dark";
+    if (now === "dark")
+        return "accessible-light";
+    if (now === "accessible-light")
+        return "accessible-dark";
+    return "light";
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="fg1">
+        <div>
+            <header>
+                <nav>
+                    <!-- header.php -->
+<a href="#main-content" class="skip-link">
+    Skip to content</a>
+<h1>Biography</h1>
+<p>
+
+<a href="../gr/biography.html"
+>Greek</a>
+is also supported. Available are
+<a href="index.html"
+>the home page,</a>
+<a href="portfolio.html"
+>portfolio,</a>
+<a href="biography.html"
+>biography,</a>
+<a href="../cv.pdf"
+>cv.pdf and</a>
+
+<button
+    onclick="switchColorScheme()"
+    class="bg1 fg1"
+>dark/light themes.</button>
+</p>
+<script> setUpColorScheme() </script>
+
+                </nav>
+            </header>
+            <main id="main-content">
+                
+
+<h2>Minimalism</h2>
+<p>
+Got attracted to minimal tools, in a movement of exploration.
+Started with Visual Studio Code and Windows 10,
+and gradually made it to using Arch Linux on a 30GB partition,
+with NeoVim and a suboptimal internet speed of about 4Mbps,
+for University projects since the third year.
+It went better at times and worse other times
+but there was acceptance.
+</p>
+<p>
+Since autumn 2023,
+using tools in the style of Unix is comfortable and relaxing.
+Some of these tools are commonly found in servers even today,
+such as Vi, tmux, emacs, zsh bash
+and dash, which is a POSIX compliant shell.
+</p>
+
+
+<h2>High school</h2>
+<p>
+    Graduated    <a href="http://2lyk-amaliad.ilei.sch.gr/wordpress17/"
+    >high school</a>
+    
+with a 17325/20000 score on 2019.
+The final exams included algebra, physics,
+the hardest chemistry exam in a long time,
+and essay reading and writing.
+Went to France with the program
+    <a href="https://school-education.ec.europa.eu/en/etwinning"
+    >E-Twinning</a>.
+</p>
+<p>
+    
+Improvised a proof for the volume of a cone,
+math for Wolfenstein 3D - style graphics
+without being taught vectors yet,
+and watched plenty from the YouTube channels
+    <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a>,
+    <a href="https://www.youtube.com/@Mathologer">Mathologer</a>,
+    <a href="https://www.youtube.com/@numberphile">Numberphile</a>,
+    <a href="https://www.youtube.com/@Computerphile">Computerphile</a>
+    and    <a href="https://www.youtube.com/@standupmaths">Matt Parker</a>.
+</p>
+<p>
+    In the University got interest in    <a href="https://www.youtube.com/@ThePrimeagen">ThePrimeagen</a>,
+    <a href="https://www.youtube.com/@HealthyGamerGG">Healthy Gamer GG</a>
+    and    <a href="https://www.youtube.com/@RamseyDewey">Ramsey Dewey</a>.
+</p>
+<p>
+    
+Went to the
+National and Kapodistrian University of Athens (UoA),
+to the
+    <a href="https://www.di.uoa.gr"
+    >Department of Informatics (DI)</a>.
+    Participated with effort and enthousiasm in thethe open source    <a href="https://github.com/ACM-UoA-Student-Chapter/dil"
+    >compiler</a>
+    
+project of ACM's student chapter,
+though the knowledge gap didn't allow to contribute much.
+As of now, Autumn 2023, hasn't worked.
+Had a tiny internship with
+    <a href="https://helvia.io">Helvia</a>
+    that introduced web development basics.</p>
+
+
+<h2>Languages</h2>
+
+<p>
+    
+There was a span of about 3 weeks in Autumn 2023 with
+wake ups at 4 or 5 in the morning and warm up exercises.
+It didn't last very long, as with many experimentations,
+but it was a feat to be proud of. In those warm ups
+and in some afternoon exercises,
+used mostly C, but sometimes also
+Python, Haskell and Matlab or GNU Octave to be exact.
+The algorithms were about parallelism,
+data structures and data manipulation,
+using
+    <a href="https://www.youtube.com/watch?v=kScFczWbwRM">TDD</a>,
+    <a href="https://youtu.be/tnO2Mos0RjU?si=OhTk8fUdI0FPTWT6">TCR</a>
+    or neither, often in Vi (not referring to Vim).</p>
+<p>
+    
+Outside deliberate pracrice and unfortunately
+as a painkiller for loneliness,
+I've got some touch with
+Rust, Graphviz Dot, AWK, GNU Make, BF,    <a href="https://code.jsoftware.com/wiki/Studio/TasteofJPart1">J</a>
+    
+slightly, lisp and Typescript.
+Isn't opinionated about Typescript but indeed something is off.
+</p>
+<p>
+    
+Both from personal motivation and for the University,
+familiarized with
+C++, Python, PHP, LaTeX, HTML CSS and Javascript,
+Java, Bourne and POSIX shell scripting which is similar to bash.
+The aforementioned warm-ups were also done
+in languages for the University.
+</p>
+
+
+<h2>Architecture</h2>
+
+<p>
+Architecture may not be the best term since there is no
+experience with large systems.
+There have been however experiences of
+creations that were used for a long time, with changing requirements.
+The directory structure that holds projects and images
+was reorganized five times,
+similar to the image tagging system
+and the key bindings framework and command palette.
+At one point, images were placed in a binary tree of directories,
+where the user would traverse the directories asking questions
+in the style of is it or is it not,
+in order to find or insert a new image.
+There was also a point where projects were categorized using symlinks,
+and the key bindings system used to also play the role of
+a code snippet system, which also allowed the user to manipulate
+a code snippet, and perhaps execute it if it's a shell script.
+Before that, the image tagging was done by
+prepending letters to file names which acted like flags,
+also the directory structure had chains of shell scripts
+that lead from an outside directory deeper and deeper into the tree.
+Generally, flatter hierarchies proved to be the most effective approach.
+</p>
+<p>
+    
+These relatively simple experiences proved prototyping to be valuable,
+and they highlighted some positive and negative sides of
+trees, hierarchies and multi purpose tools.
+There were also many experimentations with abstract code
+and code with tiny functions, and because some programs were very slow,
+there were one or two painful experiments wich caching.
+Since these programs were used constantly,
+over time they revealed the messages behind the
+    <a href="http://agilemanifesto.org/"
+    >Manifesto</a>
+    for Agile Software Development.</p>
+
+
+<h2>Friends</h2>
+
+<p>
+Lived lonely and proud until the age of 21,
+but eventually humbled and started
+exercising the ability to attend to conversations
+and gradually made some basic friendships.
+</p>
+<p>
+Collaborated with various people.
+On one project we willingly worked next to each other
+4 hours a day 4 days a week for 2 months,
+rounding the numbers below the theoretical maximum.
+That's 6 per 4 for 3.
+That was the absolute best experience.
+The worst project experiences came from
+resistance to collaborate.
+</p>
+<p>
+The truth is that with most of the teams
+I've collaborated with in the University, we don't talk anymore.
+The adrenaline fuelled, their followers,
+those who hibernate to survive those who only order and critisize,
+none of them appreciate calm collaboration.
+There were a few nice collaborations however.
+I'm having to understand that
+if someone uses stress for motivation I can't calm them down,
+because they'll lose their motivation and they'll perceive that
+as giving a problem.
+I can only demonstrate my way of working and let them think about it,
+which they'll hopefully perceive as a solution to a problem.
+</p>
+
+
+<h2>Illustration and the piano</h2>
+
+<p>
+Quit the piano after 7/9 steps to the diploma,
+when the world view changed and didn't line up with
+the typcial motivations for playing.
+</p>
+<p>
+    
+Then started illustration, guided by the
+    <a href="https://drawabox.com"
+    >Draw A Box</a>
+    community and lessons, as well as videos from    <a href="https://www.proko.com"
+    >Stanislav Prokopenko</a>.
+    
+Quit after being able to draw pleasant looking
+places figures and faces with some difficulty.
+That was partly because
+there was still a disconnection
+between people and my approach to drawing.
+Mostly however, drawing didn't tie with programming,
+and it drained a lot of time.
+</p>
+<p>
+Arts cultivated respect towards
+old means of achieving goals,
+old experienced people's advice,
+warming up before working
+and judging work with a fresh pair of eyes.
+</p>
+
+
+<h2>YouTube</h2>
+
+<p>
+    Recorded    <a href="https://www.youtube.com/@theodorealenas3171"
+    >YouTube videos</a>
+    using <code>ffmpeg</code>
+    piping <code>/dev/video0</code>
+    to <code>mpv</code>
+    
+for showing the webcam's output on the screen.
+The purpose of the YouTube channel is
+to share stories and demonstrate realizations.
+The hardest lessons were related to graphs
+and how to interpret them.
+There is no direct answer to whether or not
+the intended audience benefitted,
+or to how the unintended audience felt.
+</p>
+
+            </main>
+        </div>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->

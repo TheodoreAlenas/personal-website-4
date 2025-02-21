@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Theodoros Dimakopoulos</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+body {
+    line-height: 1.5em;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-weight: normal;
+    font-size: 0.5cm;
+}
+body > div > * { padding: 1em 1em; }
+.img-and-p { display: flex; flex-direction: row; align-items: center; }
+@media (max-width: 20cm) { .img-and-p { flex-direction: column; } }
+.img-container { margin: 1cm 2cm; }
+.img-container, img { border-radius: 100vw; }
+body > div > header { position: relative; }
+.skip-link { position: absolute; top: -100%; text-align: center; }
+.skip-link:focus { top: 0; left: 0; right: 0; }
+h1 { text-align: center; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+pre {
+    border-radius: 5px; padding-left: 1em; overflow: scroll;
+    font-family: 'Source Code Pro Light', monospace;
+    font-size: 0.4cm; line-height: 1.2em;
+}
+a {
+    text-underline-offset: 0.2em;
+    display: inline-block; position: relative; z-index: 1;
+}
+a::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: -0.5em; right: -0.5em; top: -0.5em; bottom: -0.5em;
+}
+a::before, button {
+    border-radius: 5px;
+}
+button {
+    border-style: solid; border-width: 1px;
+    font-family: inherit; font-size: inherit;
+    cursor: pointer;
+    padding: 0.5em 0.5em;
+}
+
+body > div { max-width: 30cm; margin: 0 auto; }
+@media (min-width: 30cm) {
+    [scheme=dark] body,
+    [scheme=light] body {
+        background-color: #cde;
+        background-image: url(../blue-mountains.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+[scheme=light] a { color: #036; }
+[scheme=light] a:visited { color: #604; }
+[scheme=light] button,
+[scheme=light] pre { box-sizing: border-box; border: #888c 1px solid; }
+[scheme=light] body > div,
+[scheme=light] button { background-color: #fffd; color: #111; }
+[scheme=light] pre,
+[scheme=light] body > div > header { background-color: #0088ff0e; }
+[scheme=light] body > div > header::after {
+    content: ""; position: absolute;
+    bottom: 0; left: 1em; right: 1em; height: 1px;
+    background-color: #888c;
+}
+
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] body > div > header,
+[scheme=dark] pre {
+    background-color: #134; box-shadow: inset 0 3px 5px 0 #0003;
+}
+[scheme=dark] pre b { color: #ccd; }
+[scheme=dark] body > div,
+[scheme=dark] button {
+    color: #bde; border-color: #bde; background-color: #245;
+}
+
+[scheme=accessible-dark] button,
+[scheme=accessible-dark] body { background-color: #000; color: #fff; }
+[scheme=accessible-dark] a { color: #8af; }
+[scheme=accessible-dark] a:visited { color: #fa8; }
+
+[scheme=accessible-light] button,
+[scheme=accessible-light] body { background-color: #fff; color: #000; }
+[scheme=accessible-light] a { color: #043; }
+[scheme=accessible-light] a:visited { color: #804; }
+
+
+[scheme=light] body { --bg-hov: #112; --fg-hov: #cdf; }
+[scheme=dark] body { --bg-hov: #cf6; --fg-hov: #000; }
+[scheme=accessible-light] body { --bg-hov: #000; --fg-hov: #fff; }
+[scheme=accessible-dark] body { --bg-hov: #fff; --fg-hov: #000; }
+
+[scheme] a.skip-link, a.skip-link::before,
+button:hover, [scheme] a:hover, a:hover::before,
+*::selection { background-color: var(--bg-hov); color: var(--fg-hov); }
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function setUpColorScheme() {
+    const stored = localStorage.getItem("lastTheme");
+    const html = document.querySelector("html");
+    setSchemeByChangingElement(html, getThisOrPreferedScheme(stored));
+}
+
+function switchColorScheme() {
+    const html = document.querySelector("html");
+    const next = getNextSchemeLookingAtElement(html);
+    setSchemeByChangingElement(html, next);
+    localStorage.setItem("lastTheme", next);
+}
+
+function setSchemeByChangingElement(html, newScheme) {
+    html.setAttribute("scheme", newScheme);
+    if (newScheme === "light" || newScheme === "accessible-light")
+        html.style.colorScheme = "light";
+    if (newScheme === "dark" || newScheme === "accessible-dark")
+        html.style.colorScheme = "dark";
+}
+
+function getThisOrPreferedScheme(stored) {
+    if (stored)
+        return stored;
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        return "dark";
+    return "light";
+}
+
+function getNextSchemeLookingAtElement(html) {
+    const now = html.getAttribute("scheme");
+    if (now === "light")
+        return "dark";
+    if (now === "dark")
+        return "accessible-light";
+    if (now === "accessible-light")
+        return "accessible-dark";
+    return "light";
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="fg1">
+        <div>
+            <header>
+                <nav>
+                    <!-- header.php -->
+<a href="#main-content" class="skip-link">
+    Skip to content</a>
+<h1>Theodoros Dimakopoulos</h1>
+<p>
+
+<a href="../gr/index.html"
+>Greek</a>
+is also supported. Available are
+<a href="index.html"
+>the home page,</a>
+<a href="portfolio.html"
+>portfolio,</a>
+<a href="biography.html"
+>biography,</a>
+<a href="../cv.pdf"
+>cv.pdf and</a>
+
+<button
+    onclick="switchColorScheme()"
+    class="bg1 fg1"
+>dark/light themes.</button>
+</p>
+<script> setUpColorScheme() </script>
+
+                </nav>
+            </header>
+            <main id="main-content">
+                
+
+<div class="img-and-p">
+    <div
+        class="img-container"
+        style="height: 128px; background-color: #d3cbca">
+        <img
+            src="../face.png"
+            alt="white male face with long hair staring at viewer"
+            style="width: 128px; height: 128px"
+        />
+    </div>
+    <p>
+        You may find me on        <a href="https://www.youtube.com/@theodorealenas3171"
+        >YouTube as Theodore Alenas or</a>
+        <a href="https://https://github.com/TheodoreAlenas/"
+        >GitHub also as TheodoreAlenas,</a>
+        <a href="mailto:dimakopt732@gmail.com"
+        >or email me at dimakopt732@gmail.com.</a>
+        
+I produce about weekly content on YouTube
+but I'm inactive on social media otherwise.
+Alenas is what the word Greek sounds like in Greek.    </p>
+</div>
+<p>
+So, welcome! I'm a University student,
+started on 2019, and I love programming.
+I mostly tinker the operating system
+on the lowest possible level every time
+and I've been through the journey to Linux, NeoVim and Emacs.
+Today I consider it to be a journey
+to the different cultures of programmers,
+because these tools have a history that belongs to
+mathematicians, system administrators, low level programmers and so on.
+</p>
+<p>
+I love minimalism and I move iteratively,
+so that there is always something to demonstrate.
+I've been through multiple iterations myself too.
+I used to be obsessed with the agile manifesto,
+also I switched from being closed
+to obsessing over face to face collaboration to an annoying extent,
+I've changed opinions regarding software too
+and generally I'd rather be hurt now than get hurt making realizations.
+I do find that all of this is nice but you may want
+to keep in mind that I perform well among like minded people.
+</p>
+<p>
+I keep this website mainly for people who think of hiring me.
+</p>
+<p>
+As of 2023, I don't have hands-on experience developing
+websites and web apps except this site.
+I've used various tools and techniques
+for my personal environment,
+and I'm surprisingly comfortable handling complexity
+for an undergraduate.
+</p>
+<p>
+If you don't mind,
+I'd like to go outside with the developers
+and have some fun together and see it from there,
+we can all judge together if I fit and where I'd fit.
+I'll cover for backlash from higher ups.
+</p>
+
+            </main>
+        </div>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->

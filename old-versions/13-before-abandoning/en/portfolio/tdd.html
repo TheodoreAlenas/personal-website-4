@@ -1,0 +1,910 @@
+
+
+
+<!DOCTYPE HTML>
+
+<html lang="en">
+  <head>
+
+    <title>Theodore - (broken)</title>
+
+    <meta name="author" content="Dimakopoulos Theodoros">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <style>
+/* License at the bottom. */
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  font-family: system-ui;
+  line-height: 1.6;
+  margin: 0 0;
+}
+
+.be-like-h2, h2 {
+  margin-bottom: 4rem;
+  text-align: center;
+  font-size: 1.5em;
+  display: block;
+}
+
+.phone-screen { font-size: 1.2rem; }
+.phone-screen .m-like-h2,
+.phone-screen .be-like-h2,
+.phone-screen h2 {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 1200px) {
+  .free-media-query { font-size: 1.2rem; }
+  .free-media-query .m-like-h2,
+  .free-media-query .be-like-h2,
+  .free-media-query h2 {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+  }
+}
+.desktop-screen { font-size: 1.5rem; }
+.desktop-screen .m-like-h2,
+.desktop-screen .be-like-h2,
+.desktop-screen h2 {
+  margin-top: 12rem;
+  margin-bottom: 4rem;
+}
+@media screen and (min-width: 1200px) {
+  .free-media-query { font-size: 1.5rem; }
+  .free-media-query .m-like-h2,
+  .free-media-query .be-like-h2,
+  .free-media-query h2 {
+    margin-top: 12rem;
+    margin-bottom: 4rem;
+  }
+}
+
+h2.saner-h2 {
+  margin: initial;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+.debug-mode .menu-bar a,
+.debug-mode .menu-bar span {
+  border: red 1px dashed;
+}
+.menu-bar, .hamburger-nav-list {
+  background-color: var(--panel-normal, #eee);
+  background-color: var(--panel-normal, #eee);
+  box-shadow: var(--shadow, #ccc) 0 0 1rem 0;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.hamburger-nav-list {
+  border-radius: 5px;
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+}
+
+.menu-bar > a {
+  padding: 0.2rem 1rem;
+}
+
+.hamburger-checkbox {
+  opacity: 1%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.hamburger-checkbox + label + .hamburger-nav-list {
+  display: none;
+}
+.hamburger-checkbox:checked + label + .hamburger-nav-list,
+  .hamburger-on
+.hamburger-checkbox + label + .hamburger-nav-list {
+  display: block;
+}
+
+ .debug-mode .hamburger-checkbox {
+  opacity: 50%;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom */
+
+.dont-be-like-button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+.dont-be-like-list {
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0;
+}
+
+.dont-be-like-link {
+  text-decoration: none;
+  color: var(--foreground-normal, black);
+}
+
+.dont-be-like-table,
+.dont-be-like-table > tbody,
+.dont-be-like-table > tbody > tr,
+.dont-be-like-table > tbody > tr > td {
+  display: block;
+}
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-dont-be-like-table,
+  .free-media-query .phone-dont-be-like-table > tbody,
+  .free-media-query .phone-dont-be-like-table > tbody > tr,
+  .free-media-query .phone-dont-be-like-table > tbody > tr > td {
+    display: block;
+  }
+}
+.phone-screen .phone-dont-be-like-table,
+.phone-screen .phone-dont-be-like-table > tbody,
+.phone-screen .phone-dont-be-like-table > tbody > tr,
+.phone-screen .phone-dont-be-like-table > tbody > tr > td {
+  display: block;
+}
+
+.abs-t-r {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.hamburger-prettify {
+  line-height: calc(100% - 10px);
+  padding: 8px 2rem;
+  font-size: 2.5rem;
+  color: var(--fat-lines, #222);
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.bg-select, .debug-mode .bg-select {
+  background-color: var(--selection, #444);
+}
+
+.fat-ghost-on-check:checked + label::before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.debug-mode .fat-ghost-on-check:checked + label::before {
+  width: 0;
+  height: 0;
+}
+
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+.phone-screen .desktop { display: none; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .desktop { display: none; }
+}
+
+.desktop-screen .phone { display: none; }
+@media screen and (min-width: 1200px) {
+  .free-media-query .phone { display: none; }
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.pad-no-ln-h > * {
+  line-height: 1em;
+  padding-top: 5px;
+}
+
+.p1, .inside-p1 > *, .iinside-p1 > * > * { padding: 0.5rem 0.5rem; }
+
+.p2, .inside-p2 > *, .iinside-p2 > * > * { padding: 1rem 1rem; }
+.pl2 { padding-left: 1rem; }
+.ml2 { margin-left: 1rem; }
+
+.pl3 { padding-left: 2rem; }
+.ml3 { margin-left: 2rem; }
+
+.ptb1 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.mtb1 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+
+.mtb4 { margin-top: 12rem; margin-bottom: 8rem; }
+
+.mtb-like-p { margin-top: 1em; margin-bottom: 1em; }
+
+.ptb2 { padding-top: 1rem; padding-bottom: 1rem; }
+.mtb2 { margin-top: 1rem; margin-bottom: 1rem; }
+
+.p3, .inside-p3 > *, .iinside-p3 > * > * { padding: 3rem 2rem; }
+.m3, .inside-m3 > *, .iinside-m3 > * > * { margin: 3rem 2rem; }
+
+.iinside-mtb3 > * > * { margin-top: 3rem; margin-bottom: 3rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-mtb3,
+  .free-media-query .phone-inside-mtb3 > *,
+  .free-media-query .phone-iinside-mtb3 > * > * {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}
+.phone-screen .phone-mtb3,
+.phone-screen .phone-inside-mtb3 > *,
+.phone-screen .phone-iinside-mtb3 > * > * {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .free-media-query .desktop-iinside-p2 > * > * { padding: 1rem 1rem; }
+  .free-media-query .desktop-iinside-p3 > * > * { padding: 3rem 2rem; }
+}
+.desktop-screen .desktop-iinside-p2 > * > * { padding: 1rem 1rem; }
+.desktop-screen .desktop-iinside-p3 > * > * { padding: 3rem 2rem; }
+
+@media screen and (min-width: 1200px) {
+  .free-media-query .desktop-mtb4 {
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+  }
+}
+.desktop-screen .desktop-mtb4 {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+.iinside-last-child-fat > *:last-child > * { padding-right: 4rem; }
+.iinside-first-child-fat > *:first-child > * { padding-left: 4rem; }
+.iinside-first-child-ffat > *:first-child > * {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.inside-first-child-mra > *:first-child { margin-right: auto; }
+
+.m0a { margin: 0 auto; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-m0a { margin: 0 auto; }
+}
+.phone-screen .phone-m0a { margin: 0 auto; }
+
+.mlra { margin-left: auto; margin-right: auto; }
+
+.m0 { margin: 0; }
+
+.phone-screen .phone-p1 { padding: 0.5rem; }
+.phone-screen .phone-p2 { padding: 1rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-p1 { padding: 0.5rem; }
+  .free-media-query .phone-p2 { padding: 1rem; }
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom */
+
+.newspaper {
+  width: min(100% - 2rem - 2px, 35cm);
+  margin: 0 auto;
+}
+
+.bar-center {
+  width: min(150rem, 100%);
+  margin: 0 auto;
+}
+
+.ovf-hid { overflow: hidden; }
+
+.lrline {
+  border-right: var(--line, #eee) 1px solid;
+  border-left: var(--line, #eee) 1px solid;
+}
+
+.w-h-max-cont {
+  width: max-content;
+  height: max-content;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.round { border-radius: 5px; }
+
+.flex-row-spbet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.flex-row-spar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.grid { display: grid; }
+.gap-2 { gap: 2rem; }
+.grid-col-to-row { grid-auto-flow: column; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .grid-col-to-row { grid-auto-flow: row; }
+}
+.phone-screen .grid-col-to-row { grid-auto-flow: row; }
+.desktop-screen .grid-col-to-row { grid-auto-flow: column; }
+
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-scroll-x { overflow-x: scroll; }
+}
+.phone-screen .phone-scroll-x { overflow-x: scroll; }
+
+.inl-bl, .inside-inl-bl > * { display: inline-block; }
+.block , .inside-block > * { display: block; }
+.disp-none { display: none; }
+
+.sticky { position: sticky; top: 0; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.ln-h-1em {
+  line-height: 1em;
+}
+
+.txt-cent { text-align: center; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-txt-cent { text-align: center; }
+}
+.phone-screen .phone-txt-cent { text-align: center; }
+
+.smol, .dont-be-like-button.smol {
+  font-size: 75%;
+  line-height: 2em;
+}
+.phone-screen .phone-smol { font-size: 75%; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-smol { font-size: 75%; }
+}
+
+.fat {
+  font-size: 130%;
+}
+.ffat {
+  font-size: 130%;
+  letter-spacing: 0.1rem;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+.light-themed,
+.dark-themed .inverse-theme {
+  --background-normal: #fff;
+  --foreground-normal: #000;
+}
+.dark-themed,
+.light-themed .inverse-theme {
+  --background-normal: #404045;
+  --foreground-normal: #ddd;
+}
+
+
+.inverse-theme,
+.theme-wrapper {
+  background-color: var(--background-normal);
+  color: var(--foreground-normal);
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.debug-red {
+  background-color: red;
+}
+
+.light-themed {
+  --panel-normal: #fff;
+  --shadow: rgba(0, 0, 0, 7%);
+
+  --code-background: #ccc;
+  --code-font: #222;
+  --code-background: #101928;
+  --code-font: #aaa;
+
+  --code-background-gray: #181410;
+}
+.dark-themed {
+  --panel-normal: #404045;
+  --shadow: rgba(0, 0, 0, 10%);
+
+  --code-background: #223;
+  --code-font: #aaa;
+
+  --code-background-gray: #262630;
+}
+
+.brown {
+  background-color: var(--code-background-gray, #181410);
+  color: var(--code-font, #aaa);
+}
+.blue {
+  background-color: var(--code-background, #101928);
+  color: var(--code-font, #aaa);
+}
+
+.light-themed {
+  --selection: #e0e0e8;
+  --fat-lines: #222;
+  --line: #ccc;
+  --contrast: #444;
+}
+.dark-themed {
+  --selection: #505058;
+  --fat-lines: #999;
+  --line: #555;
+  --contrast: #aaa;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* License at the bottom. */
+
+.light-themed {
+  --link-normal: #226;
+  --link-visited: #404;
+  --link-hover: #22a;
+  --link-visited-hover: #806;
+  --hover: rgba(0, 0, 128, 4%);
+}
+.dark-themed {
+  --link-normal: #aad;
+  --link-visited: #c9b;
+  --link-hover: #99f;
+  --link-visited-hover: #f8b;
+  --hover: rgba(128, 128, 255, 6%);
+}
+
+a .be-like-link, a:not(.dont-be-like-link) {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  color: var(--link-normal);
+  transition: color linear 0.05s;
+}
+a:visited .be-like-link, a:not(.dont-be-like-link):visited {
+  color: var(--link-visited);
+}
+a:hover .be-like-link, a:not(.dont-be-like-link):hover {
+  text-underline-offset: 0.15rem;
+  color: var(--link-hover);
+  background-color: var(--hover);
+}
+a:visited:hover .be-like-link, a:not(.dont-be-like-link):visited:hover {
+  color: var(--link-visited-hover);
+}
+
+.buttony:hover {
+  cursor: pointer;
+  background-color: var(--hover);
+}
+ 
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+    </style>
+    <script>
+// License at the bottom.
+
+function setUpThemeSwitches() {
+  forEachThemeSwitch(makeItToggleTheTheme);
+}
+
+function applyStoredTheme() {
+  if (getThemeIsDark())
+    showDarkness();
+  else
+    showBrightness();
+}
+
+function forEachThemeSwitch(callback) {
+  const themeSwitches = document.getElementsByClassName("theme-switch");
+  for (let i = 0; i < themeSwitches.length; i++)
+    callback(themeSwitches[i]);
+}
+function makeItToggleTheTheme(themeSwitch) {
+  themeSwitch.addEventListener("click", toggleTheme);
+}
+
+function getThemeIsDark() {
+  return "dark" === localStorage.getItem('preferredTheme');
+}
+function storeDarkTheme() {
+  localStorage.setItem('preferredTheme', 'dark');
+}
+function storeLightTheme() {
+  localStorage.setItem('preferredTheme', 'light');
+}
+function showDarkness() {
+  const classList = document.getElementById('theme-wrapper').classList;
+  classList.remove("light-themed");
+  classList.add("dark-themed");
+}
+function showBrightness() {
+  const classList = document.getElementById('theme-wrapper').classList;
+  classList.remove("dark-themed");
+  classList.add("light-themed");
+}
+
+function makeItDark() {
+  showDarkness();
+  storeDarkTheme();
+}
+function makeItBright() {
+  showBrightness();
+  storeLightTheme();
+}
+
+function toggleTheme() {
+  if (getThemeIsDark())
+    makeItBright();
+  else
+    makeItDark();
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+    </script>
+
+  </head>
+  <body>
+    <input
+      id="dark-theme-switch"
+      type="checkbox"
+      class="dark-theme-switch disp-none"
+    />
+
+    <div
+      id="theme-wrapper"
+      class="theme-wrapper"
+      style="padding-bottom: 12rem"
+    >
+      <script> applyStoredTheme(); </script>
+
+<header class='free-media-query sticky'>
+<nav class='menu-bar bar-center relative'>
+  <span class='
+    menu-bar-title phone inl-bl ptb1 pl3
+  '>(broken)</span>
+  <ul class='
+    desktop dont-be-like-list flex-row-spbet
+    iinside-last-child-fat iinside-first-child-ffat
+    inside-first-child-mra
+    iinside-p3
+  '><li class='inside-block'><a href='../en/index.html'>Home</a></li><li class='inside-block'>
+<button
+  class='theme-switch dont-be-like-button buttony line-h-1em smol'
+  style='width: 100%; text-align: left;'
+>
+Theme
+</button>
+</li><li class='inside-block'><a class='smol' href='which-portfolio-tdd-language-gr'>Greek</a></li><li class='inside-block'><a href='../en/portfolio.html'>Portfolio</a></li><li class='inside-block'><a href='../en/biography.html'>Biography</a></li><li class='inside-block'><a href='../en/contact.html'>Contact</a></li></ul>
+  <input
+  id='hamburger-checkbox-639'
+  type='checkbox'
+  class='hamburger-checkbox phone fat-ghost-on-check'
+/>
+<label
+  for='hamburger-checkbox-639'
+  class='abs-t-r hamburger-prettify phone inl-bl'
+  role='img'
+  aria-label='show menu'
+> ☰</label>
+  <ul class='
+    hamburger-nav-list
+    phone dont-be-like-list iinside-p2 absolute round ovf-hid
+  '><li class='inside-block'><a href='../en/index.html'>Home</a></li><li class='inside-block'>
+<button
+  class='theme-switch dont-be-like-button buttony line-h-1em smol'
+  style='width: 100%; text-align: left;'
+>
+Theme
+</button>
+</li><li class='inside-block'><a class='smol' href='which-portfolio-tdd-language-gr'>Greek</a></li><li class='inside-block'><a href='../en/portfolio.html'>Portfolio</a></li><li class='inside-block'><a href='../en/biography.html'>Biography</a></li><li class='inside-block'><a href='../en/contact.html'>Contact</a></li></ul>
+</nav>
+</header>
+pre
+<main class='free-media-query newspaper lrline p2'>
+hello there! I'm the contents of TDD portfolio.
+It's not a big deal right?
+Well no, it's not. Hi hi!
+
+</main>
+
+      <script> setUpThemeSwitches(); </script>
+    </div>
+  </body>
+</html>

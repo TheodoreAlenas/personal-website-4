@@ -1,0 +1,447 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Βιογραφικό</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+body {
+    line-height: 1.5em;
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    font-weight: normal;
+    font-size: 0.5cm;
+}
+body > div > * { padding: 1em 1em; }
+.img-and-p { display: flex; flex-direction: row; align-items: center; }
+@media (max-width: 20cm) { .img-and-p { flex-direction: column; } }
+.img-container { margin: 1cm 2cm; }
+.img-container, img { border-radius: 100vw; }
+body > div > header { position: relative; }
+.skip-link { position: absolute; top: -100%; text-align: center; }
+.skip-link:focus { top: 0; left: 0; right: 0; }
+h1 { text-align: center; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+pre {
+    border-radius: 5px; padding-left: 1em; overflow: scroll;
+    font-family: 'Source Code Pro Light', monospace;
+    font-size: 0.4cm; line-height: 1.2em;
+}
+a {
+    text-underline-offset: 0.2em;
+    display: inline-block; position: relative; z-index: 1;
+}
+a::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: -0.5em; right: -0.5em; top: -0.5em; bottom: -0.5em;
+}
+a::before, button {
+    border-radius: 5px;
+}
+button {
+    border-style: solid; border-width: 1px;
+    font-family: inherit; font-size: inherit;
+    cursor: pointer;
+    padding: 0.5em 0.5em;
+}
+
+body > div { max-width: 30cm; margin: 0 auto; }
+@media (min-width: 30cm) {
+    [scheme=dark] body,
+    [scheme=light] body {
+        background-color: #cde;
+        background-image: url(../blue-mountains.svg);
+        background-attachment: fixed;
+        background-size: cover;
+    }
+}
+
+[scheme=light] a { color: #036; }
+[scheme=light] a:visited { color: #604; }
+[scheme=light] button,
+[scheme=light] pre { box-sizing: border-box; border: #888c 1px solid; }
+[scheme=light] body > div,
+[scheme=light] button { background-color: #fffd; color: #111; }
+[scheme=light] pre,
+[scheme=light] body > div > header { background-color: #0088ff0e; }
+[scheme=light] body > div > header::after {
+    content: ""; position: absolute;
+    bottom: 0; left: 1em; right: 1em; height: 1px;
+    background-color: #888c;
+}
+
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] body > div > header,
+[scheme=dark] pre {
+    background-color: #134; box-shadow: inset 0 3px 5px 0 #0003;
+}
+[scheme=dark] pre b { color: #ccd; }
+[scheme=dark] body > div,
+[scheme=dark] button {
+    color: #bde; border-color: #bde; background-color: #245;
+}
+
+[scheme=accessible-dark] button,
+[scheme=accessible-dark] body { background-color: #000; color: #fff; }
+[scheme=accessible-dark] a { color: #8af; }
+[scheme=accessible-dark] a:visited { color: #fa8; }
+
+[scheme=accessible-light] button,
+[scheme=accessible-light] body { background-color: #fff; color: #000; }
+[scheme=accessible-light] a { color: #043; }
+[scheme=accessible-light] a:visited { color: #804; }
+
+
+[scheme=light] body { --bg-hov: #112; --fg-hov: #cdf; }
+[scheme=dark] body { --bg-hov: #cf6; --fg-hov: #000; }
+[scheme=accessible-light] body { --bg-hov: #000; --fg-hov: #fff; }
+[scheme=accessible-dark] body { --bg-hov: #fff; --fg-hov: #000; }
+
+[scheme] a.skip-link, a.skip-link::before,
+button:hover, [scheme] a:hover, a:hover::before,
+*::selection { background-color: var(--bg-hov); color: var(--fg-hov); }
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function setUpColorScheme() {
+    const stored = localStorage.getItem("lastTheme");
+    const html = document.querySelector("html");
+    setSchemeByChangingElement(html, getThisOrPreferedScheme(stored));
+}
+
+function switchColorScheme() {
+    const html = document.querySelector("html");
+    const next = getNextSchemeLookingAtElement(html);
+    setSchemeByChangingElement(html, next);
+    localStorage.setItem("lastTheme", next);
+}
+
+function setSchemeByChangingElement(html, newScheme) {
+    html.setAttribute("scheme", newScheme);
+    if (newScheme === "light" || newScheme === "accessible-light")
+        html.style.colorScheme = "light";
+    if (newScheme === "dark" || newScheme === "accessible-dark")
+        html.style.colorScheme = "dark";
+}
+
+function getThisOrPreferedScheme(stored) {
+    if (stored)
+        return stored;
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches)
+        return "dark";
+    return "light";
+}
+
+function getNextSchemeLookingAtElement(html) {
+    const now = html.getAttribute("scheme");
+    if (now === "light")
+        return "dark";
+    if (now === "dark")
+        return "accessible-light";
+    if (now === "accessible-light")
+        return "accessible-dark";
+    return "light";
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="fg1">
+        <div>
+            <header>
+                <nav>
+                    <!-- header.php -->
+<a href="#main-content" class="skip-link">
+    Μετάβαση στο περιεχόμενο</a>
+<h1>Βιογραφικό</h1>
+<p>
+
+<a href="../en/biography.html"
+>English</a>
+is also supported. Διατίθενται
+<a href="index.html"
+>η αρχική σελίδα,</a>
+<a href="portfolio.html"
+>χαρτοφυλάκιο,</a>
+<a href="biography.html"
+>βιογραφικό,</a>
+<a href="../cv.pdf"
+>cv.pdf και</a>
+
+<button
+    onclick="switchColorScheme()"
+    class="bg1 fg1"
+>ανοιχτά/σκούρα θέματα.</button>
+</p>
+<script> setUpColorScheme() </script>
+
+                </nav>
+            </header>
+            <main id="main-content">
+                
+
+<h2>Μινιμαλισμός</h2>
+<p>
+Απέκτησε μια τάση προς μινιμαλιστικά εργαλεία,
+μέσα σε ένα ευρύτερο πλαίσιο πειραματισμών.
+Ξεκίνησε με Visual Studio Code και Windows 10,
+και σταδιακά κατέληξε να κάνει τις εργασίες
+του τρίτου έτους της σχολής και μετά σε
+30 GB Arch Linux, NeoVim
+και 4Mbps περίπου σύνδεση στο διαδίκτυο.
+Δεν βόλευε πάντα αλλά υπήρχε μια αίσθηση αποδοχής.
+</p>
+<p>
+Από το Φθινόπωρο του 2023,
+η χρήση παλιών εργαλείων στιλ Unix είναι άνετη και ξεκούραστη.
+Κάποια από τα εργαλεία βρίσκονται σε servers και σήμερα,
+όπως Vi, tmux, emacs, zsh bash και dash που είναι POSIX compliant shell.
+</p>
+
+
+<h2>Λύκειο</h2>
+<p>
+    Απολύθηκε από    <a href="http://2lyk-amaliad.ilei.sch.gr/wordpress17/"
+    >το λύκειο</a>
+    
+με 17325 μόρια το 2019,
+με κατεύθυνση Θετικές επιστήμες.
+Πήγε Γαλλία με το πρόγραμμα
+    <a href="https://school-education.ec.europa.eu/en/etwinning"
+    >E-Twinning</a>.
+</p>
+<p>
+    
+Αυτοσχεδίασε απόδειξη για τον όγκο του κώνου,
+μαθηματικά για γραφικά στον υπολογιστή τύπου
+Wolfenstein 3D χωρίς να γνωρίζει από διανύσματα,
+και παρακολούθησε αρκετό από το περιεχόμενο των καναλιών
+    <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a>,
+    <a href="https://www.youtube.com/@Mathologer">Mathologer</a>,
+    <a href="https://www.youtube.com/@numberphile">Numberphile</a>,
+    <a href="https://www.youtube.com/@Computerphile">Computerphile</a>
+    και    <a href="https://www.youtube.com/@standupmaths">Matt Parker</a>.
+</p>
+<p>
+    Στο πανεπιστήμιο παρακολούθησε    <a href="https://www.youtube.com/@ThePrimeagen">ThePrimeagen</a>,
+    <a href="https://www.youtube.com/@HealthyGamerGG">Healthy Gamer GG</a>
+    και    <a href="https://www.youtube.com/@RamseyDewey">Ramsey Dewey</a>.
+</p>
+<p>
+    
+Σπούδασε στο Εθνικό και Καπποδιστριακό Πανεπιστήμιο Αθηνών
+(ΕΚΠΑ) στο
+    <a href="https://www.di.uoa.gr"
+    >Τμήμα Πληροφορικής και Τηλεπικοινωνιών</a>.
+    Συμμετείχε με ενθουσιασμό στο πρότζεκτ open source    <a href="https://github.com/ACM-UoA-Student-Chapter/dil"
+    >μεταγλωττιστή</a>
+    
+του ACM student chapter,
+αν και δεν κατείχε γνώσεις ώστε να προσφέρει πολλά.
+Ως τώρα, το Φθινόπωρο του 2023, δεν έχει εργαστεί.
+Έκανε ελάχιστη πρακτική εργασία με την εταιρεία
+    <a href="https://helvia.io">Helvia</a>
+    με την οποία είδε βασικές αρχές του web development.</p>
+
+
+<h2>Γλώσσες</h2>
+
+<p>
+    
+Υπήρξε ένα διάστημα περίπου τριών εβδομάδων το Φθινόπωρο του 2023
+με πρωινό ξύπνημα στις 4 ή 5 το πρωί και ασκήσεις ζεστάματος.
+Δε διήρκεσε πολύ, όπως και άλλοι αντίστοιχοι πειραματισμοί δεν
+διήρκεσαν, αλλά ήταν ένα κατόρθωμα. Σε αυτά τα ζεστάματα,
+καθώς και σε απογευματινές ασκήσεις,
+χρησιμοποιήθηκε κυρίως C αλλά κάποιες φορές και
+Python, Haskell και Matlab ή GNU Octave για την ακρίβεια.
+Οι αλγόριθμοι αφορούσαν παραλληλία,
+δομές δεδομένων και διαχείριση δεδομένων, με
+    <a href="https://www.youtube.com/watch?v=kScFczWbwRM">TDD</a>,
+    <a href="https://youtu.be/tnO2Mos0RjU?si=OhTk8fUdI0FPTWT6">TCR</a>
+    ή κανένα από τα δύο, συχνά σε Vi (όχι Vim).</p>
+<p>
+    
+Χωρίς εκπαιδευτικούς σκοπούς,
+με κίνητρο εσωτερικά κενά δυστυχώς,
+πήρε μία πρώτη ιδέα και από τις γλώσσες
+Rust, Graphviz Dot, AWK, GNU Make, BF,    <a href="https://code.jsoftware.com/wiki/Studio/TasteofJPart1">J</a>
+    
+ελαφρώς, lisp και Typescript.
+Δεν έχει έντονη άποψη για την Typescript
+αλλά κάτι δεν πάει καλά πράγματι.
+</p>
+<p>
+    
+Τόσο για το Πανεπιστήμιο όσο και για προσωπικούς λόγους,
+εξοικειώθηκε με
+C++, Python, PHP, LaTeX, HTML CSS και Javascript,
+Java, Bourne και POSIX shell scripting που είναι παρόμοιο με bash.
+Τα ζεστάματα που αναφέρθηκαν γίνονταν επίσης σε γλώσσες
+που χρησιμοποιούνταν στο Πανεπιστήμιο.
+</p>
+
+
+<h2>Αρχιτεκτονική</h2>
+
+<p>
+Αρχιτεκτονική ίσως να μην είναι ο πιο σωστός όρος,
+αφού δεν έχει υπάρξει εμπειρία με μεγάλα συστήματα.
+Υπάρχει όμως η αίσθηση ότι μία κατασκευή χρησιμοποιείται
+για πολύ καιρό και οι απαιτήσεις της αλλάζουν.
+Η δομή των φακέλων με πρότζεκτ και εικόνες
+επανασχεδιάστηκε περίπου πέντε φορές,
+όπως και το σύστημα κατηγοριοποίησης εικόνων
+και το σύστημα συνδυασμού πλήκτρων.
+Για ένα διάστημα, οι εικόνες κατηγοριοποιούνταν μέσα σε ένα
+δυαδικό δέντρο φακέλων. Ο χρήστης έκανε επιλογές τύπου
+είναι ή δεν είναι, ώστε να διασχίσει τους φακέλους και να βρει
+ή να τοποθετήσει μια εικόνα.
+Υπήρξε επίσης ένα διάστημα που οι φάκελοι των πρότζεκτ
+κατηγοριοποιούνταν με τη χρήση symlinks,
+και το σύστημα συνδυασμού πλήκτρων αποθήκευε
+τμήματα κώδικα παντός χρήσης, με τη δυνατότητα να τα επεξεργαστεί
+πρωτού τα επικολλήσει ή τα εκτελέσει.
+Άλλοτε οι εικόνες κατηγοριοποιούνταν χρησιμοποιώντας
+γράμματα στην αρχή του ονόματός τους
+και για τα πρότζεκτ υπήρχαν αλυσίδες από shell scripts
+που ξεκινούσαν από εξωτερικούς φακέλους και κατέληγαν σε εσωτερικούς.
+Τελικά αποδείχτηκε ότι οι πιο επίπεδες ιεραρχίες είναι οι καλύτερες.
+</p>
+<p>
+    
+Αυτές οι σχετικά απλές εμπειρίες ανέδειξαν την αξία
+της προτοτυποποίησης,
+και έκαναν φανερά κάποια πλεονεκτήματα και μειονεκτήματα
+των δένδρων, των ιεραρχιών και των εργαλείων πολλαπλής χρήσης.
+Υπήρξαν διάφοροι πειραματισμοί και με αφαιρετικό κώδικα
+και με πολύ μικρές συναρτήσεις,
+και επειδή ορισμένα προγράμματα ήταν πολύ αργά,
+υπήρξαν ένας ή δύο οδυνηροί πειραματισμοί με caching.
+Επειδή αυτά τα προγράμματα χρησιμοποιούνταν,
+γίνονταν όλο και πιο φανερά τα μηνύματα του
+    <a href="http://agilemanifesto.org/"
+    >Manifesto</a>
+    for Agile Software Development.</p>
+
+
+<h2>Φίλοι</h2>
+
+<p>
+Έζησε εσωστρεφής με μια στάση περιφάνειας μέχρι την ηλικία των 21
+αλλά τελικά άλλαξε στάση και
+παρά τις δυσκολίες, άρχισε να σχηματίζει παρέες.
+</p>
+<p>
+Συνεργάστηκε με διάφορα άτομα,
+και η καλύτερη συνεργασία έγινε με νέους τότε φίλους,
+πρόσωπο με πρόσωπο
+4 ώρες τη μέρα 4 μέρες την εβδομάδα επί 2 μήνες,
+στρογγυλοποιώντας κάτω από το θεωρητικό μέγιστο
+6 ανά 4 επί 3.
+Οι πιο δυσάρεστες εμπειρίες συνεργασίας σε εργασίες της σχολής
+προέρχονταν από αντίσταση στη συνεργασία.
+</p>
+<p>
+Η αλήθεια είναι ότι από τις ομάδες που συνεργαστήκαμε στο Πανεπιστήμιο,
+με τις περισσότερες δε μιλάμε πλέον.
+Κάποιοι παίρνουν ενέργεια απ' το άγχος, έπειτα είναι οι ακόλουθοί τους,
+έπειτα οι παράλυτοι που προσπερνούν τους τρελούς,
+λίγοι εκτιμούν την ήρεμη συνεργασία.
+Ορισμένες συνεργασίες ήταν καλές πράγματι.
+Φαίνεται πως αν ο συνάδελφος παίρνει ενέργεια μέσα από το άγχος
+και τον ηρεμήσουν, από τη δική του οπτική γωνία, του έφεραν προβλήματα.
+Για να εκλάβει κάποια επιρροή ως λύση σε πρόβλημα
+χρειάζεται λεπτεπίλεπτη μεταχείριση.
+</p>
+
+
+<h2>Σκιτσογραφία και πιάνο</h2>
+
+<p>
+Εγκατέλειψε το πιάνο στο επίπεδο πρώτης ανωτέρας,
+όταν άλλαξε τρόπο σκέψης και τα μέχρι τότε κίνητρα
+για μελέτη δεν εφαρμόζονταν.
+</p>
+<p>
+    
+Έπειτα καταπιάστηκε με τη σκιτισογραφία, μέσα απ' την
+κοινότητα και σειρά μαθημάτων
+    <a href="https://drawabox.com"
+    >Draw A Box</a>
+    καθώς και μέσα από βίντεο του    <a href="https://www.proko.com"
+    >Stanislav Prokopenko</a>.
+    
+Την εγκατέλειψε μπορώντας να σχεδιάσει
+ικανοποιητικά ρεαλιστικά πρόσωπα, φιγούρες και τοπία
+με αρκετή δυσκολία.
+Εν μέρει, αποστασιοποιήθηκε λόγω της
+εσωστρεφούς φύσης του χόμπυ,
+αν και κυρίως επειδή η σκιτσογραφία δε συνδυαζόταν
+καλά με την πληροφορική και απαιτούσε μεγάλη αφοσίωση.
+</p>
+<p>
+Η τέχνη καλλιέργησε σεβασμό σε παλιές μεθόδους και παλιά εργαλεία,
+στις συμβουλές ηλικιωμένων έμπειρων,
+στο ζέσταμα
+και στην αντικειμενική κριτική μετά από λίγη απόσταση.
+</p>
+
+
+<h2>YouTube</h2>
+
+<p>
+    Δημιούργησε    <a href="https://www.youtube.com/@theodorealenas3171"
+    >βίντεο στην πλατφόρμα YouTube</a>
+    χρησιμοποιώντας το εργαλείο <code>ffmpeg</code>
+    περνώντας την έξοδο του <code>/dev/video0</code>
+    στο <code>mpv</code>
+    
+ώστε να προβάλλεται το υλικό της κάμερας στην οθόνη.
+Το κανάλι έχει στόχο να βοηθήσει άλλους προγραμματιστές
+μέσα από προσωπικές ιστορίες και επιδείξεις.
+Το δυσκολότερο ήταν η αποκωδικοποίηση των γραφημάτων
+που προσφέρει η πλατφόμα στους δημιουργούς, σε πρακτικό επίπεδο.
+Δεν είναι προφανές αν επωφελήθηκαν οι επιθυμητοί θεατές,
+ούτε είναι προφανής η αντίδραση των κατά λάθος θεατών.
+</p>
+
+            </main>
+        </div>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->

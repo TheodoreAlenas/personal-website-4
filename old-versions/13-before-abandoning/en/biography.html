@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE HTML>
+
+<html lang="en">
+  <head>
+
+    <title>Theodore - Biography</title>
+
+    <meta name="author" content="Dimakopoulos Theodoros">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+
+    <style>
+/* from common/wraps/html-body.css */
+/* License at the bottom. */
+
+html { color-scheme: light dark; }
+
+.be-like-h1, h1 {
+  text-align: center;
+  font-size: 2em;
+  display: block;
+}
+
+h2 { margin-top: 4rem; margin-left: 2rem; }
+
+.phone-screen { font-size: 1.2rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query { font-size: 1.2rem; }
+}
+.desktop-screen { font-size: 1.3rem; }
+@media screen and (min-width: 1200px) {
+  .free-media-query { font-size: 1.3rem; }
+}
+
+.phone-screen h2 { margin-top: 4rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query h2 { margin-top: 4rem; }
+}
+
+.phone-screen .m-like-h1,
+.phone-screen .be-like-h1,
+.phone-screen h1 {
+  margin-top: 4rem;
+  margin-bottom: 2rem;
+}
+@media screen and (max-width: 1200px) {
+  .free-media-query .m-like-h1,
+  .free-media-query .be-like-h1,
+  .free-media-query h1 {
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+  }
+}
+.desktop-screen .m-like-h1,
+.desktop-screen .be-like-h1,
+.desktop-screen h1 {
+  margin-top: 12rem;
+  margin-bottom: 6rem;
+}
+@media screen and (min-width: 1200px) {
+  .free-media-query .m-like-h1,
+  .free-media-query .be-like-h1,
+  .free-media-query h1 {
+    margin-top: 12rem;
+    margin-bottom: 6rem;
+  }
+}
+
+h2.saner-h2 {
+  margin: initial;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/wraps/html-body.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/menu-bar/css/default.css */
+.debug-mode .menu-bar a,
+.debug-mode .menu-bar span {
+  border: red 1px dashed;
+}
+.menu-bar, .hamburger-nav-list {
+  background-color: var(--panel-normal, #eee);
+  background-color: var(--panel-normal, #eee);
+  box-shadow: var(--shadow, #ccc) 0 0 1rem 0;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/menu-bar/css/default.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/menu-bar/css/phone.css */
+/* License at the bottom. */
+
+.hamburger-nav-list {
+  border-radius: 5px;
+  position: absolute;
+  top: 3.5rem;
+  right: 1rem;
+}
+
+.menu-bar > a {
+  padding: 0.2rem 1rem;
+}
+
+.hamburger-checkbox {
+  opacity: 1%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+:not(.hamburger-on)
+.hamburger-checkbox:not(:checked)
++ label
++ .hamburger-nav-list {
+  display: none;
+}
+
+ .debug-mode .hamburger-checkbox {
+  opacity: 50%;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/menu-bar/css/phone.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/morph.css */
+/* License at the bottom */
+
+.dont-be-like-button {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+.dont-be-like-list {
+  padding-left: 0;
+  list-style: none;
+  margin: 0 0;
+}
+
+.dont-be-like-link {
+  text-decoration: none;
+  color: var(--foreground-normal, black);
+}
+
+.dont-be-like-table,
+.dont-be-like-table > tbody,
+.dont-be-like-table > tbody > tr,
+.dont-be-like-table > tbody > tr > td {
+  display: block;
+}
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-dont-be-like-table,
+  .free-media-query .phone-dont-be-like-table > tbody,
+  .free-media-query .phone-dont-be-like-table > tbody > tr,
+  .free-media-query .phone-dont-be-like-table > tbody > tr > td {
+    display: block;
+  }
+}
+.phone-screen .phone-dont-be-like-table,
+.phone-screen .phone-dont-be-like-table > tbody,
+.phone-screen .phone-dont-be-like-table > tbody > tr,
+.phone-screen .phone-dont-be-like-table > tbody > tr > td {
+  display: block;
+}
+
+.abs-t-r {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.hamburger-prettify {
+  line-height: calc(100% - 10px);
+  padding: 8px 2rem;
+  font-size: 2.5rem;
+  color: var(--fat-lines, #222);
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/morph.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/popup.css */
+/* License at the bottom. */
+
+.bg-select, .debug-mode .bg-select {
+  background-color: var(--selection, #444);
+}
+
+.fat-ghost-on-check:checked + label::before {
+  content: "";
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.debug-mode .fat-ghost-on-check:checked + label::before {
+  width: 0;
+  height: 0;
+}
+
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/popup.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/fade.css */
+.phone-screen .desktop { display: none; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .desktop { display: none; }
+}
+
+.desktop-screen .phone { display: none; }
+@media screen and (min-width: 1200px) {
+  .free-media-query .phone { display: none; }
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/fade.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/margin-padding.css */
+/* License at the bottom. */
+
+.pad-no-ln-h > * {
+  line-height: 1em;
+  padding-top: 5px;
+}
+
+.p1, .inside-p1 > *, .iinside-p1 > * > * { padding: 0.5rem 0.5rem; }
+
+.p2, .inside-p2 > *, .iinside-p2 > * > * { padding: 1rem 1rem; }
+.pl2 { padding-left: 1rem; }
+.ml2 { margin-left: 1rem; }
+
+.pl3 { padding-left: 2rem; }
+.ml3 { margin-left: 2rem; }
+
+.ptb1 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+.mtb1 { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+
+.mtb4 { margin-top: 12rem; margin-bottom: 8rem; }
+
+.mtb-like-p { margin-top: 1em; margin-bottom: 1em; }
+
+.ptb2 { padding-top: 1rem; padding-bottom: 1rem; }
+.mtb2 { margin-top: 1rem; margin-bottom: 1rem; }
+
+.p3, .inside-p3 > *, .iinside-p3 > * > * { padding: 3rem 2rem; }
+.m3, .inside-m3 > *, .iinside-m3 > * > * { margin: 3rem 2rem; }
+
+.iinside-mtb3 > * > * { margin-top: 3rem; margin-bottom: 3rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-mtb3,
+  .free-media-query .phone-inside-mtb3 > *,
+  .free-media-query .phone-iinside-mtb3 > * > * {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+}
+.phone-screen .phone-mtb3,
+.phone-screen .phone-inside-mtb3 > *,
+.phone-screen .phone-iinside-mtb3 > * > * {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media screen and (min-width: 1200px) {
+  .free-media-query .desktop-iinside-p2 > * > * { padding: 1rem 1rem; }
+  .free-media-query .desktop-iinside-p3 > * > * { padding: 3rem 2rem; }
+}
+.desktop-screen .desktop-iinside-p2 > * > * { padding: 1rem 1rem; }
+.desktop-screen .desktop-iinside-p3 > * > * { padding: 3rem 2rem; }
+
+@media screen and (min-width: 1200px) {
+  .free-media-query .desktop-mtb4 {
+    margin-top: 8rem;
+    margin-bottom: 3rem;
+  }
+}
+.desktop-screen .desktop-mtb4 {
+  margin-top: 6rem;
+  margin-bottom: 3rem;
+}
+
+.iinside-last-child-fat > *:last-child > * { padding-right: 4rem; }
+.iinside-first-child-fat > *:first-child > * { padding-left: 4rem; }
+.iinside-first-child-ffat > *:first-child > * {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.inside-first-child-mra > *:first-child { margin-right: auto; }
+
+.m0a { margin: 0 auto; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-m0a { margin: 0 auto; }
+}
+.phone-screen .phone-m0a { margin: 0 auto; }
+
+.mlra { margin-left: auto; margin-right: auto; }
+
+.m0 { margin: 0; }
+
+.phone-screen .phone-p1 { padding: 0.5rem; }
+.phone-screen .phone-p2 { padding: 1rem; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-p1 { padding: 0.5rem; }
+  .free-media-query .phone-p2 { padding: 1rem; }
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/margin-padding.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/width-border.css */
+/* License at the bottom */
+
+.newspaper {
+  width: min(100% - 2rem - 2px, 35cm);
+  margin: 0 auto;
+}
+
+.bar-center {
+  width: min(150rem, 100%);
+  margin: 0 auto;
+}
+
+.ovf-hid { overflow: hidden; }
+
+.lrline {
+  border-right: var(--line, #eee) 1px solid;
+  border-left: var(--line, #eee) 1px solid;
+}
+
+.w-h-max-cont {
+  width: max-content;
+  height: max-content;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/width-border.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/display-position.css */
+/* License at the bottom. */
+
+.round { border-radius: 5px; }
+
+.flex-row-spbet {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.flex-row-spar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.grid { display: grid; }
+.gap-2 { gap: 3rem; }
+.grid-col-to-row { grid-auto-flow: column; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .grid-col-to-row { grid-auto-flow: row; }
+}
+.phone-screen .grid-col-to-row { grid-auto-flow: row; }
+.desktop-screen .grid-col-to-row { grid-auto-flow: column; }
+
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-scroll-x { overflow-x: scroll; }
+}
+.phone-screen .phone-scroll-x { overflow-x: scroll; }
+
+.inl-bl, .inside-inl-bl > * { display: inline-block; }
+.block , .inside-block > * { display: block; }
+.disp-none { display: none; }
+
+.sticky { position: sticky; top: 0; }
+.relative { position: relative; }
+.absolute { position: absolute; }
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/display-position.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/css-snippets/text.css */
+/* License at the bottom. */
+
+.default-font-family { font-family: system-ui; }
+.default-ln-h { line-height: 1.6; }
+
+.ln-h-1em { line-height: 1em; }
+
+.txt-cent { text-align: center; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-txt-cent { text-align: center; }
+}
+.phone-screen .phone-txt-cent { text-align: center; }
+
+.smol, .dont-be-like-button.smol {
+  font-size: 75%;
+  line-height: 2em;
+}
+.phone-screen .phone-smol { font-size: 75%; }
+.desktop-screen .desktop-smol { font-size: 75%; }
+@media screen and (max-width: 1200px) {
+  .free-media-query .phone-smol { font-size: 75%; }
+}
+@media screen and (min-width: 1200px) {
+  .free-media-query .desktop-smol { font-size: 75%; }
+}
+
+.fat { font-size: 130%; }
+.ffat { font-size: 130%; letter-spacing: 0.1rem; }
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/css-snippets/text.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/light-dark-theme/from-outside.css */
+.light-themed,
+.dark-themed .inverse-theme {
+  --background-normal: #fff;
+  --background-2: var(--code-background);
+  --foreground-normal: #000;
+  --foreground-2: #ddd;
+}
+.dark-themed,
+.light-themed .inverse-theme {
+  --background-normal: #404045;
+  --background-2: #ddd;
+  --foreground-normal: #ddd;
+  --foreground-2: #000;
+}
+
+.fg2 { color: var(--foreground-2); }
+.bg2 { background-color: var(--background-2); }
+
+.inverse-theme,
+.theme-wrapper {
+  background-color: var(--background-normal);
+  color: var(--foreground-normal);
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/light-dark-theme/from-outside.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/light-dark-theme/panels.css */
+/* License at the bottom. */
+
+.debug-red {
+  background-color: red;
+}
+
+.light-themed {
+  --panel-normal: var(--background-normal);
+  --shadow: rgba(0, 0, 0, 7%);
+
+  --code-background: #121824;
+  --code-font: #aaa;
+
+  --code-background-gray: #181410;
+}
+.dark-themed {
+  --panel-normal: var(--background-normal);
+  --shadow: rgba(0, 0, 0, 10%);
+
+  --code-background: #121824;
+  --code-font: #aaa;
+
+  --code-background-gray: #262630;
+}
+
+.brown {
+  background-color: var(--code-background-gray, #000);
+  color: var(--code-font, #aaa);
+}
+.blue {
+  background-color: var(--code-background, #000);
+  color: var(--code-font, #aaa);
+}
+
+.light-themed {
+  --selection: #e0e0e8;
+  --fat-lines: #222;
+  --line: #ccc;
+  --contrast: #444;
+}
+.dark-themed {
+  --selection: #505058;
+  --fat-lines: #999;
+  --line: #555;
+  --contrast: #aaa;
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/light-dark-theme/panels.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+/* from common/light-dark-theme/links.css */
+/* License at the bottom. */
+
+.light-themed {
+  --link-normal: #226;
+  --link-visited: #404;
+  --link-hover: #22a;
+  --link-visited-hover: #806;
+  --hover: rgba(0, 0, 128, 4%);
+}
+.dark-themed {
+  --link-normal: #aad;
+  --link-visited: #c9b;
+  --link-hover: #99f;
+  --link-visited-hover: #f8b;
+  --hover: rgba(128, 128, 255, 6%);
+}
+
+a .be-like-link, a:not(.dont-be-like-link) {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+  color: var(--link-normal);
+  transition: color linear 0.05s;
+}
+a:visited .be-like-link, a:not(.dont-be-like-link):visited {
+  color: var(--link-visited);
+}
+a:hover .be-like-link, a:not(.dont-be-like-link):hover {
+  text-underline-offset: 0.15rem;
+  color: var(--link-hover);
+  background-color: var(--hover);
+}
+a:visited:hover .be-like-link, a:not(.dont-be-like-link):visited:hover {
+  color: var(--link-visited-hover);
+}
+
+.buttony:hover {
+  cursor: pointer;
+  background-color: var(--hover);
+}
+ 
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/light-dark-theme/links.css goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+    </style>
+    <script>
+/* from common/light-dark-theme/functions.js */
+// License at the bottom.
+
+function setUpThemeSwitches() {
+  forEachThemeSwitch(makeItToggleTheTheme);
+}
+
+function applyStoredTheme() {
+  if (getThemeIsDark())
+    showDarkness();
+  else
+    showBrightness();
+}
+
+function forEachThemeSwitch(callback) {
+  const themeSwitches = document.getElementsByClassName("theme-switch");
+  for (let i = 0; i < themeSwitches.length; i++)
+    callback(themeSwitches[i]);
+}
+function makeItToggleTheTheme(themeSwitch) {
+  themeSwitch.addEventListener("click", toggleTheme);
+}
+
+function getThemeIsDark() {
+  return "dark" === localStorage.getItem('preferredTheme');
+}
+function storeDarkTheme() {
+  localStorage.setItem('preferredTheme', 'dark');
+}
+function storeLightTheme() {
+  localStorage.setItem('preferredTheme', 'light');
+}
+function showDarkness() {
+  const classList = document.getElementById('theme-wrapper').classList;
+  classList.remove("light-themed");
+  classList.add("dark-themed");
+}
+function showBrightness() {
+  const classList = document.getElementById('theme-wrapper').classList;
+  classList.remove("dark-themed");
+  classList.add("light-themed");
+}
+
+function makeItDark() {
+  showDarkness();
+  storeDarkTheme();
+}
+function makeItBright() {
+  showBrightness();
+  storeLightTheme();
+}
+
+function toggleTheme() {
+  if (getThemeIsDark())
+    makeItBright();
+  else
+    makeItDark();
+}
+
+/*
+Copyright (c) 2023 Dimakopoulos Theodoros
+
+[common/light-dark-theme/functions.js goes on]
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+*/
+
+    </script>
+
+  </head>
+  <body class="default-ln-h default-font-family default-font-size m0">
+    <div
+      id="theme-wrapper"
+      class="theme-wrapper"
+      style="padding-bottom: 12rem"
+    >
+      <script> applyStoredTheme(); </script>
+
+<header class='free-media-query sticky'>
+<nav class='menu-bar bar-center relative'>
+  <span class='
+    menu-bar-title phone inl-bl ptb1 pl3
+  '>Biography</span>
+  <ul class='
+    desktop dont-be-like-list flex-row-spbet
+    iinside-last-child-fat iinside-first-child-ffat
+    inside-first-child-mra
+    iinside-p3
+  '><li class='inside-block'><a href='../en/index.html'>Home</a></li><li class='inside-block'>
+<button
+  class='theme-switch dont-be-like-button buttony line-h-1em smol'
+  style='width: 100%; text-align: left;'
+>
+Theme
+</button>
+</li><li class='inside-block'><a class='smol' href='../gr/biography.html'>Greek</a></li><li class='inside-block'><a href='../en/portfolio.html'>Portfolio</a></li><li class='inside-block'><span class='bg2 fg2'>Biography</span></li><li class='inside-block'><a href='../en/contact.html'>Contact</a></li></ul>
+  <input
+  id='hamburger-checkbox-677'
+  type='checkbox'
+  class='hamburger-checkbox phone fat-ghost-on-check'
+/>
+<label
+  for='hamburger-checkbox-677'
+  class='abs-t-r hamburger-prettify phone inl-bl'
+  role='img'
+  aria-label='show menu'
+> ☰</label>
+  <ul class='
+    hamburger-nav-list
+    phone dont-be-like-list iinside-p2 absolute round ovf-hid
+  '><li class='inside-block'><a href='../en/index.html'>Home</a></li><li class='inside-block'>
+<button
+  class='theme-switch dont-be-like-button buttony line-h-1em smol'
+  style='width: 100%; text-align: left;'
+>
+Theme
+</button>
+</li><li class='inside-block'><a class='smol' href='../gr/biography.html'>Greek</a></li><li class='inside-block'><a href='../en/portfolio.html'>Portfolio</a></li><li class='inside-block'><span class='bg2 fg2'>Biography</span></li><li class='inside-block'><a href='../en/contact.html'>Contact</a></li></ul>
+</nav>
+</header>
+
+<main class='free-media-query newspaper lrline p2'>
+<section><!-- XML '<all>' -->
+  <h2>
+    <!-- XML '<gr>...</gr>' -->
+    <!-- XML '<en>' -->Minimalism<!-- XML '</en>' -->
+  </h2>
+  <p>
+    <!-- XML '<gr>...</gr>' -->
+    <!-- XML '<en>' -->
+      Studied exclusively on a 30GB Arch Linux partition with
+      260 BK/s maximum and unstable internet speed,
+      to do University projects using mostly NeoVim, for 2 years.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<gr>...</gr>' -->
+    <!-- XML '<en>' -->
+      By autumn 2023,
+      using Vi without terminal multiplexing is comfortable,
+      and tmux, emacs, zsh bash and even dash,
+      therefore any POSIX compliant shell,
+      are all decently comfortable
+      to use for extensive periods of time.
+    <!-- XML '</en>' -->
+  </p>
+
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->High school<!-- XML '</en>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Graduated
+      <!-- XML INVALID LINK -->high school<!-- XML </a> -->
+      with a 17000/20000 score on 2019.
+      The final exams included algebra, physics,
+      <!-- XML INVALID LINK -->the hardest
+      chemistry exam in a long time<!-- XML </a> -->,
+      and essay reading and writing.
+      Participated in the
+      <!-- XML INVALID LINK -->E-Twinning<!-- XML </a> -->
+      program and went to France.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Improvised a proof for the volume of a cone,
+      math for Wolfenstein 3D - style graphics
+      without being taught vectors yet,
+      and watched plenty from the YouTube channels
+    <!-- XML '</en>' -->
+    <!-- XML INVALID LINK -->3blue1brown<!-- XML </a> -->,
+    <!-- XML INVALID LINK -->Mathologer<!-- XML </a> -->,
+    <!-- XML INVALID LINK -->Numberphile<!-- XML </a> -->,
+    <!-- XML INVALID LINK -->Computerphile<!-- XML </a> -->
+    <!-- XML '<en>' -->and<!-- XML '</en>' -->
+    <!-- XML INVALID LINK -->Matt Parker<!-- XML </a> -->.
+
+    <!-- XML '<en>' -->In the University got interest in<!-- XML '</en>' -->
+    <!-- XML INVALID LINK -->ThePrimeagen<!-- XML </a> -->,
+    <!-- XML INVALID LINK -->Healthy Gamer GG<!-- XML </a> --> and
+    <!-- XML INVALID LINK -->Ramsey Dewey<!-- XML </a> -->.
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Went to the
+      National and Kapodistrian University of Athens (UoA),
+      to the
+      <!-- XML INVALID LINK -->Department of Informatics (DI)<!-- XML </a> -->.
+      Participated with effort and enthousiasm in the
+      <!-- XML INVALID LINK -->ACM open source compiler project<!-- XML </a> -->,
+      though the knowledge gap didn't allow to contribute much.
+      As of Autumn 2023, hasn't worked in a company.
+      Had a tiny internship with
+      <!-- XML INVALID LINK -->Helvia<!-- XML </a> -->
+      that introduced web development basics.
+    <!-- XML '</en>' -->
+  </p>
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->Friends<!-- XML '</en>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Went to psychology not understanding why people talk
+      about people who talk, and one year later
+      started making friends.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Collaborated with various people.
+      On one project we willingly worked next to each other
+      4 hours a day 4 days a week for 2 months,
+      rounding the numbers below the theoretical maximum.
+      That's 6 per 4 for 3.
+      That was the absolute best experience.
+      The worst project experiences came from
+      resistance to collaborate.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Worked with 2 traumatizing people on separate projects,
+      most things were amazing with
+      the kind hearted random one,
+      most things were distgusting with
+      the tough love daddy commercial product culture one,
+      I still want to burn his house down.
+      I showed an amount of resistense that
+      burnt me out for good, but
+      he'd freeze until he'd forget everything wrong
+      and tranform into a motorbike politician again.
+    <!-- XML '</en>' -->
+  </p>
+      
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->Languages<!-- XML '</en>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Did 5am morning warm-ups and afternoon exercises
+      on and off using C, Python, Haskell and Matlab
+      (GNU Octave to be exact)
+      on an about bi-daily basis since Autumn of 2023.
+      The algorithms were about parallelism,
+      data structures and data manipulation,
+      using
+      <!-- XML INVALID LINK -->TDD<!-- XML </a> -->,
+      <!-- XML INVALID LINK -->TCR<!-- XML </a> -->
+      or neither, often in Vi (not referring to Vim).
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Outside deliberate pracrice and unfortunately
+      as a painkiller for loneliness,
+      I've got some touch with
+      Rust AWK and GNU Make, BF,
+      <!-- XML INVALID LINK -->J<!-- XML </a> -->
+      slightly, lisp and Typescript.
+      I do agree that everything surrounding Typescript
+      is emotionally painful except the syntax.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Both for myself and for the University,
+      I familiarized with
+      C++, Python, PHP, LaTeX, HTML CSS and Javascript,
+      Java, Bourne and POSIX shell scripting ("bash" let's say).
+      The aforementioned warm-ups were also done
+      in languages for the University.
+    <!-- XML '</en>' -->
+  </p>
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->Architecture<!-- XML '</en>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Reworked the operating system's
+      key binding framework, home directory structure and image tagging
+      systems about 5 times each,
+      following my needs and addressing inabilities,
+      in a natural and slow pace over the span of 2 years.
+      The approaches were radical to me,
+
+      images placed in a binary tree
+      of manual binary grouping decisions,
+
+      coding projects getting tagged
+      by language using symlinks,
+
+      a snippet completion and generation system
+      providing shell scripts for key bindings,
+
+      and a lot more.
+      Ended up with technically elegant solutions.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Through this journey I got to value
+      prototyping,
+      thinking in tradeoffs,
+      technical simplicity from high to low levels,
+      and <!-- XML INVALID LINK -->the Manifesto
+      for Agile Software Development<!-- XML </a> -->.
+    <!-- XML '</en>' -->
+  </p>
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->Illustration and the piano<!-- XML '</en>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Quit the piano after 7/9 steps to the diploma,
+      because it was a lonely abuse
+      of engineering and composing genious
+      for artificial goals and nerd-pride.
+      Never for replacing Spotify,
+      and never for friends.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Then started illustration, guided by
+      <!-- XML INVALID LINK -->the Draw A Box community and lessons<!-- XML </a> -->,
+      as well as videos from
+      <!-- XML INVALID LINK -->Stanislav Prokopenko<!-- XML </a> -->.
+      Quit after being able to draw pleasant looking
+      places figures and faces with some difficulty.
+      That was partly because
+      there was still a disconnection
+      between people and my approach to drawing.
+      Mostly however, drawing didn't tie with programming,
+      and it drained a lot of time.
+    <!-- XML '</en>' -->
+  </p>
+  <p>
+    <!-- XML '<en>' -->
+      Arts cultivated me to respect
+      old means of achieving goals,
+      old experienced people's advice,
+      warming up before working
+      and measuring the value of my work
+      by looking at it as an outsider.
+    <!-- XML '</en>' -->
+  </p>
+<!-- XML '</all>' --><section><!-- XML '<all>' -->
+  <h2><!-- XML '<en>' -->YouTube<!-- XML '</en>' --><!-- XML '<gr>...</gr>' --></h2>
+  <p>
+    <!-- XML '<en>' -->
+      Recorded
+      <a href=https://www.youtube.com/@theodorealenas317>YouTube videos</a>
+      using ffmpeg,
+      piping /dev/video0 to mpv
+      for showing the webcam's output on the screen.
+      The purpose of the YouTube channel is
+      to share knowledge and life experiences.
+    <!-- XML '</en>' -->
+  </p>
+<!-- XML '</all>' -->
+</main>
+
+      <script> setUpThemeSwitches(); </script>
+    </div>
+  </body>
+</html>

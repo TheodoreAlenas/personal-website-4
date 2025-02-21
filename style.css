@@ -1,0 +1,269 @@
+/*
+ Copyright (c) 2024 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+ See LICENSE.
+ Search for the string "/*---" in this file to jump to sections.
+*/
+
+
+/*--- Colors ---*/
+
+:root { color-scheme: light dark; }
+
+[data-sch=light] .bg { background-color: #fff; }
+[data-sch=light] a,
+[data-sch=light] a.fs1 { color: #025; }
+[data-sch=light] a:visited { color: #302; }
+[data-sch=light] .fs1, [data-sch=light] .fs1Marker::marker { color: #000; }
+[data-sch=light] .fs2, [data-sch=light] .fs2Marker::marker { color: #111; }
+[data-sch=light] .fs3, [data-sch=light] .fs3Marker::marker { color: #222; }
+[data-sch=light] .fs4, [data-sch=light] .fs4Marker::marker { color: #333; }
+[data-sch=light] .fs5, [data-sch=light] .fs5Marker::marker { color: #444; }
+[data-sch=light] .fs6, [data-sch=light] .fs6Marker::marker { color: #444; }
+
+[data-sch=contr] .bg { background-color: #000; }
+[data-sch=contr] a,
+[data-sch=contr] a.fs1 { color: #ff0; }
+[data-sch=contr] a:visited { color: #ffa; }
+
+.bg { background-color: #333; }
+a,
+a.fs1 { color: #bcf; }
+a:visited { color: #dcd; }
+.fs1, .fs1Marker::marker { color: #eee; }
+.fs2, .fs2Marker::marker { color: #ddd; }
+.fs3, .fs3Marker::marker { color: #ccc; }
+.fs4, .fs4Marker::marker { color: #bbb; }
+.fs5, .fs5Marker::marker { color: #bbb; }
+.fs6, .fs6Marker::marker { color: #bbb; }
+
+[data-sch=light] .code1 b { color: #804; }
+[data-sch=light] .code1 i { color: #041; }
+[data-sch=light] .code1 {
+    background-color: #fafafa;
+    border: 1px solid #ccc;
+    color: #333;
+}
+
+[data-sch=contr] .code1 b { color: #ff0; }
+[data-sch=contr] .code1 i { color: #fff; }
+[data-sch=contr] .code1 {
+    background-color: #000;
+    border: 1px solid #777;
+    color: #fff;
+}
+
+.code1 b { color: #da8; }
+.code1 i { color: #dad; }
+.code1 {
+    background-color: #282828;
+    border: 1px solid #444;
+    color: #ccc;
+}
+
+
+/*--- Class independent styling ---*/
+
+body { font-family: system-ui,sans-serif; margin: 0; }
+a { text-underline-offset: 0.3em; }
+input, label { cursor: pointer; }
+
+
+/*--- Outlined links ---*/
+
+.outlined {
+    border-radius: 4px; border-bottom: 1px solid;
+    display: inline-block; padding: 0.4em 0.6em;
+    text-decoration: none;
+    box-shadow: 0 0 1px 0;
+}
+
+
+/*--- Code snippets ---*/
+
+pre.code1 { overflow-x: scroll; padding: 1em; border-radius: 5px; }
+pre.code1 > code { font-size: 12pt; }
+pre.code1 b { font-weight: normal; }
+pre.code1 i { font-style: normal; }
+pre.code1 code { font-family: source-code-pro-regular,monospace; }
+@font-face {
+    font-family: source-code-pro-regular;
+    src: url(r/source-code-pro-regular.otf);
+}
+
+
+/*--- Header and lists ---*/
+
+.ls1 { display: flex; flex-wrap: wrap; column-gap: 1.4em; padding: 0; }
+.ls1 > li { list-style: none; }
+.ls1 > li > a { display: flex; align-items: center; gap: 0.4em; padding: 1em 0; }
+.ls2 { padding: 0; margin: 0.5em 0; list-style: none; }
+.ls2 > li > label { display: inline-block; padding: 0.2em 0; }
+.column { margin: 0 auto; max-width: 30cm; padding: 0 1rem; }
+.column2 { margin: 0 auto; max-width: 60cm; padding: 0; }
+.header { position: relative; }
+
+.pdfAnchor {
+    display: flex; flex-direction: column; align-items: center; gap: 0.5em;
+    margin: 4em 0;
+}
+
+
+/*--- Fonts ---*/
+
+.fs1, .fs1Marker::marker { font-size: 12pt; line-height: 1.4em; }
+.fs2, .fs2Marker::marker { font-size: 14pt; line-height: 1.4em; }
+.fs3, .fs3Marker::marker { font-size: 18pt; line-height: 1.2em; }
+.fs4, .fs4Marker::marker { font-size: 24pt; line-height: 1.1em; }
+.fs5, .fs5Marker::marker { font-size: 28pt; line-height: 1em; }
+.fs6, .fs6Marker::marker { font-size: 32pt; line-height: 1em; }
+.fwn { font-weight: normal; }
+.bigMarker::marker { font-weight: bold; content: "XX  "; }
+
+
+/*--- Images and flexing ---*/
+
+.txtcent { text-align: center; }
+.img { display: block; border-radius: 4px; }
+.flex { display: flex; }
+.w3-100 { width: min(12cm, 100%); }
+.w100 { width: 100%; }
+.flexac { display: flex; align-items: center; }
+.flexjc { display: flex; justify-content: center; }
+.flexw { flex-wrap: wrap; }
+.spc { justify-content: space-between; }
+.nolist { list-style: none; padding: 0; }
+
+
+/*--- Spacing ---*/
+
+.m20 { margin: 0.6rem 0; }
+.m30 { margin: 1rem 0; }
+.m40 { margin: 2em 0; }
+.ml2 { margin-left: 0.2em; }
+.ml3 { margin-left: 0.5em; }
+.ml4 { margin-left: 1em; }
+.ml5 { margin-left: 4em; }
+.mt0 { margin-top: 0; }
+.mt1 { margin-top: 1.4cm; }
+.mt2 { margin-top: 1.8cm; }
+.mt3 { margin-top: 2.2cm; }
+.mt4 { margin-top: 2.6cm; }
+.mt5 { margin-top: 3.0cm; }
+.p20 { padding: 1rem 0; }
+.p30 { padding: 2rem 0; }
+.pl3 { padding-left: 1em; }
+.pl4 { padding-left: 2em; }
+.pl5 { padding-left: 3em; }
+.pr2 { padding-right: 0.3em; }
+.pr3 { padding-right: 1em; }
+.pr4 { padding-right: 2em; }
+.pt2 { padding-top: 1rem; }
+.gap3 { column-gap: 1cm; }
+.gap4 { column-gap: 2cm; }
+
+
+/*--- Dekstop - only CSS ---*/
+
+@media (min-width: 20cm) {
+    .wide-flex { display: flex; }
+    .wide-fix-size { width: min(10cm, 40vw); }
+    .fs6 { font-size: 40pt; line-height: 1em; }
+    .mt1 { margin-top: 2cm; }
+    .mt2 { margin-top: 3cm; }
+    .mt3 { margin-top: 4cm; }
+    .mt4 { margin-top: 5cm; }
+    .mt5 { margin-top: 8cm; }
+    .pdfAnchor { width: max-content; }
+    .cards1 {
+        display: grid;
+        gap: 1cm 2cm;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 5cm), 1fr));
+    }
+}
+
+.pad-like-card { padding-left: 1rem; }
+.card11 { margin: 1rem; }
+@media (min-width: 30cm) {
+    .card1 {
+        display: grid;
+        grid-template-columns: 1fr 6fr 1fr 8fr;
+        grid-template-areas: "_1 tt _2 ii";
+        align-items: center;
+    }
+    .pad-like-card { padding-left: 6.25%; }
+    .card11 { grid-area: tt; margin: 0; }
+    .card12 { grid-area: ii; }
+}
+
+
+/*--- The 2 overlapping images ---*/
+
+.overlapping-images {
+    position: relative;
+    padding-top: 1cm;
+    padding-right: 1cm;
+    border-right: 1px solid;
+    box-sizing: border-box;
+}
+.small-up-right {
+    position: absolute; top: 0; right: 0; width: 40%;
+}
+.shadow {
+    box-shadow: 0 0 4cm -3cm;
+}
+.faded-underline {
+    box-shadow: 0 3px 3px -5px;
+}
+
+
+/*--- From my widgets template ---*/
+
+fieldset.inp-pill-choice {
+    border: none;
+    padding: 0;
+    margin: 0.5em 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+fieldset.inp-pill-choice > legend {
+    padding: calc(0.2em + 4px) 0;
+    padding-right: 0.8em;
+    float: left;
+}
+fieldset.inp-pill-choice > ol {
+    list-style: none;
+    padding: 2px;
+    margin: 0;
+    display: inline-block;
+    border-radius: 1em;
+    box-shadow: currentColor 0 0 3px -2px;
+}
+fieldset.inp-pill-choice > ol > li {
+    display: inline-block;
+}
+fieldset.inp-pill-choice > ol > li > label {
+    padding: 0.2em 0.8em;
+    position: relative;
+    display: inline-block;
+}
+@supports (appearance: none) {
+    fieldset.inp-pill-choice > ol > li > label > input[type="radio"] {
+        appearance: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        border-radius: 100vw;
+        margin: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    fieldset.inp-pill-choice > ol > li > label > input[type="radio"]:checked {
+        border: 1px solid;
+    }
+    fieldset.inp-pill-choice > ol > li > label > input[type="radio"]:hover:not(:checked) {
+        box-shadow: currentColor 0 0 3px -1px;
+    }
+}

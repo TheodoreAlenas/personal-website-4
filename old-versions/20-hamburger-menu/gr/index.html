@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html scheme="dark">
+    <head>
+        <title>Αρχική</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+html { color-scheme: light; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+button { cursor: pointer; }
+pre { border-radius: 5px; padding-left: 1em; overflow: scroll; }
+a { text-underline-offset: 0.2em; }
+main a:hover { position: relative; z-index: 1; }
+main a:hover::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: 0; right: 0; top: -0.2em; bottom: 0;
+}
+
+/* Improvised bright color scheme and TokyoNight color scheme */
+[scheme=light] pre b,
+[scheme=light] a { color: #000066; }
+[scheme=light] a:visited { color: #660044; }
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after,
+[scheme=light] .bg1 { background-color: #ffffff; }
+[scheme=light] pre,
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after { border-color: #111111; }
+[scheme=light] .fg1 { color: #111111; }
+
+[scheme=dark] pre { color: #7dcfff; }
+[scheme=dark] pre b,
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after,
+[scheme=dark] .bg1 { background-color: #24283b; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after { border-color: #c0caf5; }
+[scheme=dark] .fg1 { color: #c0caf5; }
+
+[scheme=light] .hov-bg3:hover,
+[scheme=light] a:hover,
+[scheme=light] main a:hover::before,
+[scheme=light] *::selection,
+[scheme=light] a.bg3,
+[scheme=light] .bg3 { background-color: #111122; color: #c0caf5 }
+[scheme=light] #menu button,
+[scheme=light] main { border-color: #cccccc; }
+[scheme=light] pre { background-color: #eeeeee; }
+[scheme=light] .shadow { box-shadow: #cccccc 0 0 1rem 0; }
+
+[scheme=dark] .hov-bg3:hover,
+[scheme=dark] a:hover,
+[scheme=dark] main a:hover::before,
+[scheme=dark] *::selection,
+[scheme=dark] a.bg3,
+[scheme=dark] .bg3 { background-color: #e0af68; color: #1d202f }
+[scheme=dark] #menu button,
+[scheme=dark] main { border-color: #1d202f; }
+[scheme=dark] pre { background-color: #1d202f; }
+[scheme=dark] .shadow { box-shadow: #1d202f 0 0 1rem 0; }
+
+main {border-left: 1px solid; border-right: 1px solid}
+#menu button {border-style: solid; border-width: 2px}
+#menu button {border-radius: 3px}
+#menu button {font-family: inherit; font-size: inherit}
+
+body {line-height: 1.5em}
+#menu input {width: 1.7em; height: 1.7em}
+main {max-width: 30cm}
+#menu ul {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto;
+    grid-auto-columns: max-content;
+}
+#menu li {grid-row: 1}
+#menu ul {padding: 0}
+main, #menu a {padding: 1.5em 1.5em}
+#menu label {padding: 0.5em 1em}
+#menu button {padding: 1em 1em; margin: 0.5em}
+.pl3, #menu .pl3 {padding-left: 3em}
+.pr3, #menu .pr3 {padding-right: 3em}
+header {position: sticky; top: 0}
+#menu input {position: absolute; top: 0.5em; right: 1em}
+body, #menu input {margin: 0}
+main, #menu ul {margin: 0 auto}
+#menu ul {list-style: none; max-width: 60cm}
+#menu li, #menu a, #menu button {display: inline-block}
+#menu a, #menu button {transition: all 0.2s}
+
+#hamburger-checkbox::before,
+#hamburger-checkbox::after {
+    content: ""; position: absolute;
+    width: 100%; height: 50%;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    box-sizing: border-box;
+}
+#hamburger-checkbox::before {
+    top: 0; border-top-width: 2px; border-bottom-width: 1px; }
+#hamburger-checkbox::after {
+    top: 50%; border-top-width: 1px; border-bottom-width: 2px; }
+
+body {font-family: system-ui; font-size: 0.5cm}
+#menu input, #menu label {display: none}
+
+@media screen and (max-width: 25cm) {
+    body { font-size: 0.4cm; }
+    #menu input {display: unset}
+    #menu label {display: block}
+
+    #hamburger-checkbox:not(:checked) + label + ul {
+        display: none;
+    }
+    #hamburger-checkbox:checked + label::before {
+        content: ""; position: absolute;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+    }
+    #menu ul {
+        position: absolute;
+        top: 1em; right: 1em;
+        border-radius: 5px; overflow: hidden;
+        display: grid; grid-auto-rows: auto; align-items: center;
+    }
+    #menu li {
+        display: grid; grid-column: 1; grid-row: unset;
+    }
+    #menu li a {
+        padding: 1.5em 2em;
+    }
+}
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function switchColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "light";
+    if (definer.getAttribute("scheme") === "light")
+        setTo = "dark";
+    definer.setAttribute("scheme", setTo);
+    localStorage.setItem("lastTheme", setTo);
+}
+
+function setUpColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "dark";
+    if (localStorage.getItem("lastTheme") === "light")
+        setTo = "light";
+    definer.setAttribute("scheme", setTo);
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="bg1 fg1">
+        <header id="menu">
+            <nav>
+
+                <!-- header.php -->
+<input
+    id="hamburger-checkbox"
+    type="checkbox"
+    />
+<label
+    for="hamburger-checkbox"
+    class="shadow bg1"
+>Αρχική</label>
+<ul
+    class="shadow bg1"
+>
+    <li>
+        <a href="index.html" class="ilbl hov-bg3 pl3 pr3 bg3 ">
+            Αρχική        </a>
+    </li>
+    <li>
+        <button
+            onclick="switchColorScheme()"
+            class="ilbl bg1 fg1 hov-bg3"
+        >
+            Χρώμα        </button>
+    </li>
+    <script> setUpColorScheme(); </script>
+    <li>
+        <a href="../en/index.html" class="ilbl hov-bg3  ">
+            English        </a>
+    </li>
+    <li>
+        <a href="../cv.pdf" class="ilbl hov-bg3  ">
+            cv.pdf
+        </a>
+    </li>
+    <li>
+        <a href="portfolio.html" class="ilbl hov-bg3  ">
+            Χαρτοφυλάκιο        </a>
+    </li>
+    <li>
+        <a href="biography.html" class="ilbl hov-bg3 pr3 ">
+            Βιογραφικό        </a>
+    </li>
+</ul>
+
+
+            </nav>
+        </header>
+        <main class="bg1 fg1">
+            
+
+<h1>Θοδωρής Δημακόπουλος</h1>
+
+<p>
+Έφτιαξα αυτό τον ιστοχώρο κυρίως για εργοδότες.
+</p>
+<p>
+    
+Μέχρι στιγμής, το 2023, δεν έχω πρακτική εμπειρία στις
+διαδικτυακές εφαρμογές και ιστοχώρους εκτός από αυτόν εδώ,
+αλλά έχω χριησιμοποιήσει μια μεγάλη ποικιλία εργαλείων και
+έχω προγραμματίσει με διάφροες τεχνικές,
+όσο φτιάχνω εργαλεία για το προσωπικό μου περιβάλλον.
+Για τα δεδομένα προπτυχιακού φοιτητή
+είμαι αρκετά άνετος με πολύπλοκα προβλήματα.
+Επίσης, έχω
+    <a href="https://www.youtube.com/@theodorealenas3171"
+    >κανάλι στο YouTube, με ψευδώνυμο Theodore Alenas</a>.
+</p>
+<p>
+Αν συμφωνείτε θα χαιρόμουν να βγω με τους προγραμματιστές
+και να συζητήσουμε ή να κάνουμε μαζί ασκήσεις ή προθέρμανση
+αν τους ενδιαφέρουν αυτά.
+Μετά μπορούμε να συμφωνήσουμε όλοι μαζί
+αν ταιριάζω στην εταιρία και πού.
+Εννοείται πως αν προκύψουν προβλήματα με ανώτερα στελέχη
+θα συμπαρασταθώ όπου μπορώ, και αν δε θέλετε το καταλαβαίνω.
+</p>
+<p>
+    Το e-mail μου είναι    <a href="mailto:dimakopt732@gmail.com"
+    >dimakopt732@gmail.com</a>
+    και στο Instagram λέγομαι    <a href="https://www.instagram.com/theodore_alenas/"
+    >theodore_alenas</a>.
+</p>
+
+        </main>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->

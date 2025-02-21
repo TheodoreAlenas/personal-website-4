@@ -1,0 +1,10 @@
+.debug-mode .menu-bar a,
+.debug-mode .menu-bar span {
+  border: red 1px dashed;
+}
+.menu-bar, .hamburger-nav-list {
+  background-color: var(--panel-normal, #eee);
+  background-color: var(--panel-normal, #eee);
+  box-shadow: var(--shadow, #ccc) 0 0 1rem 0;
+}
+

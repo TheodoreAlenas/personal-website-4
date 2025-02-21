@@ -1,0 +1,433 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>Theodoros Dimakopoulos</title>
+<meta name="description" content="Biography and portfolio overview, for employers">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="favicon.ico">
+<script>
+function initColorScheme() {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const prefersContr = window.matchMedia('(prefers-contrast: more)').matches;
+    const preferredNow = prefersDark ? (prefersContr ? "contr" : "dark") : "light";
+
+    const lastPreferred = localStorage.getItem("portfolioColorSchemeLastPreferred");
+    const last = localStorage.getItem("portfolioColorSchemeLastUsed")
+    localStorage.setItem("portfolioColorSchemeLastPreferred", preferredNow);
+
+    if (lastPreferred === preferredNow && last)
+        setColorScheme(last);
+    else
+        setColorScheme(preferredNow);
+}
+
+initColorScheme();
+
+function setColorScheme(value) {
+    const binary = value === "contr" ? "dark" : value;
+    document.querySelector("html").style.colorScheme = binary;
+    document.querySelector("html").setAttribute("data-sch", value);
+    localStorage.setItem("portfolioColorSchemeLastUsed", value);
+}
+</script>
+<style>
+:root { color-scheme: light dark; }
+
+[data-sch=light] .cover { background-color: #fff; }
+[data-sch=light] img { border-color: #fff; box-shadow: #ddd 0 2px 2px 0; }
+[data-sch=light] body { color: #000; }
+[data-sch=light] a { color: #025; }
+[data-sch=light] a:visited { color: #608; }
+[data-sch=light] h1,
+[data-sch=light] h2,
+[data-sch=light] h3,
+[data-sch=light] pre b { color: #123; }
+[data-sch=light] pre {
+    border: 1px #ccc solid; background-color: #fafafa; color: #000;
+}
+[data-sch=light] body {
+    background-image: url(resources-2024-03-01/blue-mountains.svg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+[data-sch=contr] .cover { background-color: #000; }
+[data-sch=contr] img { border-color: #000; }
+[data-sch=contr] .body { color: #fff; }
+[data-sch=contr] pre { background-color: #000; }
+
+.cover { background-color: #333; }
+img { box-shadow: #555 0 2px 2px 0; }
+body { color: #ddd; }
+a { color: #bcf; }
+a:visited { color: #faf; }
+h1, h2, h3, pre b { color: #ca8; }
+pre { background-color: #222; color: #f99; border: 1px #333 solid; }
+
+body { font-family: system-ui,sans-serif; font-size: 0.5cm; margin: 0; }
+body p { line-height: 1.5em; }
+h2, h3 { margin-top: 2em; }
+.c2 { padding: 1px 1em; margin: 0 auto; max-width: 30cm; }
+.first-element { margin-top: 30vh; padding-top: 2em; position: relative; }
+.final-element { padding-bottom: 20vh; }
+h1 { margin-top: 2cm; }
+img {
+    width: 6cm; height: 6cm; border-radius: 20%;
+    border: 0.5cm #444 solid; position: absolute;
+    left: 50%; transform: translateX(-50%); top: -4.5cm;
+}
+a { text-underline-offset: 0.3em; }
+pre { overflow: scroll; padding: 1em; border-radius: 5px; }
+pre > code { font-size: 0.4cm; }
+code { font-family: source-code-pro-regular,monospace; }
+pre b { font-family: source-code-pro-semibold,monospace; }
+@font-face {
+    font-family: source-code-pro-regular;
+    src: url(resources-2024-03-01/source-code-pro-regular.otf);
+}
+@font-face {
+    font-family: source-code-pro-semibold;
+    src: url(resources-2024-03-01/source-code-pro-semibold.otf);
+}
+ul { display: flex; flex-wrap: wrap; padding: 0; }
+li { list-style: none; margin: 0 1.6em 0 0; }
+li a { display: inline-block; padding: 0.5em 0; }
+fieldset { border: none; padding: 0; margin: 0; }
+fieldset legend { float: left; }
+fieldset legend::after { content: ":"; }
+fieldset label, fieldset input { padding: 1em 0; cursor: pointer; }
+fieldset input { margin-left: 1em; }
+</style>
+</head>
+<body>
+<div class="c2 cover first-element">
+<picture>
+<source
+srcset="resources-2024-03-01/face-512x512-lossless-1-compr-4.webp"
+type="image/webp">
+<img
+src="resources-2024-03-01/face-512x512.png"
+alt="light brown man with long slightly curly hair">
+</picture>
+<h1>Hi, I'm Theodore!</h1>
+<p>
+My name is Theodoros Dimakopoulos
+and I'm a Greek undergraduate software developer.
+I like face to face interactions and concepts such as
+<a href="https://www.youtube.com/watch?v=kScFczWbwRM">TDD</a>.
+I'm looking for a 6 month part time internship,
+or maybe a 3 month full time one,
+so I can get my degree.
+Please mind that I won't be available on March 2024.
+</p>
+<ul>
+
+<li><a href="resources-2024-03-01/cv-2024-10-10.pdf"
+>CV</a>: cv-2024-10-10.pdf</li>
+
+<li><a href="https://github.com/TheodoreAlenas/"
+>GitHub</a>: TheodoreAlenas</li>
+
+<li><a href="mailto:dimakopt732@gmail.com"
+>Gmail</a>: dimakop<strong>t</strong>732@gmail.com</li>
+
+<li><a href="https://www.linkedin.com/in/theodoros-dimakopoulos-726ba1289/"
+>LinkedIn</a>: Theodoros Dimakopoulos</li>
+
+</ul>
+<fieldset><legend>Theme</legend>
+<input type="radio" name="theme" value="light" id="theme-light" /><label for="theme-light">Light</label>
+<input type="radio" name="theme" value="dark" id="theme-dark" /><label for="theme-dark">Dark</label>
+<input type="radio" name="theme" value="contr" id="theme-contr" /><label for="theme-contr">Contrast</label>
+<script>
+  let q = "input[type=radio][name=theme]"
+  const themeRadios = document.querySelectorAll(q);
+  const sch = document.querySelector("html").getAttribute("data-sch");
+  for (let r of themeRadios) {
+      const v = r.getAttribute("value")
+      if (v == sch) r.checked = true;
+      r.onchange = function(_) {setColorScheme(v)}
+  }
+</script>
+</fieldset>
+<h2>Web development</h2>
+<p>
+In July 2024 I interned full time
+<a href="https://helvia.ai/">at Helvia</a>,
+one month on DevOps/operations and for two months
+I learned NextJS, MongoDB and Python's FastAPI by
+<a href="https://theodoros-d-alenas.site/key-mouth/"
+>making Key Mouth</a>.
+It's a chat app that shows each key instead of messages.
+It was hard mainly because there's no point of reference to hold onto.
+</p>
+<p>
+Before joining Helvia, we had web development related courses and
+I tried PostGres SQL, MySQL and MongoDB,
+I read code in VueJS and Python's Jango and
+I tried learning Spring in Java and Kotlin multiple times.
+On my own, I entered a few Docker containers to look around in them
+and I played around with Jest and Typescript a little.
+</p>
+<h2>Linux</h2>
+<p>
+I tried WSL in 2020, I believe,
+then I went to Linux Mint and then,
+because I couldn't figure out how to use minimal tools on Mint,
+I installed Arch Linux with the manual installation.
+I was 
+<a href="https://www.youtube.com/@DistroTube"
+>motivated mostly by the DistroTube channel</a>
+on YouTube
+but I'm not into that mindset anymore.
+</p>
+<p>
+I used the shell a lot and eventually I got good at
+using the POSIX features in scripts and interactive sessions.
+One day I rented an Alpine Linux server
+to use it for backups and for serving this site with NginX and certbot.
+Although it went well, I wouldn't say I'm good at serving sites.
+There's downtime here and there,
+the certificates are off a little so some browsers don't show the site,
+but I've made it thus far.
+</p>
+<h2>Social experiences</h2>
+<p>
+I was a stereotypical programmer until about 2021,
+today I have a close friend,
+I've watched movies with friends a few times,
+I've had somewhat of a party at my house
+and I went on 2 dates.
+I'm trying to speedrun a bit before I reach my 30.
+It's going well and I love meeting new people.
+</p>
+<p>
+In University projects
+I embraced UX user tests,
+I introduced teammates to automated tests
+and in two projects I demonstrated some draft prototypes.
+None of this went well though and that's a topic that
+frustrates me to no end, we can talk about the details.
+On the other hand there was a project with friends where
+we were face to face
+2 months, 4 hours a day, 4 days a week at a minimum,
+working on it together and that was my favorite project.
+We read about the Rust compiler and the syntax
+and we wrote a text about it.
+</p>
+</div>  <!-- centered -->
+<div class="cover final-element">
+<div class="c2">
+<h2>The 2 rewrites of this site</h2>
+<p>
+The site used to support both Greek and English and it had a menu.
+</p>
+<h3>Identity buffee</h3>
+<p>
+Abstract PHP functions that compose HTML code.
+It's still <a href="../../old-versions/13-before-abandoning/en/index.html"
+>served</a> and it's on
+<a href="https://github.com/TheodoreAlenas/personal-website-1/"
+>GitHub</a>.
+</p>
+<pre><code>include_once(&quot;common/wraps/<b>typical-layouts</b>.php&quot;);
+[...]
+function <b>get_biography_html</b>(string $language) &lbrace;
+  return <b>get_typical_layout</b>&lpar;
+    $language,</code></pre>
+
+<h3>Fewest layers possible</h3>
+<p>
+Abstractions got replaced with abbreviations.
+I serve an
+<a href="../../old-versions/20-hamburger-menu/en/index.html"
+>older</a> and a
+<a href="../../old-versions/21-blue-mountains-many-themes/en/index.html"
+>newer</a> version
+and it's on
+<a href="https://github.com/TheodoreAlenas/personal-website-2/"
+>GitHub</a>.
+</p>
+<pre><code>&lt;?php $STR_XML = <b>simplexml_load_file</b>(&quot;biography/bio-high-school.xml&quot;) ?&gt;
+&lt;h2&gt;&lt;?php $b(&quot;<b>title</b>&quot;) ?&gt;&lt;/h2&gt;
+&lt;p&gt;
+    &lt;?php $b(&quot;<b>graduated</b>&quot;) ?&gt;
+    &lt;a href=&quot;http://2lyk-amaliad.ilei.sch.gr/wordpress17/&quot;
+    &gt;&lt;?php $b(&quot;<b>high_school</b>&quot;) ?&gt;&lt;/a&gt;</code></pre>
+<h3>Least text possible</h3>
+<p>
+<a href="https://www.kevinpowell.co/">Kevin Powell's site</a>
+inspired me to reduce the text,
+to the point that I could serve hand written HTML.
+</p>
+<pre><code><b>&lt;h3&gt;</b>Fewest layers possible<b>&lt;/h3&gt;</b>
+<b>&lt;p&gt;</b>
+Abstractions got replaced with abbreviations.
+I serve an
+<b>&lt;a href=&quot;old-versions/20-hamburger-menu/en/index.html&quot;
+&gt;</b>older<b>&lt;/a&gt;</b> and a</code></pre>
+<h3>Conclusion</h3>
+<p>
+At first it looks like I lowered the requirements to get away with draft code
+but I'd say the requirements overall went up.
+It was a requirement to be laconic,
+one could say there was a requirement to
+make the browser tools reflect the source code better,
+and it's fun to hand write HTML with no indentation.
+</p>
+<h2>The 3 rewrites of my hotkey system</h2>
+<p>
+I use an odd operating system which relies on key combinations
+becuase there's no taskbar or bars on windows.
+I had one real option, to use
+<a href="https://github.com/baskerville/sxhkd"><code>sxhkd</code></a>,
+but I wanted a pop-up guide too like
+<a href="https://github.com/folke/which-key.nvim"><code>which-key</code></a>.
+</p>
+<h3>Prompt for next key</h3>
+<p>
+3 bash scripts and the language shown below.
+A terminal appeared to hint what keys are allowed.
+</p>
+<pre><code><b>s *screenshot</b>   sel=$(slop -f &quot;-i %i -g %g&quot;); shotgun $sel /tmp/screenshot.png
+<b>S *scrsh-fulls</b>  sleep 0; shotgun /tmp/screenshot.png</code></pre>
+<p>
+The terminal messed with the notion of previous window
+and caused painful bugs.
+</p>
+<h3>Hotkey shell commands</h3>
+<p>
+A new demand was that
+Win + e, Win + Alt + r
+should also be possible from the terminal as
+<code>al e +r</code>.
+</p>
+<p>
+Another new demand is that Win + m, Win + v
+is bound to <code>pacmd set-sink-volume 0 ...</code>
+and I'll be prompted to fill in the gap.
+It's uploaded on
+<a href="https://github.com/TheodoreAlenas/hotkey-system-2-alk"
+>GitHub</a> after the fact.
+</p>
+<pre><code><b>video | V)</b> mpv_shut_up $(find ~/img/go -name '*.mp4' | shuf) <b>;;</b>
+<b>screenshot | s)</b> sxiv /tmp/screenshot.png <b>;;</b></code></pre>
+<p>
+The configuration code was verbose
+and the commands couldn't be listed reliably.
+It wasn't actually used it in the terminal either.
+</p>
+<h3>Code snippet composer</h3>
+<p>
+The sunken cost fallacy.
+It's on
+<a href="https://github.com/TheodoreAlenas/alsnip/blob/main/example-config/reset.sh"
+>GitHub</a>.
+The demands went up
+but they weren't based on real needs.
+</p>
+<p>
+There had to be a list of text snippets,
+some of which are operating system commands,
+some of which are bound to hotkeys.
+Some can prompt for completion.
+The completion gives hints,
+a bar shows the final command that ran,
+and each text snippet has an easily accessible description.
+Other purposes for the text snippets were shell aliases,
+copying ASCII art and
+completing parts of a C for loop and copying it.
+Below is part of the list that appeared on the screen.
+</p>
+<pre><code>vol1  .m1 /auto   | pacmd set-sink-volume 0 6000
+vol0  .m0 /auto   | pacmd set-sink-volume 0 0
+wm_t7 .!7 /auto   | bspc node --to-desktop temporary --follow
+wm_b7 .^7 /auto   | bspc node @temporary:/ --to-desktop focused</code></pre>
+<p>
+The configuration was shell scripts that printed shell scripts.
+It became so slow that I considered caching.
+</p>
+<h3>Self-installing shell script</h3>
+<pre><code><b>about_logging</b>() { <b>tail /tmp/scmd.sh</b>; echo &quot;Should have lines that look like: <b>func() { echo hi; } #>>hi</b>&quot;; }
+<b>about_why</b>() { echo &quot;<b>For the syntax highlighting and to reduce bugs</b>. I've made many abstract hotkey systems.&quot;; }
+  [...]
+<b>volume_set_8</b>() { pacmd set-sink-volume 0 48000; } <b>#m8</b>
+<b>volume_set_9</b>() { pacmd set-sink-volume 0 54000; } <b>#m9</b>
+<b>volume_set_custom</b>() { pacmd set-sink-volume 0 &quot;$(:|dmenu)&quot;; }
+  [...]
+<b>scmd_run</b>() &lbrace; c=&quot;$(dmenu &lt; &quot;$(<b>this_file</b>)&quot; | cut -d&#039;(&#039; -f1)&quot;; test &quot;$c&quot; &amp;&amp; <b>scmd_with_bar_status</b> &quot;$c&quot;; &rbrace; <b>#x</b>
+  [...]
+<b>this_file</b>() { echo ~/.config/scmd.sh; }</code></pre>
+<p>
+I got syntax highlighting in my configuration file,
+I got a listing, a superset of the hotkey commands,
+a bar saying what ran,
+I could run the same actions from the terminal
+and for the first time I could easily log the commands and their output.
+</p>
+<p>
+It's on <a href="https://github.com/TheodoreAlenas/dotfiles/blob/main/scmd.sh"
+>GitHub</a> among my dotfiles.
+</p>
+<h3>Conclusion</h3>
+<p>
+This project made me think of code as a person going through phases.
+It started relatable, then it became fancy and then almost grumpy.
+Just like the website, I ended up with one file with flat hierarchies.
+Maybe at scale a project can't go through phases in the same way,
+but this is an experience that I can't explain to people
+and I wish we could all talk about it.
+</p>
+<h2>Other experiments at home</h2>
+<p>
+Some other stories are
+the directory structure of my laptop
+which was restructured 4 times alongside its remote backup,
+the image tagging facilities which used python GUIs at first,
+I tried to make my computer look mysterious and mesmerizing
+but I became more of a minimalist along the way,
+I tried to &quot;clean-up&quot; the
+<a href="https://tools.suckless.org/dmenu/"><code>dmenu</code></a>
+project but I lost my ego when I made it oddly worse and I re-wrote a
+<a href="https://github.com/TheodoreAlenas/">clock pop-up</a>
+from Python to C and made it uglier.
+</p>
+<p>
+Although I found complexity and mysticism more attractive,
+if there were high demands and I was ready to question my ideas,
+the projects eventually became flat in hierarchies and weird.
+The code needed some explaining,
+but there wasn't much code in the first place.
+</p>
+<h2>Thank you very much</h2>
+<p>
+I hope you enjoyed the read.
+Have a nice day!
+</p>
+</div>
+</div>
+</body>
+</html>
+<!--
+    Copyright (c) 2024 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+
+    Permission is hereby granted, free of charge, to any person obtaining a copy
+    of this software and associated documentation files (the "Software"), to deal
+    in the Software without restriction, including without limitation the rights
+    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+    copies of the Software, and to permit persons to whom the Software is
+    furnished to do so, subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be included in all
+    copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+-->

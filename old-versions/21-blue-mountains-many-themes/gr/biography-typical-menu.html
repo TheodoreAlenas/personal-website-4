@@ -1,0 +1,441 @@
+<!DOCTYPE HTML>
+<html scheme="dark">
+    <head>
+        <title>Βιογραφικό</title>
+
+        <meta name="author" content="Dimakopoulos Theodoros">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8">
+
+        <style>
+            /* s.css */
+
+html { color-scheme: light; }
+h2 { margin-top: 3rem; margin-left: 2rem; }
+button { cursor: pointer; }
+pre { border-radius: 5px; padding-left: 1em; overflow: scroll; }
+a { text-underline-offset: 0.2em; }
+main a:hover { position: relative; z-index: 1; }
+main a:hover::before {
+    position: absolute; z-index: -1;
+    display: inline-block; content: "";
+    left: 0; right: 0; top: -0.2em; bottom: 0;
+}
+
+/* Improvised bright color scheme and TokyoNight color scheme */
+[scheme=light] pre b,
+[scheme=light] a { color: #000066; }
+[scheme=light] a:visited { color: #660044; }
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after,
+[scheme=light] .bg1 { background-color: #ffffff; }
+[scheme=light] pre,
+[scheme=light] #hamburger-checkbox::before,
+[scheme=light] #hamburger-checkbox::after { border-color: #111111; }
+[scheme=light] .fg1 { color: #111111; }
+
+[scheme=dark] pre { color: #7dcfff; }
+[scheme=dark] pre b,
+[scheme=dark] a { color: #7aa2f7; }
+[scheme=dark] a:visited { color: #bb9af7; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after,
+[scheme=dark] .bg1 { background-color: #24283b; }
+[scheme=dark] #hamburger-checkbox::before,
+[scheme=dark] #hamburger-checkbox::after { border-color: #c0caf5; }
+[scheme=dark] .fg1 { color: #c0caf5; }
+
+[scheme=light] .hov-bg3:hover,
+[scheme=light] a:hover,
+[scheme=light] main a:hover::before,
+[scheme=light] *::selection,
+[scheme=light] a.bg3,
+[scheme=light] .bg3 { background-color: #111122; color: #c0caf5 }
+[scheme=light] #menu button,
+[scheme=light] main { border-color: #cccccc; }
+[scheme=light] pre { background-color: #eeeeee; }
+[scheme=light] .shadow { box-shadow: #cccccc 0 0 1rem 0; }
+
+[scheme=dark] .hov-bg3:hover,
+[scheme=dark] a:hover,
+[scheme=dark] main a:hover::before,
+[scheme=dark] *::selection,
+[scheme=dark] a.bg3,
+[scheme=dark] .bg3 { background-color: #e0af68; color: #1d202f }
+[scheme=dark] #menu button,
+[scheme=dark] main { border-color: #1d202f; }
+[scheme=dark] pre { background-color: #1d202f; }
+[scheme=dark] .shadow { box-shadow: #1d202f 0 0 1rem 0; }
+
+main {border-left: 1px solid; border-right: 1px solid}
+#menu button {border-style: solid; border-width: 2px}
+#menu button {border-radius: 3px}
+#menu button {font-family: inherit; font-size: inherit}
+
+body {line-height: 1.5em}
+#menu input {width: 1.7em; height: 1.7em}
+main {max-width: 30cm}
+#menu ul {
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto;
+    grid-auto-columns: max-content;
+}
+#menu li {grid-row: 1}
+#menu ul {padding: 0}
+main, #menu a {padding: 1.5em 1.5em}
+#menu label {padding: 0.5em 1em}
+#menu button {padding: 1em 1em; margin: 0.5em}
+.pl3, #menu .pl3 {padding-left: 3em}
+.pr3, #menu .pr3 {padding-right: 3em}
+header {position: sticky; top: 0}
+#menu input {position: absolute; top: 0.5em; right: 1em}
+body, #menu input {margin: 0}
+main, #menu ul {margin: 0 auto}
+#menu ul {list-style: none; max-width: 60cm}
+#menu li, #menu a, #menu button {display: inline-block}
+#menu a, #menu button {transition: all 0.2s}
+
+#hamburger-checkbox::before,
+#hamburger-checkbox::after {
+    content: ""; position: absolute;
+    width: 100%; height: 50%;
+    border-top-style: solid;
+    border-bottom-style: solid;
+    box-sizing: border-box;
+}
+#hamburger-checkbox::before {
+    top: 0; border-top-width: 2px; border-bottom-width: 1px; }
+#hamburger-checkbox::after {
+    top: 50%; border-top-width: 1px; border-bottom-width: 2px; }
+
+body {font-family: system-ui; font-size: 0.5cm}
+#menu input, #menu label {display: none}
+
+@media screen and (max-width: 25cm) {
+    body { font-size: 0.4cm; }
+    #menu input {display: unset}
+    #menu label {display: block}
+
+    #hamburger-checkbox:not(:checked) + label + ul {
+        display: none;
+    }
+    #hamburger-checkbox:checked + label::before {
+        content: ""; position: absolute;
+        top: 0; left: 0; width: 100vw; height: 100vh;
+    }
+    #menu ul {
+        position: absolute;
+        top: 1em; right: 1em;
+        border-radius: 5px; overflow: hidden;
+        display: grid; grid-auto-rows: auto; align-items: center;
+    }
+    #menu li {
+        display: grid; grid-column: 1; grid-row: unset;
+    }
+    #menu li a {
+        padding: 1.5em 2em;
+    }
+}
+
+/* The original file had the MIT notice here */
+        </style>
+
+        <script>
+            /* s.js */
+
+function switchColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "light";
+    if (definer.getAttribute("scheme") === "light")
+        setTo = "dark";
+    definer.setAttribute("scheme", setTo);
+    localStorage.setItem("lastTheme", setTo);
+}
+
+function setUpColorScheme() {
+    const definer = document.querySelector("[scheme]");
+    let setTo = "dark";
+    if (localStorage.getItem("lastTheme") === "light")
+        setTo = "light";
+    definer.setAttribute("scheme", setTo);
+}
+
+
+/* The original file had the MIT notice here */
+        </script>
+
+    </head>
+    <body class="bg1 fg1">
+        <header id="menu">
+            <nav>
+
+                <!-- header.php -->
+<input
+    id="hamburger-checkbox"
+    type="checkbox"
+    />
+<label
+    for="hamburger-checkbox"
+    class="shadow bg1"
+>Βιογραφικό</label>
+<ul
+    class="shadow bg1"
+>
+    <li>
+        <a href="index.html" class="ilbl hov-bg3 pl3 pr3 ">
+            Αρχική        </a>
+    </li>
+    <li>
+        <button
+            onclick="switchColorScheme()"
+            class="ilbl bg1 fg1 hov-bg3"
+        >
+            Χρώμα        </button>
+    </li>
+    <script> setUpColorScheme(); </script>
+    <li>
+        <a href="../en/biography.html" class="ilbl hov-bg3  ">
+            English        </a>
+    </li>
+    <li>
+        <a href="../cv.pdf" class="ilbl hov-bg3  ">
+            cv.pdf
+        </a>
+    </li>
+    <li>
+        <a href="portfolio.html" class="ilbl hov-bg3  ">
+            Χαρτοφυλάκιο        </a>
+    </li>
+    <li>
+        <a href="biography.html" class="ilbl hov-bg3 pr3 bg3 ">
+            Βιογραφικό        </a>
+    </li>
+</ul>
+
+
+            </nav>
+        </header>
+        <main class="bg1 fg1">
+            
+
+<h2>Μινιμαλισμός</h2>
+<p>
+Για 2 χρόνια, οι εργασίες της σχολής γίνονταν σε
+ένα 30GB Arch Linux partition με
+260 BK/s μέγιστη και αυξομοιούμενη ταχύτητα δικτύου,
+κυρίως χρησιμοποιώντας NeoVim.
+</p>
+<p>
+Από το Φθινόπωρο του 2023,
+είναι άνετη η πολύωρη χρήση του Vi χωρίς terminal multiplexing,
+όπως και η χρήση των εργαλείων tmux, emacs, zsh bash και dash,
+που σημαίνει κάθε POSIX compliant shell.
+</p>
+
+
+<h2>Λύκειο</h2>
+<p>
+    Απολύθηκε από    <a href="http://2lyk-amaliad.ilei.sch.gr/wordpress17/"
+    >το λύκειο</a>
+    
+με 17325 μόρια το 2019,
+με κατεύθυνση Θετικές επιστήμες.
+Πήγε Γαλλία με το πρόγραμμα
+    <a href="https://school-education.ec.europa.eu/en/etwinning"
+    >E-Twinning</a>.
+</p>
+<p>
+    
+Αυτοσχεδίασε απόδειξη για τον όγκο του κώνου,
+μαθηματικά για γραφικά στον υπολογιστή τύπου
+Wolfenstein 3D χωρίς να γνωρίζει από διανύσματα,
+και παρακολούθησε αρκετό από το περιεχόμενο των καναλιών
+    <a href="https://www.youtube.com/@3blue1brown">3blue1brown</a>,
+    <a href="https://www.youtube.com/@Mathologer">Mathologer</a>,
+    <a href="https://www.youtube.com/@numberphile">Numberphile</a>,
+    <a href="https://www.youtube.com/@Computerphile">Computerphile</a>
+    και    <a href="https://www.youtube.com/@standupmaths">Matt Parker</a>.
+</p>
+<p>
+    Στο πανεπιστήμιο παρακολούθησε    <a href="https://www.youtube.com/@ThePrimeagen">ThePrimeagen</a>,
+    <a href="https://www.youtube.com/@HealthyGamerGG">Healthy Gamer GG</a>
+    και    <a href="https://www.youtube.com/@RamseyDewey">Ramsey Dewey</a>.
+</p>
+<p>
+    
+Σπούδασε στο Εθνικό και Καπποδιστριακό Πανεπιστήμιο Αθηνών
+(ΕΚΠΑ) στο
+    <a href="https://www.di.uoa.gr"
+    >Τμήμα Πληροφορικής και Τηλεπικοινωνιών</a>.
+    Συμμετείχε με ενθουσιασμό στο    <a href="https://github.com/ACM-UoA-Student-Chapter/dil"
+    >πρότζεκτ open source μεταγλωττιστή του ACM student chapter</a>,
+    
+αν και δεν κατείχε γνώσεις ώστε να προσφέρει πολλά.
+Ως τώρα, το Φθινόπωρο του 2023, δεν έχει εργαστεί.
+Έκανε ελάχιστη πρακτική εργασία με την εταιρεία
+    <a href="https://helvia.io">Helvia</a>
+    με την οποία είδε βασικές αρχές του web development.</p>
+
+
+<h2>Γλώσσες</h2>
+
+<p>
+    
+Ξεκινούσε τη μέρα με ζέσταμα στις 5
+για περίπου 3 εβδωμάδες το Φθινόπωρο του 2023,
+και απογευματινές ασκήσεις,
+κυρίως σε C αλλά κάποιες φορές και σε
+Python, Haskell και Matlab (GNU Octave για την ακρίβεια).
+Οι αλγόριθμοι αφορούν παραλληλία,
+δομές δεδομένων και διαχείριση δεδομένων, με
+    <a href="https://www.youtube.com/watch?v=kScFczWbwRM">TDD</a>,
+    <a href="https://youtu.be/tnO2Mos0RjU?si=OhTk8fUdI0FPTWT6">TCR</a>
+    ή κανένα από τα δύο, συχνά σε Vi (όχι Vim).</p>
+<p>
+    
+Χωρίς εκπαιδευτικούς σκοπούς,
+με κίνητρο εσωτερικά κενά δυστυχώς,
+πήρε μία πρώτη ιδέα και από τις γλώσσες
+Rust, Graphviz Dot, AWK, GNU Make, BF,    <a href="https://code.jsoftware.com/wiki/Studio/TasteofJPart1">J</a>
+    
+ελαφρώς, lisp και Typescript.
+Πράγματι οτιδήποτε σχετίζεται με Typescript
+είναι οδυνηρό, εκτός απ' το συντακτικό.
+</p>
+<p>
+    
+Τόσο για το Πανεπιστήμιο όσο και για προσωπικούς λόγους,
+εξοικειώθηκε με
+C++, Python, PHP, LaTeX, HTML CSS και Javascript,
+Java, Bourne και POSIX shell scripting (bash έστω).
+Τα ζεστάματα που αναφέρθηκαν γίνονταν επίσης σε γλώσσες
+που χρησιμοποιούνταν στο Πανεπιστήμιο.
+</p>
+
+
+<h2>Αρχιτεκτονική</h2>
+
+<p>
+Επανασχεδίασε 5 φορές τα τμήματα του λειτουργικού του συστήματος
+που αφορούν τους συνδυασμούς πλήκτρων, τη κύρια δομή αρχείων
+και την ταξινόμηση εικόνων.
+Οι αλλαγές ακολουθούσαν προσωπικές ανάγκες και ελλείψεις,
+με αργό και σταθερό ρυθμό επί 2 χρόνια.
+Οι τεχνικές έδιναν μια αίσθηση των άκρων,
+
+με εικόνες τοποθετημένες σε δυαδικό δέντρο
+από χειροκίνητες αποφάσεις ομαδοποίησης,
+
+πρότζεκτ με κώδικα να ταξινομούνται χρησιμοποιώντας symlinks,
+
+ένα σύστημα συμπλήρωσης και δημιουργίας φράσεων
+να παράγει shell scripts για συνδυασμούς πλήκτρων
+
+και πολλά ακόμα.
+Κατέληξε με τεχνικά κομψές λύσεις.
+</p>
+<p>
+    
+Μέσα από αυτά τα κινήματα καλλιέργησε
+σεβασμό στα προτότυπα,
+αίσθηση των υπέρ και κατά μιας ιδέας,
+εκτίμηση στην τεχνική απλότητα από υψηλό ως χαμηλό επίπεδο,
+και συμπάθεια στο
+    <a href="http://agilemanifesto.org/"
+    >Manifesto for Agile Software Development</a>.
+</p>
+
+
+<h2>Φίλοι</h2>
+
+<p>
+Μέχρι την ηλικία των 21 έζησε εσωστρεφής και περήφανος, απορώντας
+γιατί άνθρωποι μιλούν για ανθρώπους που μιλούν.
+Τελικά άλλαξε εικόνα του εαυτού και άρχισε να σχηματίζει
+παρέες παρά τις δυσκολίες μίας τόσο έντονης αλλαγής.
+</p>
+<p>
+Συνεργάστηκε με διάφορα άτομα,
+και η καλύτερη συνεργασία έγινε με νέους τότε φίλους,
+πρόσωπο με πρόσωπο
+4 ώρες τη μέρα 4 μέρες την εβδομάδα επί 2 μήνες,
+στρογγυλοποιώντας κάτω από το θεωρητικό μέγιστο
+6 ανά 4 επί 3.
+Οι πιο δυσάρεστες εμπειρίες συνεργασίας σε εργασίες της σχολής
+προέρχονταν από αντίσταση στη συνεργασία.
+</p>
+<p>
+Συνεργάστηκε με 2 λιγότερο ευχάριστα άτομα σε ξεχωριστά πρότζεκτ.
+Ενώ τα πράγματα πήγαν εντυπωσιακά καλά με το
+απρόβλεπτα συναισθηματικό αλλά καλόκαρδο άτομο,
+δεν πήγαν καθόλου καλά με τον κυρ διαфημιστή
+μοτοσυκλετιστή πρόεδρο στραβο-πατέρα που δεν είναι πατέρας.
+Θα του ξεριζώσω και τα χέρια και τα πόδια.
+Έδειξα τεράστια αντίσταση που με εξουθένωσε εντελώς,
+αλλά αυτός πάγωνε μέχρι να τα ξεχάσει όλα και να
+συνεχίσει να κλάνει.
+</p>
+
+
+<h2>Σκιτσογραφία και πιάνο</h2>
+
+<p>
+Εγκατέλειψε το πιάνο στο επίπεδο πρώτης ανωτέρας,
+όταν άλλαξε τρόπο σκέψης και τα μέχρι τότε κίνητρα
+για μελέτη δεν εφαρμόζονταν.
+</p>
+<p>
+    Έπειτα καταπιάστηκε με τη σκιτισογραφία, μέσα απ' την    <a href="https://drawabox.com"
+    >κοινότητα και σειρά μαθημάτων Draw A Box</a>,
+    καθώς και μέσα από βίντεο του    <a href="https://www.proko.com"
+    >Stanislav Prokopenko</a>.
+    </p>
+<p>
+Η τέχνη καλλιέργησε σεβασμό σε παλιές μεθόδους, παλιά εργαλεία,
+συμβουλές ηλικιωμένων εμπειρογνώμων,
+το ζέσταμα πριν τη δουλειά
+και την αποτίμηση της δουλειάς
+σκεπτόμενος απ' τη ματιά τρίτου.
+</p>
+
+
+<h2>YouTube</h2>
+
+<p>
+    Δημιούργησε    <a href="https://www.youtube.com/@theodorealenas3171"
+    >βίντεο στην πλατφόρμα YouTube</a>
+    χρησιμοποιώντας το εργαλείο <code>ffmpeg</code>
+    περνώντας την έξοδο του <code>/dev/video0</code>
+    στο <code>mpv</code>
+    
+ώστε να προβάλλεται το υλικό της κάμερας στην οθόνη.
+Το κανάλι έχει στόχο την αξιοποίηση
+εμπειριών και γνώσεων.
+</p>
+
+        </main>
+    </body>
+</html>
+
+<!--
+     Copyright (c) 2023 Dimakopoulos Theodoros <dimakopt732@gmail.com>
+
+     Permission is hereby granted, free of charge, to any person obtaining a copy
+     of this software and associated documentation files (the "Software"), to deal
+     in the Software without restriction, including without limitation the rights
+     to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+     copies of the Software, and to permit persons to whom the Software is
+     furnished to do so, subject to the following conditions:
+
+     The above copyright notice and this permission notice shall be included in all
+     copies or substantial portions of the Software.
+
+     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+     IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+     FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+     AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+     SOFTWARE.
+-->
