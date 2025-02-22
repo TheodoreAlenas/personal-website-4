@@ -440,7 +440,7 @@ Abstractions got replaced with abbreviations.
             ]))
         }
         return c('section', {c: 'column mt2'}, [
-            c('h2', {c: 'txtcent fs4'}, [t(li.children[0].textContent)]),
+            c('h2', {c: 'desktop-txtcent fs4'}, [t(li.children[0].textContent)]),
             c('ol', {c: 'cards1 nolist mt1'}, lis)
         ])
     }

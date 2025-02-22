@@ -122,7 +122,6 @@ pre.code1 code { font-family: source-code-pro-regular,monospace; }
 
 /*--- Images and flexing ---*/
 
-.txtcent { text-align: center; }
 .img { display: block; border-radius: 4px; }
 .flex { display: flex; }
 .w3-100 { width: min(12cm, 100%); }
@@ -179,6 +178,7 @@ pre.code1 code { font-family: source-code-pro-regular,monospace; }
         gap: 1cm 2cm;
         grid-template-columns: repeat(auto-fit, minmax(min(100%, 5cm), 1fr));
     }
+    .desktop-txtcent { text-align: center; }
 }
 
 .pad-like-card { padding-left: 1rem; }
