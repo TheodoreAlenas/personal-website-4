@@ -62,6 +62,8 @@ const linkHrefs = {
     pf2: 'old-versions/21-blue-mountains-many-themes/en/index.html',
     pf2gh: 'https://github.com/TheodoreAlenas/personal-website-2/',
     pf3: 'old-versions/30-face-square-poking/index.html',
+    pf3gh: 'https://github.com/TheodoreAlenas/portfolio/',
+    pf4gh: 'https://github.com/TheodoreAlenas/personal-website-4/',
     uni: 'https://www.di.uoa.gr/',
     sigmod: 'https://sigmod-contest-2025.github.io/index.html',
     scmd: 'https://github.com/baskerville/sxhkd',
