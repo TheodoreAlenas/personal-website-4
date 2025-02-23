@@ -66,7 +66,7 @@ const linkHrefs = {
     pf4gh: 'https://github.com/TheodoreAlenas/personal-website-4/',
     uni: 'https://www.di.uoa.gr/',
     sigmod: 'https://sigmod-contest-2025.github.io/index.html',
-    scmd: 'https://github.com/baskerville/sxhkd',
+    scmd: 'https://github.com/TheodoreAlenas/dotfiles/blob/main/scmd.sh',
     helvia: 'https://helvia.ai/',
     nobuild: 'https://world.hey.com/dhh/you-can-t-get-faster-than-no-build-7a44131c',
     email: 'mailto:dimakopt732@gmail.com',
