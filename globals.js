@@ -47,34 +47,10 @@ const colorScheme = {
 
 //--- Loading content
 
-const linkHrefs = {
-    greek: 'index-el.html',
-    english: 'index.html',
-    cvPdf: 'r/cv-2024-10-10.pdf',
-    keymouth: 'https://theodoros-d-alenas.site/key-mouth/',
-    reactjs: 'https://react.dev/',
-    nextjs: 'https://nextjs.org/',
-    fastapi: 'https://fastapi.tiangolo.com/',
-    keymouthgh: 'https://github.com/TheodoreAlenas/key-mouth',
-    pf1: 'old-versions/13-before-abandoning/en/index.html',
-    pf1gh: 'https://github.com/TheodoreAlenas/personal-website-1/',
-    cleancode: 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
-    pf2: 'old-versions/21-blue-mountains-many-themes/en/index.html',
-    pf2gh: 'https://github.com/TheodoreAlenas/personal-website-2/',
-    pf3: 'old-versions/30-face-square-poking/index.html',
-    pf3gh: 'https://github.com/TheodoreAlenas/portfolio/',
-    pf4gh: 'https://github.com/TheodoreAlenas/personal-website-4/',
-    uni: 'https://www.di.uoa.gr/',
-    sigmod: 'https://sigmod-contest-2025.github.io/index.html',
-    scmd: 'https://github.com/TheodoreAlenas/dotfiles/blob/main/scmd.sh',
-    helvia: 'https://helvia.ai/',
-    nobuild: 'https://world.hey.com/dhh/you-can-t-get-faster-than-no-build-7a44131c',
-    email: 'mailto:dimakopt732@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/theodoros-dimakopoulos-726ba1289/',
-    github: 'https://github.com/TheodoreAlenas/',
-}
-
 function formatPage() {
+
+    // Library for rendering components
+
     function c(tag, about, children) {
         const elem = document.createElement(tag)
         for (p in about) {
@@ -90,6 +66,9 @@ function formatPage() {
     function t(text) {
         return document.createTextNode(text)
     }
+
+    // <u at=github></u>  ->  <a href=https://github.com></a>
+
     function uToA(u) {
         const which = u.getAttribute('at')
         const href = linkHrefs[which]
@@ -114,6 +93,9 @@ function formatPage() {
         }
         return res
     }
+
+    // couldError("title", createTitle) -> either that title or error element
+
     function couldError(intent, func) {
         try {
             const res = func()
@@ -125,7 +107,61 @@ function formatPage() {
             return c('code', {}, [t("[ERROR] " + intent)])
         }
     }
-    function themeLi(v, text) {
+
+    // Main components
+
+    function functionCalledAtTheBottom() {
+        const output = document.createElement('div')
+        const base = document.getElementById('localization-structure')
+        const cur = base.children[0]
+        base.children[0].remove()
+        base.appendChild(formatEverything(cur))
+    }
+    function formatEverything(cur) {
+        return c('div', {c: 'bg fs2'}, [
+            couldError("header", () => formatHeader(cur.children[0].children[0])),
+            c('main', {}, [
+                couldError("card",        () => formatCard(        cur.children[1])),
+                couldError("experiences", () => formatExperiences( cur.children[2])),
+                couldError("projects",    () => formatProjects(    cur.children[3])),
+                couldError("values",      () => formatValues(      cur.children[4])),
+                couldError("preferences", () => formatPreferences( cur.children[5])),
+                couldError("links",       () => formatLinks(                      )),
+            ])
+        ])
+    }
+
+    // Header
+
+    function formatHeader(ol) {
+        return c('header', {c: 'column flexac flexw gap3 spc pt2 header'}, [
+            couldError("portfolio label", () =>
+                c('h1', {c: 'fs3 fwn'}, [
+                    t(ol.children[0].textContent)
+                ])
+            ),
+            couldError("theme picker", () =>
+                c('fieldset', {c: 'inp-pill-choice'}, [
+                    couldError("'theme' legend", () => c('legend', {}, [
+                        c('span', {c: 'ml3 fs1'}, [
+                            t(ol.children[1].textContent)
+                        ])
+                    ])),
+                    couldError("theme input list", function() {
+                        const lis = ol.children[2].children[0].children
+                        return c('ol', {c: 'modal-box bg ls2'}, [
+                            fhThemeLi('light', lis[0].textContent),
+                            fhThemeLi('dark' , lis[1].textContent),
+                            fhThemeLi('contr', lis[2].textContent)
+                        ])
+                    }),
+                ])
+            ),
+            couldError("Greek/English link", () =>
+                uToA(ol.children[3].children[0])),
+        ])
+    }
+    function fhThemeLi(v, text) {
         const inp = c('input', {
             type: 'radio',
             name: 'theme',
@@ -141,81 +177,108 @@ function formatPage() {
             ])
         ])
     }
-    function formatHeader(ol) {
-        const themeOl = couldError("theme input list", function() {
-            const li = ol.children[2].children[0].children
-            return c('ol', {c: 'modal-box bg ls2'}, [
-                themeLi('light', li[0].textContent),
-                themeLi('dark' , li[1].textContent),
-                themeLi('contr', li[2].textContent)
-            ])
-        })
 
-        const fieldset = couldError("theme picker", function() {
-            return c('fieldset', {c: 'inp-pill-choice'}, [
-                c('legend', {}, [
-                    c('span', {c: 'ml3 fs1'}, [
-                        t(ol.children[1].textContent)
-                    ])
-                ]),
-                themeOl
-            ])
-        })
-        
-        return c('header', {c: 'column flexac flexw gap3 spc pt2 header'}, [
-            couldError("portfolio label", function () {
-                return c('h1', {c: 'fs3 fwn'}, [
-                    t(ol.children[0].textContent)
+    // Card
+
+    function formatCard(li) {
+        return c('div', {c: 'wide-flex gap4 column faded-underline'}, [
+            couldError("text next to avatar", () => fcTextOnTheLeft(li)),
+            couldError("picture with hoodie", () => fcAvatarOnTheRight(li)),
+        ])
+    }
+    function fcTextOnTheLeft(li) {
+        return c('section', {}, [
+            c('h2', {c: 'fs6 fwn m20 mt3'}, [
+                couldError("non-bold part of title", () =>
+                    t(li.children[0].children[0].textContent)),
+                c('strong', {}, [
+                    couldError("bold part of title", () =>
+                        t(li.children[0].children[1].textContent))
                 ])
+            ]),
+            c('p', {c: 'fs3 m20'}, [
+                couldError("subtitle", () =>
+                    t(li.children[1].textContent))
+            ]),
+            c('p', {c: 'fs1 m20'}, [
+                couldError("small paragraph after subtitle", () =>
+                    t(li.children[2].textContent))
+            ]),
+            couldError("anchor to CV PDF", function () {
+                const a = c('a', {c: 'pdfAnchor', href: linkHrefs.cvPdf})
+                a.innerHTML = pdfLogoSvg + '<span>CV</span>'
+                return a
+            })
+        ])
+    }
+    function fcAvatarOnTheRight(li) {
+        return c('picture', {c: 'mt2'}, [
+            c('source', {
+                srcset: 'r/hood-669x890.webp',
+                type: 'image/webp',
             }),
-            fieldset,
-            couldError("Greek/English link", function () {
-                return uToA(ol.children[3].children[0])
+            c('img', {
+                c: 'w3-100 wide-fix-size img',
+                src: 'r/hood-334x445.png',
+                alt: li.children[3].textContent
+            })
+        ])
+    }
+
+    // Experiences
+
+    function formatExperiences(li) {
+        return c('div', {c: 'card1 mt1 column2'}, [
+            feText(li),
+            feCode()
+        ])
+    }
+    function feText(li) {
+        return c('section', {c: 'card11'}, [
+            c('h2', {c: 'fs4 mt0'}, [
+                couldError("experience heading", () =>
+                    t(li.children[0].textContent))
+            ]),
+            couldError("experience bullet list", function () {
+                const ol = li.children[1]
+                const lis = []
+                for (let i = 0; i < ol.children.length; i++) {
+                    lis.push(c('li',
+                               {c: 'bigMarker fs4Marker m40'},
+                               uToAs(ol.children[i])))
+                }
+                return c('ol', {c: 'pl5'}, lis)
             }),
         ])
     }
-    function formatCard(li) {
-        return c('div', {c: 'wide-flex gap4 column faded-underline'}, [
-            c('section', {}, [
-                c('h2', {c: 'fs6 fwn m20 mt3'}, [
-                    couldError("non-bold part of title", function () {
-                        return t(li.children[0].children[0].textContent)
-                    }),
-                    c('strong', {}, [
-                        couldError("bold part of title", function () {
-                            return t(li.children[0].children[1].textContent)
-                        })
-                    ])
-                ]),
-                c('p', {c: 'fs3 m20'}, [
-                    couldError("subtitle", function () {
-                        return t(li.children[1].textContent)
-                    })
-                ]),
-                c('p', {c: 'fs1 m20'}, [
-                    couldError("small paragraph after subtitle", function () {
-                        return t(li.children[2].textContent)
-                    })
-                ]),
-                couldError("anchor to CV PDF", function () {
-                    const a = c('a', {c: 'pdfAnchor', href: linkHrefs.cvPdf})
-                    a.innerHTML = pdfLogoSvg + '<span>CV</span>'
-                    return a
-                })
+    function feCode() {
+        return c('div', {c: 'card12'}, [
+            c('pre', {c: 'code1'}, [
+                c('code', {}, paintCode([`
+`,1,`void`,2,` Solve_by_col_parallel`,0,`(`,1,`int`,0,` num_threads) {
+    `,1,`int`,0,` row, col;
+`,2,`#   pragma`,0,` omp parallel num_threads(num_threads)
+
+`,2,`#   pragma`,0,` omp for private(row)
+    `,1,`for`,0,` (row = 0; row < n; row++)
+        x[row] = b[row];
+
+    `,1,`for`,0,` (col = n-1; col >= 0; col--) {
+        x[col] /= A[col][col];
+`,2,`#       pragma`,0,` omp for private(row)
+        `,1,`for`,0,` (row = 0; row < n; row++)
+            x[row] -= A[row][col] * x[col];
+    }
+}`]))
             ]),
-            couldError("picture with hoodie", function () {
-                return c('picture', {c: 'mt2'}, [
-                    c('source', {
-                        srcset: 'r/hood-669x890.webp',
-                        type: 'image/webp',
-                    }),
-                    c('img', {
-                        c: 'w3-100 wide-fix-size img',
-                        src: 'r/hood-334x445.png',
-                        alt: li.children[3].textContent
-                    })
-                ])
-            })
+            c('pre', {c: 'code1'}, [
+                c('code', {}, paintCode([`
+`,2,`CALL_BF`,0,`(`,2,`BF_OpenFile`,0,`(fileName, &(HT_FILE_METAS[i].fileDesc)));
+`,1,`for`,0,` (`,1,`int`,0,` j = 0; j < BF_BUFFER_SIZE; j++) {
+  HT_FILE_METAS[i].pinned[j] = `,2,`NULL`,0,`;
+}
+`]))
+            ])
         ])
     }
     function paintCode(alternating) {
@@ -241,55 +304,9 @@ function formatPage() {
         }
         return s
     }
-    function formatExperiences(li) {
-        return c('div', {c: 'card1 mt1 column2'}, [
-            c('section', {c: 'card11'}, [
-                c('h2', {c: 'fs4 mt0'}, [
-                    couldError("experience heading", function () {
-                        return t(li.children[0].textContent)
-                    })
-                ]),
-                couldError("experience bullet list", function () {
-                    const ol = li.children[1]
-                    const lis = []
-                    for (let i = 0; i < ol.children.length; i++) {
-                        lis.push(c('li',
-                                   {c: 'bigMarker fs4Marker m40'},
-                                   uToAs(ol.children[i])))
-                    }
-                    return c('ol', {c: 'pl5'}, lis)
-                }),
-            ]),
-            c('div', {c: 'card12'}, [
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
-`,1,`void`,2,` Solve_by_col_parallel`,0,`(`,1,`int`,0,` num_threads) {
-    `,1,`int`,0,` row, col;
-`,2,`#   pragma`,0,` omp parallel num_threads(num_threads)
 
-`,2,`#   pragma`,0,` omp for private(row)
-    `,1,`for`,0,` (row = 0; row < n; row++)
-        x[row] = b[row];
+    // Projects
 
-    `,1,`for`,0,` (col = n-1; col >= 0; col--) {
-        x[col] /= A[col][col];
-`,2,`#       pragma`,0,` omp for private(row)
-        `,1,`for`,0,` (row = 0; row < n; row++)
-            x[row] -= A[row][col] * x[col];
-    }
-}`]))
-                ]),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
-`,2,`CALL_BF`,0,`(`,2,`BF_OpenFile`,0,`(fileName, &(HT_FILE_METAS[i].fileDesc)));
-`,1,`for`,0,` (`,1,`int`,0,` j = 0; j < BF_BUFFER_SIZE; j++) {
-  HT_FILE_METAS[i].pinned[j] = `,2,`NULL`,0,`;
-}
-`]))
-                ])
-            ])
-        ])
-    }
     function formatProjects(li) {
         const h2 = li.children[0].textContent
         const ol = li.children[1]
@@ -301,67 +318,93 @@ function formatPage() {
             formatProjectPortfolio(portfolio),
         ])
     }
+
+    // Project KeyMouth
+
     function formatProjectKeymouth(keyMouth) {
         return c('div', {c: 'card1'}, [
             c('section', {c: 'card11'}, [
                 c('h3', {c: 'fs4 mt0'}, [
-                    couldError("KeyMouth heading", function () {
-                        return t(keyMouth.children[0].textContent)
-                    }),
+                    couldError("KeyMouth heading", () =>
+                        t(keyMouth.children[0].textContent)),
                 ]),
-                couldError("KeyMouth paragraph", function () {
-                    return c('p', {}, uToAs(keyMouth.children[1]))
-                }),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
+                couldError("KeyMouth paragraph", () =>
+                    c('p', {}, uToAs(keyMouth.children[1]))),
+                couldError("KeyMouth code", () =>
+                    fpkCode()),
+                couldError("KeyMouth links", () =>
+                    fpkLinks(keyMouth)),
+            ]),
+            c('div', {c: 'card12 w100 overlapping-images'}, [
+                couldError("KeyMouth big screenshot", () =>
+                    fpkBigImage(keyMouth)),
+                couldError("KeyMouth small screenshot", () =>
+                    fpkSmallImage(keyMouth)),
+            ]),
+        ])
+    }
+    function fpkCode() {
+        return c('pre', {c: 'code1'}, [
+            c('code', {}, paintCode([`
 `,1,`def`,2,` assign_the_socket`,0,`(conn):
     id_to_sock[conn.conn_id] = websocket
 conn = `,1,`await `,2,`wrap`,0,`(logic.connect, room,
                   `,2,`before_sending=`,0,`assign_the_socket)
 `]))
-                ]),
-                couldError("KeyMouth links", function () {
-                    return c('ul', {c: 'nolist ls1'}, [
-                        c('a', {c: 'outlined', href: linkHrefs.keymouth}, [
-                            t(keyMouth.children[2].textContent)
-                        ]),
-                        c('a', {c: 'outlined', href: linkHrefs.keymouthgh}, [
-                            t(keyMouth.children[3].textContent)
-                        ]),
-                    ])
-                })
-            ]),
-            c('div', {c: 'card12 w100 overlapping-images'}, [
-                couldError("KeyMouth big screenshot", function () {
-                    return c('picture', {c: 'big-down-left'}, [
-                        c('source', {
-                            srcset: 'r/keymouth-bot-1012x624.webp',
-                            type: 'image/webp',
-                        }),
-                        c('img', {
-                            c: 'img w100 shadow',
-                            src: 'r/keymouth-bot-506x312.png',
-                            alt: keyMouth.children[4].textContent
-                        })
-                    ])
-                }),
-                couldError("KeyMouth small screenshot", function () {
-                    return c('picture', {c: 'small-up-right'}, [
-                        c('source', {
-                            srcset: 'r/keymouth-zoom-430x359.webp',
-                            type: 'image/webp',
-                        }),
-                        c('img', {
-                            c: 'img w100 shadow',
-                            src: 'r/keymouth-zoom-215x179.png',
-                            alt: keyMouth.children[5].textContent
-                        })
-                    ])
-                }),
-            ])
         ])
     }
+    function fpkLinks(keyMouth) {
+        return c('ul', {c: 'nolist ls1'}, [
+            c('a', {c: 'outlined', href: linkHrefs.keymouth}, [
+                t(keyMouth.children[2].textContent)
+            ]),
+            c('a', {c: 'outlined', href: linkHrefs.keymouthgh}, [
+                t(keyMouth.children[3].textContent)
+            ]),
+        ])
+    }
+    function fpkBigImage(keyMouth) {
+        return c('picture', {c: 'big-down-left'}, [
+            c('source', {
+                srcset: 'r/keymouth-bot-1012x624.webp',
+                type: 'image/webp',
+            }),
+            c('img', {
+                c: 'img w100 shadow',
+                src: 'r/keymouth-bot-506x312.png',
+                alt: keyMouth.children[4].textContent
+            })
+        ])
+    }
+    function fpkSmallImage(keyMouth) {
+        return c('picture', {c: 'small-up-right'}, [
+            c('source', {
+                srcset: 'r/keymouth-zoom-430x359.webp',
+                type: 'image/webp',
+            }),
+            c('img', {
+                c: 'img w100 shadow',
+                src: 'r/keymouth-zoom-215x179.png',
+                alt: keyMouth.children[5].textContent
+            })
+        ])
+    }
+
+    // Project portfolio
+
     function formatProjectPortfolio(portfolio) {
+        const textFromHtml = fppGetPortfolioVersionsText(portfolio)
+        return c('div', {c: 'card1 mt3'}, [
+            fppText(portfolio, textFromHtml.lis),
+            c('div', {c: 'card12'}, [
+                fppFourScreenshots(textFromHtml.altText),
+                fppCode1(),
+                fppCode2(),
+                fppCode3(),
+            ]),
+        ])
+    }
+    function fppGetPortfolioVersionsText(portfolio) {
         const lis = []
         let altText = null
         let i = 1
@@ -393,46 +436,50 @@ conn = `,1,`await `,2,`wrap`,0,`(logic.connect, room,
         if (!altText) {
             console.error("no alt text for the portfolio image")
         }
-        return c('div', {c: 'card1 mt3'}, [
-            c('section', {c: 'card11'}, [
-                c('h3', {c: 'fs4'}, [
-                    t(portfolio[0].textContent),
-                ]),
-                c('ul', {c: 'nolist'}, lis),
+        return {lis, altText}
+    }
+    function fppText(portfolio, lis) {
+        return c('section', {c: 'card11'}, [
+            c('h3', {c: 'fs4'}, [
+                t(portfolio[0].textContent),
             ]),
-            c('div', {c: 'card12'}, [
-                c('picture', {}, [
-                    c('source', {
-                        srcset: 'r/pf-cross-1460x643.webp',
-                        type: 'image/webp',
-                    }),
-                    c('img', {
-                        c: 'img w100 shadow',
-                        src: 'r/pf-cross-730x321.png',
-                        alt: altText,
-                    })
-                ]),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
-`,1,`function`,2,` get_biography_html`,0,`(`,1,`string`,0,` $language) {
-  `,1,`return`,2,` get_typical_layout`,0,`(
-`]))
-                ]),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
-<?php $STR_XML = `,2,`simplexml_load_file`,0,`(`,1,`"biography/bio-high-school.xml"`,0,`) ?>
-`,1,`<h2>`,0,`<?php `,2,`$b`,0,`(`,1,`"title"`,0,`) ?>`,1,`</h2>
-`]))
-                ]),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode([`
-`,2,`<`,1,`p`,2,`>`,0,`
-Abstractions got replaced with abbreviations.
-`]))
-                ]),
-            ]),
+            c('ul', {c: 'nolist'}, lis),
         ])
     }
+    function fppFourScreenshots(altText) {
+        return c('picture', {}, [
+            c('source', {
+                srcset: 'r/pf-cross-1460x643.webp',
+                type: 'image/webp',
+            }),
+            c('img', {
+                c: 'img w100 shadow',
+                src: 'r/pf-cross-730x321.png',
+                alt: altText,
+            })
+        ])
+    }
+    function fppCode1() {
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
+`,1,`function`,2,` get_biography_html`,0,`(`,1,`string`,0,` $language) {
+  `,1,`return`,2,` get_typical_layout`,0,`(
+`]))])
+    }
+    function fppCode2() {
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
+<?php $STR_XML = `,2,`simplexml_load_file`,0,`(`,1,`"biography/bio-high-school.xml"`,0,`) ?>
+`,1,`<h2>`,0,`<?php `,2,`$b`,0,`(`,1,`"title"`,0,`) ?>`,1,`</h2>
+`]))])
+    }
+    function fppCode3() {
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
+`,2,`<`,1,`p`,2,`>`,0,`
+Abstractions got replaced with abbreviations.
+`]))])
+    }
+
+    // Values
+
     function formatValues(li) {
         const lis = []
         for (let i = 1; i < li.children.length; i += 2) {
@@ -446,6 +493,9 @@ Abstractions got replaced with abbreviations.
             c('ol', {c: 'cards1 nolist mt1'}, lis)
         ])
     }
+
+    // Preferences
+
     function formatPreferences(li) {
         const s = []
         s.push(c('h2', {c: 'fs4 mt3'}, [t(li.children[0].textContent)]))
@@ -454,6 +504,9 @@ Abstractions got replaced with abbreviations.
         }
         return c('section', {c: 'column'}, s)
     }
+
+    // Links (at the bottom)
+
     function formatLinks() {
         return c('footer', {c: 'mt5 flexjc'}, [
             c('ul', {c: 'ls1'}, [
@@ -469,22 +522,39 @@ Abstractions got replaced with abbreviations.
             ])
         ])
     }
-    const output = document.createElement('div')
-    const base = document.getElementById('localization-structure')
-    const cur = base.children[0]
-    base.children[0].remove()
-    base.appendChild(
-        c('div', {c: 'bg fs2'}, [
-            couldError("header", function () { return formatHeader(cur.children[0].children[0]); }),
-            c('main', {}, [
-                couldError("card",        function () { return formatCard(        cur.children[1]); }),
-                couldError("experiences", function () { return formatExperiences( cur.children[2]); }),
-                couldError("projects",    function () { return formatProjects(    cur.children[3]); }),
-                couldError("values",      function () { return formatValues(      cur.children[4]); }),
-                couldError("preferences", function () { return formatPreferences( cur.children[5]); }),
-                couldError("links",       function () { return formatLinks(                      ); }),
-            ])
-        ]))
+
+    // Executing
+
+    functionCalledAtTheBottom()
+}
+
+//--- Links
+
+const linkHrefs = {
+    greek: 'index-el.html',
+    english: 'index.html',
+    cvPdf: 'r/cv-2024-10-10.pdf',
+    keymouth: 'https://theodoros-d-alenas.site/key-mouth/',
+    reactjs: 'https://react.dev/',
+    nextjs: 'https://nextjs.org/',
+    fastapi: 'https://fastapi.tiangolo.com/',
+    keymouthgh: 'https://github.com/TheodoreAlenas/key-mouth',
+    pf1: 'old-versions/13-before-abandoning/en/index.html',
+    pf1gh: 'https://github.com/TheodoreAlenas/personal-website-1/',
+    cleancode: 'https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882',
+    pf2: 'old-versions/21-blue-mountains-many-themes/en/index.html',
+    pf2gh: 'https://github.com/TheodoreAlenas/personal-website-2/',
+    pf3: 'old-versions/30-face-square-poking/index.html',
+    pf3gh: 'https://github.com/TheodoreAlenas/portfolio/',
+    pf4gh: 'https://github.com/TheodoreAlenas/personal-website-4/',
+    uni: 'https://www.di.uoa.gr/',
+    sigmod: 'https://sigmod-contest-2025.github.io/index.html',
+    scmd: 'https://github.com/TheodoreAlenas/dotfiles/blob/main/scmd.sh',
+    helvia: 'https://helvia.ai/',
+    nobuild: 'https://world.hey.com/dhh/you-can-t-get-faster-than-no-build-7a44131c',
+    email: 'mailto:dimakopt732@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/theodoros-dimakopoulos-726ba1289/',
+    github: 'https://github.com/TheodoreAlenas/',
 }
 
 //--- PDF logo SVG made with Inkscape (search for //--- to skip)
