@@ -254,53 +254,77 @@ function formatPage() {
     function feCode() {
         return c('div', {c: 'card12'}, [
             c('pre', {c: 'code1'}, [
-                c('code', {}, paintCode([`
-`,1,`void`,2,` Solve_by_col_parallel`,0,`(`,1,`int`,0,` num_threads) {
-    `,1,`int`,0,` row, col;
-`,2,`#   pragma`,0,` omp parallel num_threads(num_threads)
+                c('code', {}, paintCode(`
+void Solve_by_col_parallel(int num_threads) {
+b----f--------------------nb---n-------------
+    int row, col;
+----b---n--------
+#   pragma omp parallel num_threads(num_threads)
+f---------n-------------------------------------
 
-`,2,`#   pragma`,0,` omp for private(row)
-    `,1,`for`,0,` (row = 0; row < n; row++)
+
+#   pragma omp for private(row)
+f---------n--------------------
+    for (row = 0; row < n; row++)
+----b--n-------------------------
         x[row] = b[row];
+------------------------
 
-    `,1,`for`,0,` (col = n-1; col >= 0; col--) {
+
+    for (col = n-1; col >= 0; col--) {
+----b--n------------------------------
         x[col] /= A[col][col];
-`,2,`#       pragma`,0,` omp for private(row)
-        `,1,`for`,0,` (row = 0; row < n; row++)
+------------------------------
+#       pragma omp for private(row)
+f-------------n--------------------
+        for (row = 0; row < n; row++)
+--------b--n-------------------------
             x[row] -= A[row][col] * x[col];
+-------------------------------------------
     }
-}`]))
+-----
+}
+-`))
             ]),
             c('pre', {c: 'code1'}, [
-                c('code', {}, paintCode([`
-`,2,`CALL_BF`,0,`(`,2,`BF_OpenFile`,0,`(fileName, &(HT_FILE_METAS[i].fileDesc)));
-`,1,`for`,0,` (`,1,`int`,0,` j = 0; j < BF_BUFFER_SIZE; j++) {
-  HT_FILE_METAS[i].pinned[j] = `,2,`NULL`,0,`;
+                c('code', {}, paintCode(`
+CALL_BF(BF_OpenFile(fileName, &(HT_FILE_METAS[i].fileDesc)));
+f------nf----------n-----------------------------------------
+for (int j = 0; j < BF_BUFFER_SIZE; j++) {
+b--n--------------------------------------
+  HT_FILE_METAS[i].pinned[j] = NULL;
+-------------------------------f---n
 }
-`]))
+-
+`))
             ])
         ])
     }
-    function paintCode(alternating) {
-        const s = []
-        let style = 0
-        alternating[0] = alternating[0].substr(1)
-        for (i in alternating) {
-            if (i % 2 == 0) {
-                if (style === 0)
-                    s.push(t(alternating[i]))
-                else if (style === 1)
-                    s.push(c('b', {}, [t(alternating[i])]))
-                else if (style === 2)
-                    s.push(c('i', {}, [t(alternating[i])]))
-                else if (style === 3)
-                    s.push(c('span', {}, [t(alternating[i])]))
+    function paintCode(a) {
+        const lines = a.split('\n')
+        let code = ''  // even lines
+        let paint = ''  // odd lines
+        for (let i = 1; i + 1 < lines.length; i += 2) {
+            code += lines[i] + '\n'
+            paint += lines[i+1] + '-'
+        }
+        paint += 'n'  // the loop below waits for a non dash to paint
+        const s = []  // result, list of DOM elements
+        let start = 0
+        let color = paint[0]
+        for (let j = 0; j < paint.length; j++) {
+            if (paint[j] !== '-') {
+                const snippet = code.substr(start, j - start)
+                if      (color === 'n') s.push(t(snippet))
+                else if (color === 'b') s.push(c('b', {}, [t(snippet)]))
+                else if (color === 'f') s.push(c('i', {}, [t(snippet)]))
                 else {
-                    s.push(t(alternating[i]))
-                    console.error({style, alternating})
+                    s.push(t(snippet))
+                    console.error(a)
                 }
+                start = j
+                color = paint[j]
             }
-            else style = alternating[i]
         }
         return s
     }
@@ -345,12 +369,16 @@ function formatPage() {
     }
     function fpkCode() {
         return c('pre', {c: 'code1'}, [
-            c('code', {}, paintCode([`
-`,1,`def`,2,` assign_the_socket`,0,`(conn):
+            c('code', {}, paintCode(`
+def assign_the_socket(conn):
+b---f----------------n------
     id_to_sock[conn.conn_id] = websocket
-conn = `,1,`await `,2,`wrap`,0,`(logic.connect, room,
-                  `,2,`before_sending=`,0,`assign_the_socket)
-`]))
+----------------------------------------
+conn = await wrap(logic.connect, room,
+-------b-----f---n--------------------
+                  before_sending=assign_the_socket)
+------------------f--------------n-----------------
+`))
         ])
     }
     function fpkLinks(keyMouth) {
@@ -460,22 +488,25 @@ conn = `,1,`await `,2,`wrap`,0,`(logic.connect, room,
         ])
     }
     function fppCode1() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
-`,1,`function`,2,` get_biography_html`,0,`(`,1,`string`,0,` $language) {
-  `,1,`return`,2,` get_typical_layout`,0,`(
-`]))])
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
+function get_biography_html(string $language) {
+b--------f-----------------nb------n-----------
+    return get_typical_layout(
+b----------f-----------------n`))])
     }
     function fppCode2() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
-<?php $STR_XML = `,2,`simplexml_load_file`,0,`(`,1,`"biography/bio-high-school.xml"`,0,`) ?>
-`,1,`<h2>`,0,`<?php `,2,`$b`,0,`(`,1,`"title"`,0,`) ?>`,1,`</h2>
-`]))])
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
+<?php $STR_XML = simplexml_load_file("biography/bio-high-school.xml") ?>
+n----------------f------------------nb------------------------------n---
+<h2><?php $b("title") ?></h2>
+b---n-----f-nb------n---b----`))])
     }
     function fppCode3() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode([`
-`,2,`<`,1,`p`,2,`>`,0,`
+        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
+<p>
+fbf
 Abstractions got replaced with abbreviations.
-`]))])
+n--------------------------------------------`))])
     }
 
     // Values
