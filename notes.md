@@ -1,0 +1,4 @@
+- we don't need a "Projects" heading
+- the "one letter at a time messaging app" section looks noisy, maybe the code snippet is unnecessary
+- the "this portfolio" section is too tall and too noisy
+- the "values" section is very out of place, usually there are details on the left and a demo on the right

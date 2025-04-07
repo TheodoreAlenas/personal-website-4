@@ -8,114 +8,110 @@
     <meta name="robots" content="index, follow">
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="style.css">
-    <script src="globals.js"></script>
+    <script src="g2.js"></script>
   </head>
   <body>
-    <div id="localization-structure">
-      <ol>
-        <li>
-          <ol>
-            <li>Portfolio</li>
-            <li>Theme</li>
-            <li>
-              <ol>
-                <li>Light</li>
-                <li>Dark</li>
-                <li>Contrast</li>
-              </ol>
-            </li>
-            <li><u at=greek>Greek</u></li>
-          </ol>
-          <li>
-            <h2>
-              <span>I'm </span><b>Theodore D.</b>
-            </h2>
-            <big>
-              Undergraduate programmer looking for internship. Fan of Linux and face to face interactions.
-            </big>
-            <p>
-              In 2022 I got an obsession with Linux and I learned to adapt to coding styles. Today I've balanced my life better but programming is still my main hobby.
-            </p>
-            <i>face of man, green eyes, long hair</i>
-          </li>
-        </li>
-        <li>
+    <header>
+      <h1>Portfolio</h1>
+      <ul id="theme-picker">
+        <li>Theme</li>
+        <li>Light</li>
+        <li>Dark</li>
+        <li>Contrast</li>
+        <li>(loading or errored)</li>
+      </ul>
+      <u at=greek>Greek</u>
+    </header>
+    <main>
+      <div class=card>
+        <section>
+          <h2>I'm <strong>Theodore D.</strong></h2>
+          <p class=subtitle>Undergraduate programmer looking for internship. Fan of Linux and face to face interactions.</p>
+          <p class=not-subtitle>In 2022 I got an obsession with Linux and I learned to adapt to coding styles. Today I've balanced my life better but programming is still my main hobby.</p>
+          <a id=pdf-link href="r/cv-2024-10-10.pdf">CV PDF</a>
+        </section>
+        <i id=avatar>face of man, green eyes, long hair</i>
+      </div>
+      <div class=txtimg>
+        <section>
           <h2>Bits of experience</h2>
-          <ol>
-          <li>
-            In the University, <u at=uni>University of Athens</u>, we wrote plenty of code in C, C++ and Python to mimic the internals of databases, parallel processing computers, old-school artificial intelligence and more.
-          </li>
-          <li>
-            In the first semister, ACM invited us to practice by making a compiler and I took part and tried to follow. In February 2025, now, I'm joining ACM's <u at=sigmod>SIGMOD</u> low level programming contest.
-          </li>
-          <li>
-            At home I hacked together an <u at=scmd>app-launching mechanism</u> and other tools in Linux that I still use. They were rewritten many times each, the first iterations added complexity and today they're "flat."
-          </li>
-          <li>
-            I interned in 2024 at a company that creates chat bots called <u at=helvia>Helvia</u>. For a month I tried connecting two repositories with Docker files and for the next two I made a web app to learn backend.
-          </li>
-          </ol>
-        </li>
-        <li>
-          <h2>Projects</h2>
-          <ol>
+          <ul class=xx>
+            <li>In the University, <u at=uni>University of Athens</u>, we wrote plenty of code in C, C++ and Python to mimic the internals of databases, parallel processing computers, old-school artificial intelligence and more.</li>
+            <li>At home I hacked together an <u at=scmd>app-launching mechanism</u> and other tools in Linux that I still use. They were rewritten many times each, the first iterations added complexity and today they're "flat."</li>
+            <li>I interned in 2024 at a company that creates chat bots called <u at=helvia>Helvia</u>. For a month I tried connecting two repositories with Docker files and for the next two I made a web app to learn backend.</li>
+          </ul>
+        </section>
+        <div id="code-under-experiences"></div>
+      </div>
+      <div class="txtimg keymouth">
+        <section>
+          <h2>Key streaming app</h2>
+          <p>To learn backend web development in my internship, I prototyped an app using the tools I had to learn. It was inspired by these moments when someone sends a long message and you wish you could interrupt them. It's <u at=reactjs>ReactJS</u>, <u at=nextjs>NextJS</u>, plain CSS and Python's <u at=fastapi>FastAPI</u>. The protocol and some UI quirks had to be hand written.</p>
+          <pre></pre>
+          <ul class=button-links>
+            <li><u at=keymouth>Try KeyMouth</u></li>
+            <li><u at=keymouthgh>Source code on GitHub</u></li>
+          </ul>
+        </section>
+        <div id="keymouth-images">
+          <i>Messaging app with an input bar saying stream typing, a menu has two chat rooms, a theme button and links saying author and GitHub.</i>
+          <i>Messaging app that outlines deleted text and has a button saying clear. The input box has the same text as two messages above it.</i>
+        </div>
+      </div>
+      <div class="txtimg this-portfolio">
+        <section>
+          <h2>This portfolio</h2>
+          <ul class=portfolio-iterations>
             <li>
-              <h3><u at=keymouth>One letter at a time messaging app</u></h3>
-              <p>
-                To learn backend web development in my internship, I prototyped an app using the tools I had to learn. It was inspired by these moments when someone sends a long message and you wish you could interrupt them. It uses <u at=reactjs>ReactJS</u> and <u at=nextjs>NextJS</u> in the front end, with plain CSS and so far no TypeScript. The backend is written in Python with a library that only defines the end points, called <u at=fastapi>FastAPI</u>. The protocol and some UI quirks had to be hand written.
-              </p>
-              <p>Try KeyMouth</p>
-              <p>Source code on GitHub</p>
-              <i>Messaging app with an input bar saying stream typing, a menu has two chat rooms, a theme button and links saying author and GitHub.</i>
-              <i>Messaging app that outlines deleted text and has a button saying clear. The input box has the same text as two messages above it.</i>
+              <ul>
+                <li><u at=pf1>Visit the first iteration</u></li>
+                <li><u at=pf1gh>Code on GitHub</u></li>
+              </ul>
+              <p>In 2023 I used short PHP functions that print HTML, inspired by <u at=cleancode>Clean Code</u>.</p>
             </li>
             <li>
-              <h3><u at=pfgh>This portfolio</u></h3>
-              <p>
-                In 2023 I used short PHP functions that print HTML, inspired by <u at=cleancode>Clean Code</u>.
-              </p>
-              <u at=pf1>Visit the first iteration</u>
-              <u at=pf1gh>Code on GitHub</u>
-              <p>
-                The challenge was to serve in Greek and English. I tried plain PHP too.
-              </p>
-              <u at=pf2>Visit the second iteration</u>
-              <u at=pf2gh>GitHub</u>
-              <p>
-                Then I wrote one HTML file with CSS, JS and SVGs and a script that translates it.
-              </p>
-              <u at=pf3>Visit the third iteration</u>
-              <u at=pf3gh>GitHub</u>
-              <p>
-                Inspired by a <u at=nobuild>talk by DHH</u>, I got rid of the build step, using JavaScript.
-              </p>
-              <u at=pf4gh>GitHub</u>
-              <i>Four screenshots of sites with Theodore's face, the second and third have a mountains backdrop</i>
+              <ul>
+                <li><u at=pf2>Visit the second iteration</u></li>
+                <li><u at=pf2gh>GitHub</u></li>
+              </ul>
+              <p>The challenge was to serve in Greek and English. I tried plain PHP too.</p>
             </li>
-          </ol>
-        </li>
-        <li>
-          <h2>Values</h2>
-          <h3>Demonstrations</h3>
-          <p>
-            Prototypes, user tests, whiteboards and one thought at a time.
-          </p>
-          <h3>Communication</h3>
-          <p>
-            It gives me security to know where people's takes come from.
-          </p>
-          <h3>Simple needs</h3>
-          <p>
-            Rewriting simple code to scale it is a trade-off I tend to like.
-          </p>
-        </li>
-        <li>
-          <h2>Preferences</h2>
-          <p>
-            Generally I prefer social teams. Yes, nerdy teams are open and inclusive but I have bad memories working with them. Social people may be extra loud, some have a lot of energy, sometimes they make fun of me but I'm fine with all of that. I'm also into fast builds, incremental build systems that often run fast, fast automated tests that bypass integration and other means to try out a piece of code quickly. If there are multiple teams and one of them can try out a piece of code comfortably, I'd probably prefer that team. Finally, I prefer working in person, in an office, because it's easier to strike a short conversation. You can tell when someone is focused or their eyes are drifting, you can glance at a monitor and you can observe the other person's reaction when you do something. It definitely depends on the team as well.
-          </p>
-        </li>
-      </ol>
-    </div>
+            <li>
+              <ul>
+                <li><u at=pf3>Visit the third iteration</u></li>
+                <li><u at=pf3gh>GitHub</u></li>
+              </ul>
+              <p>Then I wrote one HTML file with CSS, JS and SVGs and a script that translates it.</p>
+            </li>
+            <li>
+              <ul>
+                <li><u at=pf4gh>GitHub</u></li>
+              </ul>
+              <p>Inspired by a <u at=nobuild>talk by DHH</u>, I got rid of the build step, using JavaScript.</p>
+            </li>
+          </ul>
+        </section>
+        <div id="four-screenshots">Four screenshots of sites with Theodore's face, the second and third have a mountains backdrop.</div>
+      </div>
+      <section class=values>
+        <h2>Values</h2>
+        <ol>
+          <li>
+            <big>Demonstrations</big>
+            <p>Prototypes, user tests, whiteboards and one thought at a time.</p>
+          </li>
+          <li>
+            <big>Communication</big>
+            <p>It gives me security to know where people's takes come from.</p>
+          </li>
+          <li>
+            <big>Simple needs</big>
+            <p>Rewriting simple code to scale it is a trade-off I tend to like.</p>
+          </li>
+        </ol>
+        <p>Generally I prefer teams where we talk about everyday things. I'm also into fast builds, incremental build systems that often run fast, fast automated tests that bypass integration and other means to try out a piece of code quickly. If there are multiple teams and one of them can try out a piece of code comfortably, I'd probably prefer to be in that team. Finally, I prefer working in person, in an office, because it's easier to strike a short conversation. You can tell when someone is focused or their eyes are drifting, you can glance at a monitor and you can observe the other person's reaction when you do something. It definitely depends on the team as well.</p>
+      </section>
+      <footer id="links-at-the-bottom"></footer>
+    </main>
   </body>
 </html>
