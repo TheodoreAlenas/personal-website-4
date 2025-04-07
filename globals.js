@@ -2,8 +2,6 @@
 // See LICENSE.
 // Search for the string "//---" in this file to jump to sections
 
-//--- Initializationx
-
 function toBeCalledAtTheBottom() {
     colorScheme.init()
     window.onload = formatPage
@@ -45,11 +43,9 @@ const colorScheme = {
     }
 }
 
-//--- Loading content
-
 function formatPage() {
 
-    // Library for rendering components
+    //--- Library for rendering components
 
     function c(tag, about, children) {
         const elem = document.createElement(tag)
@@ -67,33 +63,6 @@ function formatPage() {
         return document.createTextNode(text)
     }
 
-    // <u at=github></u>  ->  <a href=https://github.com></a>
-
-    function uToA(u) {
-        const which = u.getAttribute('at')
-        const href = linkHrefs[which]
-        if (href === undefined) {
-            console.error(`tried to get link called "${which}"`)
-            return c('span', {}, [t(u.textContent)])
-        }
-        return c('a', {href: href}, [t(u.textContent)])
-    }
-    function uToAs(paragraph) {
-        const res = []
-        for (let e of paragraph.childNodes) {
-            if (e.tagName === undefined) {
-                res.push(t(e.textContent))  // textNode
-            }
-            else if (e.tagName === 'U') {
-                res.push(uToA(e))
-            }
-            else {
-                console.error("Can't format:", e)
-            }
-        }
-        return res
-    }
-
     // couldError("title", createTitle) -> either that title or error element
 
     function couldError(intent, func) {
@@ -108,58 +77,63 @@ function formatPage() {
         }
     }
 
-    // Main components
+    //--- Components
 
     function functionCalledAtTheBottom() {
-        const output = document.createElement('div')
-        const base = document.getElementById('localization-structure')
-        const cur = base.children[0]
-        base.children[0].remove()
-        base.appendChild(formatEverything(cur))
+        formatLinks()
+        formatThemePicker()
+        formatPdfLink()
+        formatAvatar()
+        formatCodeBlocks()
+        formatKeymouthImages()
+        formatFourScreenshots()
+        formatLinksAtBottom()
     }
-    function formatEverything(cur) {
-        return c('div', {c: 'bg fs2'}, [
-            couldError("header", () => formatHeader(cur.children[0].children[0])),
-            c('main', {}, [
-                couldError("card",        () => formatCard(        cur.children[1])),
-                couldError("experiences", () => formatExperiences( cur.children[2])),
-                couldError("projects",    () => formatProjects(    cur.children[3])),
-                couldError("values",      () => formatValues(      cur.children[4])),
-                couldError("preferences", () => formatPreferences( cur.children[5])),
-                couldError("links",       () => formatLinks(                      )),
+
+    // <u at=github></u>  ->  <a href=https://github.com></a>
+
+    function formatLinks() {
+        for (let unused = 0; unused < 12345; unused++) {
+            // You can't get a list of HTML elements and replace them,
+            // it seems that Firefox finds them lazily and somehow it
+            // skips every other one.
+            const u = document.getElementsByTagName('u')[0]
+            if (!u) return
+            const which = u.getAttribute('at')
+            const href = linkHrefs[which]
+            if (href === undefined) {
+                console.error(`tried to get link called "${which}"`)
+                u.replaceWith(c('span', {}, [
+                    t(u.textContent + ' (broken link)')]))
+            }
+            else {
+                u.replaceWith(c('a', {href: href}, [t(u.textContent)]))
+            }            
+        }
+        console.error("maximum loops exceeded, can't format links")
+    }
+
+    // Theme picker
+
+    function formatThemePicker() {
+        const ul = document.getElementById('theme-picker')
+        if (!ul) {console.error('no theme-picker element'); return}
+        ul.replaceWith(couldError("theme picker", () =>
+            c('fieldset', {c: 'inp-pill-choice'}, [
+                couldError("'theme' legend", () => c('legend', {}, [
+                    c('span', {}, [
+                        t(ul.children[0].textContent)
+                    ])
+                ])),
+                couldError("theme input list", () =>
+                    c('ol', {}, [
+                        fhThemeLi('light', ul.children[1].textContent),
+                        fhThemeLi('dark' , ul.children[2].textContent),
+                        fhThemeLi('contr', ul.children[3].textContent)
+                    ])
+                ),
             ])
-        ])
-    }
-
-    // Header
-
-    function formatHeader(ol) {
-        return c('header', {c: 'column flexac flexw gap3 spc pt2 header'}, [
-            couldError("portfolio label", () =>
-                c('h1', {c: 'fs3 fwn'}, [
-                    t(ol.children[0].textContent)
-                ])
-            ),
-            couldError("theme picker", () =>
-                c('fieldset', {c: 'inp-pill-choice'}, [
-                    couldError("'theme' legend", () => c('legend', {}, [
-                        c('span', {c: 'ml3 fs1'}, [
-                            t(ol.children[1].textContent)
-                        ])
-                    ])),
-                    couldError("theme input list", function() {
-                        const lis = ol.children[2].children[0].children
-                        return c('ol', {c: 'modal-box bg ls2'}, [
-                            fhThemeLi('light', lis[0].textContent),
-                            fhThemeLi('dark' , lis[1].textContent),
-                            fhThemeLi('contr', lis[2].textContent)
-                        ])
-                    }),
-                ])
-            ),
-            couldError("Greek/English link", () =>
-                uToA(ol.children[3].children[0])),
-        ])
+        ))
     }
     function fhThemeLi(v, text) {
         const inp = c('input', {
@@ -178,83 +152,44 @@ function formatPage() {
         ])
     }
 
-    // Card
+    // Card with avatar
 
-    function formatCard(li) {
-        return c('div', {c: 'wide-flex gap4 column faded-underline'}, [
-            couldError("text next to avatar", () => fcTextOnTheLeft(li)),
-            couldError("picture with hoodie", () => fcAvatarOnTheRight(li)),
-        ])
+    function formatPdfLink() {
+        const a = document.getElementById('pdf-link')
+        if (!a) {console.error('no pdf-link element'); return}
+        a.replaceWith(couldError("anchor to CV PDF", function () {
+            const a = c('a', {c: 'pdf-anchor', href: linkHrefs.cvPdf})
+            a.innerHTML = pdfLogoSvg + '<span>CV</span>'
+            return a
+        }))
     }
-    function fcTextOnTheLeft(li) {
-        return c('section', {}, [
-            c('h2', {c: 'fs6 fwn m20 mt3'}, [
-                couldError("non-bold part of title", () =>
-                    t(li.children[0].children[0].textContent)),
-                c('strong', {}, [
-                    couldError("bold part of title", () =>
-                        t(li.children[0].children[1].textContent))
-                ])
-            ]),
-            c('p', {c: 'fs3 m20'}, [
-                couldError("subtitle", () =>
-                    t(li.children[1].textContent))
-            ]),
-            c('p', {c: 'fs1 m20'}, [
-                couldError("small paragraph after subtitle", () =>
-                    t(li.children[2].textContent))
-            ]),
-            couldError("anchor to CV PDF", function () {
-                const a = c('a', {c: 'pdfAnchor', href: linkHrefs.cvPdf})
-                a.innerHTML = pdfLogoSvg + '<span>CV</span>'
-                return a
-            })
-        ])
-    }
-    function fcAvatarOnTheRight(li) {
-        return c('picture', {c: 'mt2'}, [
+    function formatAvatar(li) {
+        const i = document.getElementById('avatar')
+        if (!i) {console.error('no "avatar" element'); return}
+        i.replaceWith(c('picture', {}, [
             c('source', {
                 srcset: 'r/hood-669x890.webp',
                 type: 'image/webp',
             }),
             c('img', {
-                c: 'w3-100 wide-fix-size img',
                 src: 'r/hood-334x445.png',
-                alt: li.children[3].textContent
+                alt: i.textContent
             })
-        ])
+        ]))
     }
 
-    // Experiences
+    // Experiences section
 
-    function formatExperiences(li) {
-        return c('div', {c: 'card1 mt1 column2'}, [
-            feText(li),
-            feCode()
-        ])
-    }
-    function feText(li) {
-        return c('section', {c: 'card11'}, [
-            c('h2', {c: 'fs4 mt0'}, [
-                couldError("experience heading", () =>
-                    t(li.children[0].textContent))
-            ]),
-            couldError("experience bullet list", function () {
-                const ol = li.children[1]
-                const lis = []
-                for (let i = 0; i < ol.children.length; i++) {
-                    lis.push(c('li',
-                               {c: 'bigMarker fs4Marker m40'},
-                               uToAs(ol.children[i])))
-                }
-                return c('ol', {c: 'pl5'}, lis)
-            }),
-        ])
-    }
-    function feCode() {
-        return c('div', {c: 'card12'}, [
-            c('pre', {c: 'code1'}, [
-                c('code', {}, paintCode(`
+    function formatCodeBlocks() {
+        const code = document.getElementById('code-under-experiences')
+        if (!code) {
+            console.error('no code-under-experiences element')
+            return
+        }
+        code.replaceWith(
+            c('div', {}, [
+                c('pre', {c: 'code1'}, [
+                    c('code', {}, paintCode(`
 void Solve_by_col_parallel(int num_threads) {
 b----f--------------------nb---n-------------
     int row, col;
@@ -285,9 +220,9 @@ f-------------n--------------------
 -----
 }
 -`))
-            ]),
-            c('pre', {c: 'code1'}, [
-                c('code', {}, paintCode(`
+                ]),
+                c('pre', {c: 'code1'}, [
+                    c('code', {}, paintCode(`
 CALL_BF(BF_OpenFile(fileName, &(HT_FILE_METAS[i].fileDesc)));
 f------nf----------n-----------------------------------------
 for (int j = 0; j < BF_BUFFER_SIZE; j++) {
@@ -296,10 +231,10 @@ b--n--------------------------------------
 -------------------------------f---n
 }
 -
-`))
-            ])
-        ])
+`))])
+            ]))
     }
+
     function paintCode(a) {
         const lines = a.split('\n')
         let code = ''  // even lines
@@ -329,229 +264,79 @@ b--n--------------------------------------
         return s
     }
 
-    // Projects
-
-    function formatProjects(li) {
-        const h2 = li.children[0].textContent
-        const ol = li.children[1]
-        const keyMouth = ol.children[0]
-        const portfolio = ol.children[1].children
-        return c('section', {c: 'column2'}, [
-            c('h2', {c: 'fs5 mt2 pad-like-card faded-underline'}, [t(h2)]),
-            formatProjectKeymouth(keyMouth),
-            formatProjectPortfolio(portfolio),
-        ])
-    }
-
-    // Project KeyMouth
-
-    function formatProjectKeymouth(keyMouth) {
-        return c('div', {c: 'card1'}, [
-            c('section', {c: 'card11'}, [
-                c('h3', {c: 'fs4 mt0'}, [
-                    couldError("KeyMouth heading", () =>
-                        t(keyMouth.children[0].textContent)),
-                ]),
-                couldError("KeyMouth paragraph", () =>
-                    c('p', {}, uToAs(keyMouth.children[1]))),
-                couldError("KeyMouth code", () =>
-                    fpkCode()),
-                couldError("KeyMouth links", () =>
-                    fpkLinks(keyMouth)),
+    function formatKeymouthImages(keyMouth) {
+        const div = document.getElementById('keymouth-images')
+        if (!div) {console.error('no keymouth-images element'); return}
+        div.replaceWith(c('div', {c: 'card12 w100 overlapping-images'}, [
+            c('picture', {c: 'big-down-left'}, [
+                c('source', {
+                    srcset: 'r/keymouth-bot-1012x624.webp',
+                    type: 'image/webp',
+                }),
+                c('img', {
+                    c: 'img w100 shadow',
+                    src: 'r/keymouth-bot-506x312.png',
+                    alt: div.children[0].textContent
+                })
             ]),
-            c('div', {c: 'card12 w100 overlapping-images'}, [
-                couldError("KeyMouth big screenshot", () =>
-                    fpkBigImage(keyMouth)),
-                couldError("KeyMouth small screenshot", () =>
-                    fpkSmallImage(keyMouth)),
-            ]),
-        ])
-    }
-    function fpkCode() {
-        return c('pre', {c: 'code1'}, [
-            c('code', {}, paintCode(`
-def assign_the_socket(conn):
-b---f----------------n------
-    id_to_sock[conn.conn_id] = websocket
-----------------------------------------
-conn = await wrap(logic.connect, room,
--------b-----f---n--------------------
-                  before_sending=assign_the_socket)
-------------------f--------------n-----------------
-`))
-        ])
-    }
-    function fpkLinks(keyMouth) {
-        return c('ul', {c: 'nolist ls1'}, [
-            c('a', {c: 'outlined', href: linkHrefs.keymouth}, [
-                t(keyMouth.children[2].textContent)
-            ]),
-            c('a', {c: 'outlined', href: linkHrefs.keymouthgh}, [
-                t(keyMouth.children[3].textContent)
-            ]),
-        ])
-    }
-    function fpkBigImage(keyMouth) {
-        return c('picture', {c: 'big-down-left'}, [
-            c('source', {
-                srcset: 'r/keymouth-bot-1012x624.webp',
-                type: 'image/webp',
-            }),
-            c('img', {
-                c: 'img w100 shadow',
-                src: 'r/keymouth-bot-506x312.png',
-                alt: keyMouth.children[4].textContent
-            })
-        ])
-    }
-    function fpkSmallImage(keyMouth) {
-        return c('picture', {c: 'small-up-right'}, [
-            c('source', {
-                srcset: 'r/keymouth-zoom-430x359.webp',
-                type: 'image/webp',
-            }),
-            c('img', {
-                c: 'img w100 shadow',
-                src: 'r/keymouth-zoom-215x179.png',
-                alt: keyMouth.children[5].textContent
-            })
-        ])
+            c('picture', {c: 'small-up-right'}, [
+                c('source', {
+                    srcset: 'r/keymouth-zoom-430x359.webp',
+                    type: 'image/webp',
+                }),
+                c('img', {
+                    c: 'img w100 shadow',
+                    src: 'r/keymouth-zoom-215x179.png',
+                    alt: div.children[1].textContent
+                })
+            ])
+        ]))
     }
 
-    // Project portfolio
-
-    function formatProjectPortfolio(portfolio) {
-        const textFromHtml = fppGetPortfolioVersionsText(portfolio)
-        return c('div', {c: 'card1 mt3'}, [
-            fppText(portfolio, textFromHtml.lis),
-            c('div', {c: 'card12'}, [
-                fppFourScreenshots(textFromHtml.altText),
-                fppCode1(),
-                fppCode2(),
-                fppCode3(),
+    function formatFourScreenshots(altText) {
+        const div = document.getElementById('four-screenshots')
+        if (!div) {console.error('no four-screenshots element'); return}
+        div.replaceWith(c('div', {}, [
+            c('picture', {}, [
+                c('source', {
+                    srcset: 'r/pf-cross-1460x643.webp',
+                    type: 'image/webp',
+                }),
+                c('img', {
+                    c: 'img w100 shadow',
+                    src: 'r/pf-cross-730x321.png',
+                    alt: div.textContent,
+                })
             ]),
-        ])
-    }
-    function fppGetPortfolioVersionsText(portfolio) {
-        const lis = []
-        let altText = null
-        let i = 1
-        while (i < portfolio.length) {
-            if (portfolio[i].tagName === 'I') {
-                altText = portfolio[i].textContent.trim()
-                i++
-                continue;
-            }
-            const s = []
-            s.push(c('span', {}, uToAs(portfolio[i++])))
-            const links = []
-            while (i < portfolio.length && portfolio[i].tagName === 'U') {
-                const at = portfolio[i].getAttribute('at')
-                const href = linkHrefs[at]
-                if (!href) console.error({portfolio, at, href})
-                links.push(c('a', {c: 'outlined', href: href}, [
-                    t(portfolio[i].textContent),
-                ]))
-                i++
-            }
-            if (links.length !== 0) {
-                s.push(c('ul', {c: 'nolist ls1 m30'}, links))
-            }
-            lis.push(
-                c('li', {c: 'm40'}, s)
-            )
-        }
-        if (!altText) {
-            console.error("no alt text for the portfolio image")
-        }
-        return {lis, altText}
-    }
-    function fppText(portfolio, lis) {
-        return c('section', {c: 'card11'}, [
-            c('h3', {c: 'fs4'}, [
-                t(portfolio[0].textContent),
-            ]),
-            c('ul', {c: 'nolist'}, lis),
-        ])
-    }
-    function fppFourScreenshots(altText) {
-        return c('picture', {}, [
-            c('source', {
-                srcset: 'r/pf-cross-1460x643.webp',
-                type: 'image/webp',
-            }),
-            c('img', {
-                c: 'img w100 shadow',
-                src: 'r/pf-cross-730x321.png',
-                alt: altText,
-            })
-        ])
-    }
-    function fppCode1() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
+            c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
 function get_biography_html(string $language) {
 b--------f-----------------nb------n-----------
     return get_typical_layout(
-b----------f-----------------n`))])
-    }
-    function fppCode2() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
+b----------f-----------------n`))]),
+            c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
 <?php $STR_XML = simplexml_load_file("biography/bio-high-school.xml") ?>
 n----------------f------------------nb------------------------------n---
 <h2><?php $b("title") ?></h2>
 b---n-----f-nb------n---b----`))])
-    }
-    function fppCode3() {
-        return c('pre', {c: 'code1'}, [c('code', {}, paintCode(`
-<p>
-fbf
-Abstractions got replaced with abbreviations.
-n--------------------------------------------`))])
-    }
-
-    // Values
-
-    function formatValues(li) {
-        const lis = []
-        for (let i = 1; i < li.children.length; i += 2) {
-            lis.push(c('li', {c: 'm40'}, [
-                c('big', {c: 'fs4'}, uToAs(li.children[i])),
-                c('p', {}, uToAs(li.children[i + 1])),
-            ]))
-        }
-        return c('section', {c: 'column mt2'}, [
-            c('h2', {c: 'desktop-txtcent fs4'}, [t(li.children[0].textContent)]),
-            c('ol', {c: 'cards1 nolist mt1'}, lis)
-        ])
-    }
-
-    // Preferences
-
-    function formatPreferences(li) {
-        const s = []
-        s.push(c('h2', {c: 'fs4 mt3'}, [t(li.children[0].textContent)]))
-        for (let i = 1; i < li.children.length; i++) {
-            s.push(c('p', {}, uToAs(li.children[i])))
-        }
-        return c('section', {c: 'column'}, s)
+        ]))
     }
 
     // Links (at the bottom)
 
-    function formatLinks() {
-        return c('footer', {c: 'mt5 flexjc'}, [
-            c('ul', {c: 'ls1'}, [
-                c('li', {}, [
-                    c('a', {href: linkHrefs.email}, [t('Gmail')])
-                ]),
-                c('li', {}, [
-                    c('a', {href: linkHrefs.linkedin}, [t('LinkedIn')])
-                ]),
-                c('li', {}, [
-                    c('a', {href: linkHrefs.github}, [t('GitHub')])
-                ]),
-            ])
-        ])
+    function formatLinksAtBottom() {
+        const foot = document.getElementById("links-at-the-bottom")
+        if (!foot) {console.error('no links-at-the-bottom element'); return}
+        foot.appendChild(c('ul', {c: 'ls1'}, [
+            c('li', {}, [
+                c('a', {href: linkHrefs.email}, [t('Gmail')])
+            ]),
+            c('li', {}, [
+                c('a', {href: linkHrefs.linkedin}, [t('LinkedIn')])
+            ]),
+            c('li', {}, [
+                c('a', {href: linkHrefs.github}, [t('GitHub')])
+            ]),
+        ]))
     }
 
     // Executing
@@ -588,7 +373,7 @@ const linkHrefs = {
     github: 'https://github.com/TheodoreAlenas/',
 }
 
-//--- PDF logo SVG made with Inkscape (search for //--- to skip)
+//--- PDF logo SVG made with Inkscape
 
 const pdfLogoSvg = `
 <svg
