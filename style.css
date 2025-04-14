@@ -13,22 +13,22 @@
     --cbg: #fff; --c-border: #bbb; --c-faded-border: #ddd;
     --ca: #025; --cavisited: #302; --cabg: #fff;
     --c1: #000; --c2: #111; --c3: #222; --c4: #333; --c5: #444; --c6: #444;
-    --code-bg: #fcfcfc; --code-border: var(--c-border);
-    --code1: #333; --code2: #804; --code3: #041;
+    --code-bg: #fff; --code-border: #fff;
+    --code1: #333; --code2: #004; --code3: #044;
 }
 [data-sch=dark] {
     --cbg: #252528; --c-border: #505055; --c-faded-border: #383840;
     --ca: #bcf; --cavisited: #dcd; --cabg: #202024;
     --c1: #eee; --c2: #ddd; --c3: #ccc; --c4: #bbb; --c5: #bbb; --c6: #bbb;
     --code-bg: #202024; --code-border: #303033;
-    --code1: #ccc; --code2: #da8; --code3: #dad;
+    --code1: #d0d0d0; --code2: #d0a080; --code3: #d0b8a0;
 }
 [data-sch=contr] {
     --cbg: #000; --c-border: #333; --c-faded-border: #111;
     --ca: #ff0; --cavisited: #ffa; --cabg: #000;
     --c1: #eee; --c2: #ddd; --c3: #ccc; --c4: #bbb; --c5: #bbb; --c6: #bbb;
     --code-bg: #000; --code-border: var(--c-border);
-    --code1: #fff; --code2: #ff0; --code3: #fff;
+    --code1: #fff; --code2: #ff0; --code3: #ffa;
 }
 
 
@@ -65,7 +65,7 @@
 }
 @media (min-width: 20cm) {
     :root {
-        --fs6: 40pt; --lh6: 1em;
+        --fs6: 38pt; --lh6: 1em;
     }
 }
 
@@ -124,14 +124,14 @@ pre.code1 {
     color: var(--code1);
     box-sizing: border-box;
 }
-@media (min-width: 30cm) {
+@media (min-width: 25cm) {
     pre.code1 {
         border-radius: 5px;
         width: 50vw;  /* if the grid changes, this will cause trouble */
     }
 }
 [data-sch=light] pre.code1 {
-    box-shadow: inset 2px 2px 3px -4px;
+    box-shadow: 0 2px 8px -4px;
 }
 pre.code1 b { color: var(--code2); font-weight: normal; }
 pre.code1 i { color: var(--code3); font-style: normal; }
@@ -202,7 +202,7 @@ fieldset.inp-pill-choice > ol > li > label {
 /*--- Top to bottom elements ---*/
 
 header, div.card, section.values {
-    margin: 0 auto; max-width: 30cm; padding: 0 1rem;
+    margin: 0 auto; max-width: 25cm; padding: 0 1rem;
 }
 div.experiences, section.projects {  /* TODO it works, though, there's no .projects */
     margin: 0 auto; max-width: 60cm; padding: 0;
@@ -233,6 +233,8 @@ div.card > section > p.not-subtitle {
 }
 div.card > picture {
     margin-top: var(--a2);
+    display: flex;
+    justify-content: center;
 }
 div.card > picture > img {
     display: block;
@@ -240,8 +242,9 @@ div.card > picture > img {
     width: min(12cm, 100%);
 }
 @media (min-width: 20cm) {
-    div.card { display: flex; gap: 2cm; }
-    div.card > picture > img { width: min(10cm, 40vw); }
+    div.card { display: flex; justify-content: space-between; gap: 2cm; }
+    div.card > picture { display: block; }
+    div.card > picture > img { width: min(9cm, 40vw); }
     div.card a.pdf-anchor { width: max-content; }
 }
 a.pdf-anchor {
@@ -253,7 +256,7 @@ div.txtimg {
 }
 div.txtimg > section { margin: 1rem; }
 div.txtimg > div img { border-radius: 4px; }
-@media (min-width: 30cm) {
+@media (min-width: 25cm) {
     div.txtimg {
         display: grid;
         grid-template-columns: 1fr 4fr 1fr 6fr;
