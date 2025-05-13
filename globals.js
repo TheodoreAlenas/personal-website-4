@@ -14,6 +14,10 @@ const colorScheme = {
     localStoragePrefix: 'portfolioColorScheme',
 
     init: function() {
+
+        // If the browser settings changed, consider the current settings.
+        // Otherwise, consider the theme that was used the previous time on the site.
+
         const prefersDark  = window.matchMedia('(prefers-color-scheme: dark)').matches
         const prefersContr = window.matchMedia('(prefers-contrast: more)').matches
         const preferredNow = prefersDark ? (prefersContr ? 'contr' : 'dark') : 'light'
@@ -30,6 +34,10 @@ const colorScheme = {
     },
 
     set: function(value) {
+
+        // There's <html (1) style=... (2) data-sch=...> and (3) local storage.
+        // Style for browser defaults, data-sch for CSS selectors.
+
         let lightDark = value
         if (value === 'contr') lightDark = 'dark'
         const html = document.querySelector('html')
