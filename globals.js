@@ -92,7 +92,6 @@ function formatPage() {
         formatThemePicker()
         formatPdfLink()
         formatAvatar()
-        formatCodeBlocks()
         formatKeymouthImages()
         formatFourScreenshots()
         formatLinksAtBottom()
@@ -187,61 +186,6 @@ function formatPage() {
     }
 
     // Experiences section
-
-    function formatCodeBlocks() {
-        const code = document.getElementById('code-under-experiences')
-        if (!code) {
-            console.error('no code-under-experiences element')
-            return
-        }
-        code.replaceWith(
-            c('div', {}, [
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode(`
-void Solve_by_col_parallel(int num_threads) {
-b----f--------------------nb---n-------------
-    int row, col;
-----b---n--------
-#   pragma omp parallel num_threads(num_threads)
-f---------n-------------------------------------
-
-
-#   pragma omp for private(row)
-f---------n--------------------
-    for (row = 0; row < n; row++)
-----b--n-------------------------
-        x[row] = b[row];
-------------------------
-
-
-    for (col = n-1; col >= 0; col--) {
-----b--n------------------------------
-        x[col] /= A[col][col];
-------------------------------
-#       pragma omp for private(row)
-f-------------n--------------------
-        for (row = 0; row < n; row++)
---------b--n-------------------------
-            x[row] -= A[row][col] * x[col];
--------------------------------------------
-    }
------
-}
--`))
-                ]),
-                c('pre', {c: 'code1'}, [
-                    c('code', {}, paintCode(`
-CALL_BF(BF_OpenFile(fileName, &(HT_FILE_METAS[i].fileDesc)));
-f------nf----------n-----------------------------------------
-for (int j = 0; j < BF_BUFFER_SIZE; j++) {
-b--n--------------------------------------
-  HT_FILE_METAS[i].pinned[j] = NULL;
--------------------------------f---n
-}
--
-`))])
-            ]))
-    }
 
     function paintCode(a) {
         const lines = a.split('\n')
@@ -357,7 +301,7 @@ b---n-----f-nb------n---b----`))])
 const linkHrefs = {
     greek: 'index-el.html',
     english: 'index.html',
-    cvPdf: 'r/cv-2024-10-10.pdf',
+    cvPdf: 'r/cv-2025-06-21.pdf',
     keymouth: 'https://theodoros-d-alenas.site/key-mouth/',
     reactjs: 'https://react.dev/',
     nextjs: 'https://nextjs.org/',
