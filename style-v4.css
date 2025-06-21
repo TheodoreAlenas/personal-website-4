@@ -334,7 +334,12 @@ div.this-portfolio > div img {
 }
 
 section.negative {
-    margin: var(--a3);
+    margin: var(--a3) 1rem;
+}
+@media (min-width: 25cm) {
+    section.negative {
+        margin: var(--a3);
+    }
 }
 
 footer#links-at-the-bottom > ul {
@@ -342,5 +347,5 @@ footer#links-at-the-bottom > ul {
     padding: 0;
     margin-top: var(--a1);
     padding-bottom: var(--a1);
-    display: flex; ; column-gap: 1.4em; justify-content: center;
+    display: flex; column-gap: 1.4em; justify-content: center;
 }
